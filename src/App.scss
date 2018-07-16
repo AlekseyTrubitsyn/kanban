@@ -1,1 +1,17 @@
 @import './styles/colors.scss';
+
+@import './styles/spinner.scss';
+@import './styles/kanban-board.scss';
+
+body {
+  font-family: sans-serif;
+}
+
+h1, h2, h3, h4, p, ul, li {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}

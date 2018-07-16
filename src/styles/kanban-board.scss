@@ -1,0 +1,51 @@
+@import "./colors";
+
+$padding: 10px;
+
+$board-bg: $b-white;
+$column-bg: #dedede;
+
+$column-title-bg: $celestial-blue;
+$column-title-color: $i-white;
+$item-bg: $i-white;
+$item-title-bg: $yellow;
+$item-title-color: $mid-grey;
+
+.kanban-board {
+  background: $board-bg;
+  min-height: 100vh;
+  padding: $padding * 3;
+  display: flex;
+
+  .kanban-board__column {
+    background: $column-bg;
+    flex-grow: 1;
+    margin: 0 $padding / 2;
+    padding: 0;
+  }
+
+  .kanban-board__column-title {
+    text-align: center;
+    padding: $padding;
+    background: $column-title-bg;
+    color: $column-title-color;
+    margin-bottom: $padding;
+    box-shadow: 1px 3px 5px rgba($gun-grey, .1);
+  }
+
+  .kanban-board-item {
+    text-align: center;
+    background: $item-bg;
+    padding: $padding / 2;
+    margin: $padding * 1.5;
+    box-shadow: 1px 3px 5px rgba($gun-grey, .15);
+  }
+
+  .kanban-board-item__title {
+    background: $item-title-bg;
+    color: $item-title-color;
+    padding: $padding / 2;
+    margin: -$padding / 2;
+    margin-bottom: $padding;
+  }
+}

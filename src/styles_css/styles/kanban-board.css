@@ -1,0 +1,51 @@
+/*#49483E
+#F92672
+#A6E22E
+#FD971F
+#66D9EF
+#AE81FF
+#A1EFE4
+#F8F8F2
+
+## secondary
+#75715E
+#FC5C94
+#C1F161
+#FEB257
+#8DE6F7
+#C2A1FF
+#BBF7EF
+#F8F8F0
+#1B1D1E
+#272822
+#49483E
+#75715E*/
+.kanban-board {
+  background: #FDF9F3;
+  min-height: 100vh;
+  padding: 30px;
+  display: flex; }
+  .kanban-board .kanban-board__column {
+    background: #dedede;
+    flex-grow: 1;
+    margin: 0 5px;
+    padding: 0; }
+  .kanban-board .kanban-board__column-title {
+    text-align: center;
+    padding: 10px;
+    background: #3e92cc;
+    color: #f5efed;
+    margin-bottom: 10px;
+    box-shadow: 1px 3px 5px rgba(48, 50, 61, 0.1); }
+  .kanban-board .kanban-board-item {
+    text-align: center;
+    background: #f5efed;
+    padding: 5px;
+    margin: 15px;
+    box-shadow: 1px 3px 5px rgba(48, 50, 61, 0.15); }
+  .kanban-board .kanban-board-item__title {
+    background: #ffd866;
+    color: #575558;
+    padding: 5px;
+    margin: -5px;
+    margin-bottom: 10px; }
