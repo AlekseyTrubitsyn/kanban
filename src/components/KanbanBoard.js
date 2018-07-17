@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { DragDropContext } from 'react-beautiful-dnd';
 
 import createTasks from '../utilities/createTasks';
 
@@ -14,7 +15,8 @@ class KanbanBoard extends Component {
     this.state = {
       data,
       isEmpty: false,
-      isFetching: false
+      isFetching: false,
+      isDraging: false
     };
   }
 
@@ -27,12 +29,33 @@ class KanbanBoard extends Component {
 
     return (
       <div className="kanban-board">
-        {Object.keys(data).map(item => (
+        <DragDropContext>
           <KanbanColumn
-            key={item}
-            data={data[item]}
+            droppableId="discuss"
+            key="discuss"
+            data={data.discuss}
           />
-        ))}
+          <KanbanColumn
+            droppableId="toDo"
+            key="toDo"
+            data={data.toDo}
+          />
+          <KanbanColumn
+            droppableId="inProgress"
+            key="inProgress"
+            data={data.inProgress}
+          />
+          <KanbanColumn
+            droppableId="testing"
+            key="testing"
+            data={data.testing}
+          />
+          <KanbanColumn
+            droppableId="done"
+            key="done"
+            data={data.done}
+          />
+        </DragDropContext>
       </div>
     );
   }
