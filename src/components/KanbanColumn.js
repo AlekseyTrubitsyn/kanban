@@ -50,7 +50,7 @@ class KanbanColumn extends Component {
                       {...provided.dragHandleProps}
                       style={provided.draggableProps.style}
                     >
-                      <h3 className="kanban-board-item__title">{item.title}</h3>
+                      <h3 className="kanban-board-item__title">{item.id}</h3>
                       <p className="kanban-board-item__text">{item.text}</p>
                       <p className="kanban-board-item__author">{item.author}</p>
                       <p className="kanban-board-item__developer">{item.developer}</p>
