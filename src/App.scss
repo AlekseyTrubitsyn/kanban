@@ -1,10 +1,14 @@
-@import './styles/colors.scss';
+@import './assets/styles/fonts.scss';
+@import './assets/styles/colors.scss';
 
-@import './styles/spinner.scss';
-@import './styles/kanban-board.scss';
+@import './assets/styles/spinner.scss';
+@import './assets/styles/header.scss';
+@import './assets/styles/kanban-board.scss';
 
 body {
-  font-family: sans-serif;
+  background: #4B7C9C url('../img/bg-calm.jpg');
+  background-size: cover;
+  height: 100vh;
 }
 
 h1, h2, h3, h4, p, ul, li {
@@ -15,3 +19,11 @@ h1, h2, h3, h4, p, ul, li {
 * {
   box-sizing: border-box;
 }
+
+.App {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/**/

@@ -21,33 +21,31 @@
 #49483E
 #75715E*/
 .kanban-board {
-  background: #FDF9F3;
-  min-height: 100vh;
   padding: 30px;
   display: grid;
   grid-template-columns: repeat(5, 1fr); }
   .kanban-board .kanban-board__column {
     display: flex;
     flex-direction: column;
-    background: #dedede;
+    background: rgba(222, 222, 222, 0.5);
     margin: 0 5px;
-    padding: 0; }
+    padding: 0 20px;
+    border-radius: 5px;
+    /*border-bottom-left-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;*/ }
   .kanban-board .kanban-board__column-title {
-    text-align: center;
-    padding: 10px;
-    background: #3e92cc;
-    color: #f5efed;
-    box-shadow: 1px 3px 5px rgba(48, 50, 61, 0.1); }
+    padding: 10px 0;
+    color: #f5efed; }
   .kanban-board .kanban-board__droppable {
     padding-top: 1px;
     flex-grow: 1; }
   .kanban-board .kanban-board__droppable--over {
-    background-color: #b7d6ec; }
+    background-color: rgba(183, 214, 236, 0.4); }
   .kanban-board .kanban-board-item {
     text-align: center;
     background: #f5efed;
     padding: 5px;
-    margin: 15px;
+    margin: 0 0 15px;
     box-shadow: 1px 3px 5px rgba(48, 50, 61, 0.15); }
   .kanban-board .kanban-board-item__title {
     background: #ffd866;

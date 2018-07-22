@@ -11,9 +11,11 @@ $item-bg: $i-white;
 $item-title-bg: $yellow;
 $item-title-color: $mid-grey;
 
+$border-radius: 5px;
+
 .kanban-board {
-  background: $board-bg;
-  min-height: 100vh;
+  // background: $board-bg;
+  //min-height: 100vh;
   padding: $padding * 3;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -21,17 +23,20 @@ $item-title-color: $mid-grey;
   .kanban-board__column {
     display: flex;
     flex-direction: column;
-    background: $column-bg;
+    background: rgba($column-bg, 0.5);
     margin: 0 $padding / 2;
-    padding: 0;
+    padding: 0 $padding * 2;
+    border-radius: $border-radius;
+    /*border-bottom-left-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;*/
   }
 
   .kanban-board__column-title {
-    text-align: center;
-    padding: $padding;
-    background: $column-title-bg;
+    //text-align: center;
+    padding: $padding 0;
+    // background: $column-title-bg;
     color: $column-title-color;
-    box-shadow: 1px 3px 5px rgba($gun-grey, .1);
+    // box-shadow: 1px 3px 5px rgba($gun-grey, .1);
   }
 
   .kanban-board__droppable {
@@ -40,14 +45,14 @@ $item-title-color: $mid-grey;
   }
 
   .kanban-board__droppable--over {
-    background-color: lighten($column-title-bg, 30%);
+    background-color: rgba(lighten($column-title-bg, 30%), .4);
   }
 
   .kanban-board-item {
     text-align: center;
     background: $item-bg;
     padding: $padding / 2;
-    margin: $padding * 1.5;
+    margin: 0 0 $padding * 1.5;
     box-shadow: 1px 3px 5px rgba($gun-grey, .15);
   }
 

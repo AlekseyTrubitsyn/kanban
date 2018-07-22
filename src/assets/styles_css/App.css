@@ -1,0 +1,192 @@
+body {
+  font-family: Montserrat, Arial, sans-serif; }
+
+@font-face {
+  font-family: Montserrat;
+  font-weight: 400;
+  font-style: normal;
+  src: url("../fonts/Montserrat-Regular.eot");
+  /* IE9 Compat Modes */
+  src: url("../fonts/Montserrat-Regular.eot?#iefix") format("embedded-opentype"), url("../fonts/Montserrat-Regular.woff") format("woff"), url("../fonts/Montserrat-Regular.ttf") format("truetype"), url("../fonts/Montserrat-Regular.svg#svgFontName") format("svg");
+  /* Legacy iOS */ }
+
+@font-face {
+  font-family: Montserrat;
+  font-weight: 400;
+  font-style: italic;
+  src: url("../fonts/Montserrat-Italic.eot");
+  src: url("../fonts/Montserrat-Italic.eot?#iefix") format("embedded-opentype"), url("../fonts/Montserrat-Italic.woff") format("woff"), url("../fonts/Montserrat-Italic.ttf") format("truetype"), url("../fonts/Montserrat-Italic.svg#svgFontName") format("svg"); }
+
+@font-face {
+  font-family: Montserrat;
+  font-weight: 700;
+  src: url("../fonts/Montserrat-Bold.eot");
+  src: url("../fonts/Montserrat-Bold.eot?#iefix") format("embedded-opentype"), url("../fonts/Montserrat-Bold.woff") format("woff"), url("../fonts/Montserrat-Bold.ttf") format("truetype"), url("../fonts/Montserrat-Bold.svg#svgFontName") format("svg"); }
+
+/*#49483E
+#F92672
+#A6E22E
+#FD971F
+#66D9EF
+#AE81FF
+#A1EFE4
+#F8F8F2
+
+## secondary
+#75715E
+#FC5C94
+#C1F161
+#FEB257
+#8DE6F7
+#C2A1FF
+#BBF7EF
+#F8F8F0
+#1B1D1E
+#272822
+#49483E
+#75715E*/
+.spinner {
+  margin: 100px auto;
+  width: 50px;
+  height: 40px;
+  text-align: center;
+  font-size: 10px; }
+  .spinner > div {
+    background-color: #333;
+    height: 100%;
+    width: 6px;
+    display: inline-block;
+    margin: 1px;
+    -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+    animation: sk-stretchdelay 1.2s infinite ease-in-out; }
+  .spinner .rect2 {
+    animation-delay: -1.1s; }
+  .spinner .rect3 {
+    animation-delay: -1.0s; }
+  .spinner .rect4 {
+    animation-delay: -0.9s; }
+  .spinner .rect5 {
+    animation-delay: -0.8s; }
+
+@keyframes sk-stretchdelay {
+  0%, 40%, 100% {
+    transform: scaleY(0.4); }
+  20% {
+    transform: scaleY(1); } }
+
+/*#49483E
+#F92672
+#A6E22E
+#FD971F
+#66D9EF
+#AE81FF
+#A1EFE4
+#F8F8F2
+
+## secondary
+#75715E
+#FC5C94
+#C1F161
+#FEB257
+#8DE6F7
+#C2A1FF
+#BBF7EF
+#F8F8F0
+#1B1D1E
+#272822
+#49483E
+#75715E*/
+.header {
+  display: flex;
+  background: rgba(87, 85, 88, 0.6);
+  color: white; }
+  .header > div {
+    display: inline-block;
+    padding: 10px 20px; }
+
+.header-left,
+.header-right {
+  width: 30%; }
+
+.header-logo {
+  text-align: center;
+  width: 40%; }
+
+.header-right {
+  text-align: right; }
+
+/*#49483E
+#F92672
+#A6E22E
+#FD971F
+#66D9EF
+#AE81FF
+#A1EFE4
+#F8F8F2
+
+## secondary
+#75715E
+#FC5C94
+#C1F161
+#FEB257
+#8DE6F7
+#C2A1FF
+#BBF7EF
+#F8F8F0
+#1B1D1E
+#272822
+#49483E
+#75715E*/
+.kanban-board {
+  padding: 30px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); }
+  .kanban-board .kanban-board__column {
+    display: flex;
+    flex-direction: column;
+    background: rgba(222, 222, 222, 0.5);
+    margin: 0 5px;
+    padding: 0 20px;
+    border-radius: 5px;
+    /*border-bottom-left-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;*/ }
+  .kanban-board .kanban-board__column-title {
+    padding: 10px 0;
+    color: #f5efed; }
+  .kanban-board .kanban-board__droppable {
+    padding-top: 1px;
+    flex-grow: 1; }
+  .kanban-board .kanban-board__droppable--over {
+    background-color: rgba(183, 214, 236, 0.4); }
+  .kanban-board .kanban-board-item {
+    text-align: center;
+    background: #f5efed;
+    padding: 5px;
+    margin: 0 0 15px;
+    box-shadow: 1px 3px 5px rgba(48, 50, 61, 0.15); }
+  .kanban-board .kanban-board-item__title {
+    background: #ffd866;
+    color: #575558;
+    padding: 5px;
+    margin: -5px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #e0bf60; }
+
+body {
+  background: #4B7C9C url("../img/bg-calm.jpg");
+  background-size: cover;
+  height: 100vh; }
+
+h1, h2, h3, h4, p, ul, li {
+  margin: 0;
+  padding: 0; }
+
+* {
+  box-sizing: border-box; }
+
+.App {
+  height: 100%;
+  display: flex;
+  flex-direction: column; }
+
+/**/

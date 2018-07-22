@@ -1,0 +1,28 @@
+@import "./colors";
+
+$padding: 10px;
+
+.header {
+  display: flex;
+  background: rgba($mid-grey, .6);
+  color: white;
+
+  & > div {
+    display: inline-block;
+    padding: $padding $padding * 2;
+  }
+}
+
+.header-left,
+.header-right {
+  width: 30%;
+}
+
+.header-logo {
+  text-align: center;
+  width: 40%;
+}
+
+.header-right {
+  text-align: right;
+}

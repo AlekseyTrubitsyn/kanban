@@ -28,13 +28,13 @@ class KanbanColumn extends Component {
 
     return (
       <div className="kanban-board__column">
-        <h2 className="kanban-board__column-title">{data.name}</h2>
         <Droppable droppableId={droppableId}>
           {(provided, snapshot) => (
             <div
               ref={provided.innerRef}
               className={KanbanColumn.getListClassName(snapshot.isDraggingOver)}
             >
+              <h4 className="kanban-board__column-title">{data.name}</h4>
               {!_isEmpty(data.values) && data.values.map((item, index) => (
                 <Draggable
                   key={item.id}

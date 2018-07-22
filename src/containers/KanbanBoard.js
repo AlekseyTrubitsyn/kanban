@@ -72,13 +72,13 @@ const KanbanBoard = (props) => {
 
 function mapStateToProps(state) {
   return {
-    isFetching : state.tickets.isFetching,
-    isEmpty : state.tickets.isEmpty,
-    discuss : state.tickets.discuss,
-    toDo : state.tickets.toDo,
-    inProgress : state.tickets.inProgress,
-    testing : state.tickets.testing,
-    done : state.tickets.done,
+    isFetching: state.tickets.isFetching,
+    isEmpty: state.tickets.isEmpty,
+    discuss: state.tickets.discuss,
+    toDo: state.tickets.toDo,
+    inProgress: state.tickets.inProgress,
+    testing: state.tickets.testing,
+    done: state.tickets.done,
   }
 }
 
