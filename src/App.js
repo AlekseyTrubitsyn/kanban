@@ -1,19 +1,34 @@
-import React, { Component } from 'react';
+import React, { Fragment } from 'react';
+import { connect } from 'react-redux';
+
 import './assets/styles_css/normalize.css';
 import './assets/styles_css/App.css';
 
-import KanbanBoard from './containers/KanbanBoard'
-import Header from './containers/Header'
+import LoginRegisterForm from './containers/LoginRegisterForm';
+import KanbanBoard from './containers/KanbanBoard';
+import Header from './containers/Header';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <Header />
-        <KanbanBoard />
-      </div>
-    );
+const App = (props) => {
+  const {showLoginForm} = props;
+
+  return (
+    <div className="App">
+      {showLoginForm && <LoginRegisterForm />}
+      {!showLoginForm && (
+        <Fragment>
+          <Header />
+          <KanbanBoard />
+        </Fragment>
+      )}
+    </div>
+  );
+}
+
+
+const mapStateToProps = (state) => {
+  return {
+    showLoginForm: !state.user.userData
   }
 }
 
-export default App;
+export default connect(mapStateToProps)(App);
