@@ -1,0 +1,80 @@
+/*#49483E
+#F92672
+#A6E22E
+#FD971F
+#66D9EF
+#AE81FF
+#A1EFE4
+#F8F8F2
+
+## secondary
+#75715E
+#FC5C94
+#C1F161
+#FEB257
+#8DE6F7
+#C2A1FF
+#BBF7EF
+#F8F8F0
+#1B1D1E
+#272822
+#49483E
+#75715E*/
+body {
+  background: #4B7C9C url("../img/bg-calm.jpg");
+  background-size: cover;
+  height: 100vh; }
+
+h1, h2, h3, h4, p, ul, li {
+  margin: 0;
+  padding: 0; }
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  outline: none; }
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px 20px;
+  background: rgba(245, 239, 237, 0.7);
+  border: none;
+  border-radius: 5px;
+  display: block;
+  margin: 0 0 10px;
+  transition: background-color 0.3s; }
+  input[type="text"]:focus,
+  input[type="password"]:focus {
+    background: white; }
+  input[type="text"]:invalid,
+  input[type="password"]:invalid {
+    border-color: #d8315b; }
+
+.App {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column; }
+
+.btn {
+  display: block;
+  padding: 10px 20px;
+  border-radius: 7px;
+  box-shadow: 2px 2px 5px rgba(48, 50, 61, 0.4);
+  margin: 20px auto; }
+
+.btn-primary {
+  color: white;
+  font-weight: 700;
+  background: #0860ba;
+  transition: background-color 1s ease-out; }
+  .btn-primary:hover {
+    background: #0a7aeb; }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }

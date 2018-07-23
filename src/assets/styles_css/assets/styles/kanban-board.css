@@ -29,12 +29,10 @@
     flex-direction: column;
     background: rgba(222, 222, 222, 0.5);
     margin: 0 5px;
-    padding: 0 20px;
-    border-radius: 5px;
-    /*border-bottom-left-radius: $border-radius;
-    border-bottom-right-radius: $border-radius;*/ }
+    padding: 0;
+    border-radius: 5px; }
   .kanban-board .kanban-board__column-title {
-    padding: 10px 0;
+    padding: 10px 20px;
     color: #f5efed; }
   .kanban-board .kanban-board__droppable {
     padding-top: 1px;
@@ -45,7 +43,8 @@
     text-align: center;
     background: #f5efed;
     padding: 5px;
-    margin: 0 0 15px;
+    margin: 15px;
+    margin-top: 0;
     box-shadow: 1px 3px 5px rgba(48, 50, 61, 0.15); }
   .kanban-board .kanban-board-item__title {
     background: #ffd866;

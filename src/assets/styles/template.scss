@@ -1,0 +1,76 @@
+@import './colors.scss';
+
+$padding: 10px;
+
+body {
+  background: #4B7C9C url('../img/bg-calm.jpg');
+  background-size: cover;
+  height: 100vh;
+}
+
+h1, h2, h3, h4, p, ul, li {
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: $padding $padding * 2;
+  background: rgba($i-white, .7);
+  border: none;
+  border-radius: 5px;
+  display: block;
+  margin: 0 0 $padding;
+  transition: background-color 0.3s;
+
+  &:focus {
+    background: white;
+  }
+
+  &:invalid {
+    border-color: $cherry;
+  }
+}
+
+.App {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+}
+
+.btn {
+  display: block;
+  padding: 10px 20px;
+  border-radius: 7px;
+  box-shadow: 2px 2px 5px rgba($gun-grey, .4);
+  margin: 20px auto;
+}
+
+.btn-primary {
+  color: white;
+  font-weight: 700;
+  background: lighten($dark-cerulean, 10%);
+  transition: background-color 1s ease-out;
+
+  &:hover {
+    background: lighten($dark-cerulean, 20%);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

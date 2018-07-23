@@ -1,0 +1,36 @@
+@import './colors.scss';
+$padding: 10px;
+
+.login-form {
+  position: absolute;
+  width: 300px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba($i-white, 0.6);
+  border-radius: 5px;
+  padding: 0 $padding * 2 $padding * 2;
+  overflow: hidden;
+}
+
+.login-form__tabs {
+  display: flex;
+  margin-bottom: $padding * 2;
+}
+
+.login-form__tab {
+  flex-grow: 1;
+  margin: 0;
+  outline: none;
+  border: none;
+  background: none;
+  min-height: 2em;
+
+  &--selected {
+    background: $i-white;
+  }
+}
+
+.login-form__submit {
+  margin-bottom: 0;
+}

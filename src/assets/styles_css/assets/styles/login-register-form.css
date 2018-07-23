@@ -1,0 +1,45 @@
+/*#49483E
+#F92672
+#A6E22E
+#FD971F
+#66D9EF
+#AE81FF
+#A1EFE4
+#F8F8F2
+
+## secondary
+#75715E
+#FC5C94
+#C1F161
+#FEB257
+#8DE6F7
+#C2A1FF
+#BBF7EF
+#F8F8F0
+#1B1D1E
+#272822
+#49483E
+#75715E*/
+.login-form {
+  position: absolute;
+  width: 300px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(245, 239, 237, 0.6);
+  border-radius: 5px;
+  padding: 0 20px 20px;
+  overflow: hidden; }
+
+.login-form__tabs {
+  display: flex; }
+
+.login-form__tab {
+  flex-grow: 1;
+  margin: 0;
+  outline: none;
+  border: none;
+  background: none;
+  min-height: 2em; }
+  .login-form__tab--selected {
+    background: #f5efed; }

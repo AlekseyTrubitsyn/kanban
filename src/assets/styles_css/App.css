@@ -45,14 +45,87 @@ body {
 #272822
 #49483E
 #75715E*/
+body {
+  background: #4B7C9C url("../img/bg-calm.jpg");
+  background-size: cover;
+  height: 100vh; }
+
+h1, h2, h3, h4, p, ul, li {
+  margin: 0;
+  padding: 0; }
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  outline: none; }
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px 20px;
+  background: rgba(245, 239, 237, 0.7);
+  border: none;
+  border-radius: 5px;
+  display: block;
+  margin: 0 0 10px;
+  transition: background-color 0.3s; }
+  input[type="text"]:focus,
+  input[type="password"]:focus {
+    background: white; }
+  input[type="text"]:invalid,
+  input[type="password"]:invalid {
+    border-color: #d8315b; }
+
+.App {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column; }
+
+.btn {
+  display: block;
+  padding: 10px 20px;
+  border-radius: 7px;
+  box-shadow: 2px 2px 5px rgba(48, 50, 61, 0.4);
+  margin: 20px auto; }
+
+.btn-primary {
+  color: white;
+  font-weight: 700;
+  background: #0860ba;
+  transition: background-color 1s ease-out; }
+  .btn-primary:hover {
+    background: #0a7aeb; }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+
+.spinner-container {
+  position: fixed;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.4);
+  animation: fadeIn 0.7s; }
+
 .spinner {
   margin: 100px auto;
   width: 50px;
   height: 40px;
   text-align: center;
-  font-size: 10px; }
+  font-size: 10px;
+  transition: 0.5 ease-out all;
+  transform: translateY(100%); }
   .spinner > div {
-    background-color: #333;
+    background-color: white;
     height: 100%;
     width: 6px;
     display: inline-block;
@@ -73,6 +146,56 @@ body {
     transform: scaleY(0.4); }
   20% {
     transform: scaleY(1); } }
+
+/*#49483E
+#F92672
+#A6E22E
+#FD971F
+#66D9EF
+#AE81FF
+#A1EFE4
+#F8F8F2
+
+## secondary
+#75715E
+#FC5C94
+#C1F161
+#FEB257
+#8DE6F7
+#C2A1FF
+#BBF7EF
+#F8F8F0
+#1B1D1E
+#272822
+#49483E
+#75715E*/
+.login-form {
+  position: absolute;
+  width: 300px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(245, 239, 237, 0.6);
+  border-radius: 5px;
+  padding: 0 20px 20px;
+  overflow: hidden; }
+
+.login-form__tabs {
+  display: flex;
+  margin-bottom: 20px; }
+
+.login-form__tab {
+  flex-grow: 1;
+  margin: 0;
+  outline: none;
+  border: none;
+  background: none;
+  min-height: 2em; }
+  .login-form__tab--selected {
+    background: #f5efed; }
+
+.login-form__submit {
+  margin-bottom: 0; }
 
 /*#49483E
 #F92672
@@ -146,12 +269,10 @@ body {
     flex-direction: column;
     background: rgba(222, 222, 222, 0.5);
     margin: 0 5px;
-    padding: 0 20px;
-    border-radius: 5px;
-    /*border-bottom-left-radius: $border-radius;
-    border-bottom-right-radius: $border-radius;*/ }
+    padding: 0;
+    border-radius: 5px; }
   .kanban-board .kanban-board__column-title {
-    padding: 10px 0;
+    padding: 10px 20px;
     color: #f5efed; }
   .kanban-board .kanban-board__droppable {
     padding-top: 1px;
@@ -162,7 +283,8 @@ body {
     text-align: center;
     background: #f5efed;
     padding: 5px;
-    margin: 0 0 15px;
+    margin: 15px;
+    margin-top: 0;
     box-shadow: 1px 3px 5px rgba(48, 50, 61, 0.15); }
   .kanban-board .kanban-board-item__title {
     background: #ffd866;
@@ -172,21 +294,5 @@ body {
     margin-bottom: 10px;
     border-bottom: 1px solid #e0bf60; }
 
-body {
-  background: #4B7C9C url("../img/bg-calm.jpg");
-  background-size: cover;
-  height: 100vh; }
-
-h1, h2, h3, h4, p, ul, li {
-  margin: 0;
-  padding: 0; }
-
 * {
   box-sizing: border-box; }
-
-.App {
-  height: 100%;
-  display: flex;
-  flex-direction: column; }
-
-/**/

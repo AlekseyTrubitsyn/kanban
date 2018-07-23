@@ -1,29 +1,11 @@
 @import './assets/styles/fonts.scss';
-@import './assets/styles/colors.scss';
 
+@import './assets/styles/template.scss';
 @import './assets/styles/spinner.scss';
+@import './assets/styles/login-form.scss';
 @import './assets/styles/header.scss';
 @import './assets/styles/kanban-board.scss';
-
-body {
-  background: #4B7C9C url('../img/bg-calm.jpg');
-  background-size: cover;
-  height: 100vh;
-}
-
-h1, h2, h3, h4, p, ul, li {
-  margin: 0;
-  padding: 0;
-}
 
 * {
   box-sizing: border-box;
 }
-
-.App {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-/**/
