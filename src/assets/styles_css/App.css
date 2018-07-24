@@ -197,6 +197,22 @@ input[type="password"] {
 .login-form__submit {
   margin-bottom: 0; }
 
+.login-form__icons {
+  font-size: 3em;
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #f5efed; }
+  .login-form__icons svg {
+    margin: 0 20px;
+    animation: 10s rotate infinite;
+    animation-timing-function: linear; }
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg); } }
+
 /*#49483E
 #F92672
 #A6E22E
@@ -220,23 +236,39 @@ input[type="password"] {
 #49483E
 #75715E*/
 .header {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   background: rgba(87, 85, 88, 0.6);
-  color: white; }
+  color: white;
+  font-size: 18px; }
   .header > div {
     display: inline-block;
     padding: 10px 20px; }
+  .header .btn {
+    display: inline-block;
+    margin: 0 10px; }
 
-.header-left,
-.header-right {
-  width: 30%; }
+.header-left > * {
+  opacity: 0.6; }
 
-.header-logo {
-  text-align: center;
-  width: 40%; }
+.header .header-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  color: #f5efed; }
 
 .header-right {
   text-align: right; }
+
+.header__user-name {
+  font-weight: 700;
+  margin: 0 20px; }
+
+.header .header__search {
+  display: inline-block;
+  width: auto;
+  margin-bottom: 0; }
 
 /*#49483E
 #F92672
@@ -263,22 +295,31 @@ input[type="password"] {
 .kanban-board {
   padding: 30px;
   display: grid;
-  grid-template-columns: repeat(5, 1fr); }
+  grid-template-columns: repeat(5, 1fr);
+  /*.kanban-board__droppable--over {
+    background-color: rgba(lighten($column-title-bg, 30%), .4);
+  }*/ }
   .kanban-board .kanban-board__column {
     display: flex;
     flex-direction: column;
     background: rgba(222, 222, 222, 0.5);
     margin: 0 5px;
     padding: 0;
-    border-radius: 5px; }
+    border-radius: 5px;
+    transition: 0.3s all;
+    overflow: hidden; }
+    .kanban-board .kanban-board__column:hover {
+      background: rgba(77, 80, 97, 0.5);
+      box-shadow: 2px 2px 7px rgba(48, 50, 61, 0.7); }
+      .kanban-board .kanban-board__column:hover .kanban-board__column-title {
+        color: #f5efed; }
   .kanban-board .kanban-board__column-title {
+    transition: all 0.3s;
     padding: 10px 20px;
-    color: #f5efed; }
+    color: #4d5061; }
   .kanban-board .kanban-board__droppable {
     padding-top: 1px;
     flex-grow: 1; }
-  .kanban-board .kanban-board__droppable--over {
-    background-color: rgba(183, 214, 236, 0.4); }
   .kanban-board .kanban-board-item {
     text-align: center;
     background: #f5efed;

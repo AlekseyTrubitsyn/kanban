@@ -6,6 +6,8 @@ import * as UserActions from '../actions/UserActions';
 
 import Loader from '../components/Loader';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 class LoginRegisterForm extends Component {
   constructor(props) {
     super(props);
@@ -15,6 +17,8 @@ class LoginRegisterForm extends Component {
       loginValue: 'admin',
       passwordValue: 'admin'
     }
+
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit() {
@@ -31,34 +35,45 @@ class LoginRegisterForm extends Component {
     if (isFetching) return <Loader />
 
     return (
-      <div className="login-form">
-        <div className="login-form__tabs">
-          <button
-            className="login-form__tab login-form__tab--selected"
-          >Login</button>
-          <button className="login-form__tab">Register</button>
+      <Fragment>
+        <div className="login-form__icons">
+          <FontAwesomeIcon icon={["fab", "react"]} />
+          <FontAwesomeIcon icon={["fab", "react"]} />
+          <FontAwesomeIcon icon={["fab", "react"]} />
         </div>
-        <div className="login-register-container">
-          {isLoginState && (
-            <Fragment>
-              <input
-                type="text"
-                placeholder="any login"
-                defaultValue={loginValue}
-              />
-              <input
-                type="password"
-                placeholder="any password"
-                defaultValue={passwordValue}
-              />
-              <button
-                className="btn btn-primary login-form__submit"
-                onClick={() => login('admin', '123')}
-              >Let's start!</button>
-            </Fragment>
-          )}
+        <div className="login-form">
+          <div className="login-form__tabs">
+            <button
+              className={"login-form__tab" + (isLoginState ? " login-form__tab--selected" : "")}
+            >Login</button>
+            <button
+              className={"login-form__tab" + (isLoginState ? "" : " login-form__tab--selected")}
+            >Register</button>
+          </div>
+          <div className="login-register-container">
+            {isLoginState && (
+              <Fragment>
+                <input
+                  ref="login"
+                  type="text"
+                  placeholder="any login"
+                  defaultValue={loginValue}
+                />
+                <input
+                  ref="password"
+                  type="password"
+                  placeholder="any password?"
+                  defaultValue={passwordValue}
+                />
+                <button
+                  className="btn btn-primary login-form__submit"
+                  onClick={this.handleSubmit}
+                >Let's start!</button>
+              </Fragment>
+            )}
+          </div>
         </div>
-      </div>
+      </Fragment>
     );
   }
 

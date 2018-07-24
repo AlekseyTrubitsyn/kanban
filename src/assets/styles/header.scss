@@ -3,26 +3,46 @@
 $padding: 10px;
 
 .header {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   background: rgba($mid-grey, .6);
   color: white;
+  font-size: 18px;
 
   & > div {
     display: inline-block;
     padding: $padding $padding * 2;
   }
+
+  .btn {
+    display: inline-block;
+    margin: 0 10px;
+  }
 }
 
-.header-left,
-.header-right {
-  width: 30%;
+.header-left > * {
+  opacity: 0.6;
 }
 
-.header-logo {
-  text-align: center;
-  width: 40%;
+.header .header-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  color: $i-white;
 }
 
 .header-right {
   text-align: right;
+}
+
+.header__user-name {
+  font-weight: 700;
+  margin: 0 20px;
+}
+
+.header .header__search {
+  display: inline-block;
+  width: auto;
+  margin-bottom: 0;
 }

@@ -34,3 +34,24 @@ $padding: 10px;
 .login-form__submit {
   margin-bottom: 0;
 }
+
+.login-form__icons {
+  font-size: 3em;
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: $i-white;
+
+  svg {
+    margin: 0 20px;
+    animation: 10s rotate infinite;
+    animation-timing-function: linear;
+  }
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}

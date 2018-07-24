@@ -1,7 +1,8 @@
 import {
   REGISTER_USER,
   REQUEST_USER_DATA,
-  RECEIVE_USER_DATA
+  RECEIVE_USER_DATA,
+  RESET_USER
 } from '../constants/ActionTypes';
 
 const initialState = {
@@ -23,7 +24,12 @@ export default function tickets(state = initialState, action) {
         isFetching: false,
         userData: action.payload
       }
-
+    case RESET_USER:
+      return {
+        ...state,
+        isFetching: false,
+        userData: null
+      }
     default:
       return state;
   }

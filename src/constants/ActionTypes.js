@@ -2,3 +2,4 @@ export const MOVE_TICKET = 'MOVE_TICKET';
 
 export const REQUEST_USER_DATA = 'REQUEST_USER_DATA';
 export const RECEIVE_USER_DATA = 'RECEIVE_USER_DATA';
+export const RESET_USER = 'RESET_USER';

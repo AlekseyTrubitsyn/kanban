@@ -1,7 +1,8 @@
 import {
   REGISTER_USER,
   REQUEST_USER_DATA,
-  RECEIVE_USER_DATA
+  RECEIVE_USER_DATA,
+  RESET_USER
 } from '../constants/ActionTypes';
 
 export const login = (login, password) => {
@@ -15,13 +16,19 @@ export const login = (login, password) => {
         type: RECEIVE_USER_DATA,
         payload: {
           id: 1,
-          username: 'admin',
+          username: login,
           firstName: 'Lorem',
           secondName: 'Ipsum',
           avatar: './img/users/default.png',
           email: 'admin@example.com'
         }
       });
-    }, 3000);
+    }, 300);
+  }
+}
+
+export const logout = () => {
+  return {
+    type: RESET_USER
   }
 }
