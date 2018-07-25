@@ -19,8 +19,9 @@ export const login = (login, password) => {
           username: login,
           firstName: 'Lorem',
           secondName: 'Ipsum',
-          avatar: './img/users/default.png',
-          email: 'admin@example.com'
+          gender: 'male',
+          avatar: './img/default-man.png',
+          email: 'Lorem.Ipsum@example.com'
         }
       });
     }, 300);

@@ -1,27 +1,6 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,400i,700&subset=cyrillic,cyrillic-ext");
 body {
   font-family: Montserrat, Arial, sans-serif; }
-
-@font-face {
-  font-family: Montserrat;
-  font-weight: 400;
-  font-style: normal;
-  src: url("../fonts/Montserrat-Regular.eot");
-  /* IE9 Compat Modes */
-  src: url("../fonts/Montserrat-Regular.eot?#iefix") format("embedded-opentype"), url("../fonts/Montserrat-Regular.woff") format("woff"), url("../fonts/Montserrat-Regular.ttf") format("truetype"), url("../fonts/Montserrat-Regular.svg#svgFontName") format("svg");
-  /* Legacy iOS */ }
-
-@font-face {
-  font-family: Montserrat;
-  font-weight: 400;
-  font-style: italic;
-  src: url("../fonts/Montserrat-Italic.eot");
-  src: url("../fonts/Montserrat-Italic.eot?#iefix") format("embedded-opentype"), url("../fonts/Montserrat-Italic.woff") format("woff"), url("../fonts/Montserrat-Italic.ttf") format("truetype"), url("../fonts/Montserrat-Italic.svg#svgFontName") format("svg"); }
-
-@font-face {
-  font-family: Montserrat;
-  font-weight: 700;
-  src: url("../fonts/Montserrat-Bold.eot");
-  src: url("../fonts/Montserrat-Bold.eot?#iefix") format("embedded-opentype"), url("../fonts/Montserrat-Bold.woff") format("woff"), url("../fonts/Montserrat-Bold.ttf") format("truetype"), url("../fonts/Montserrat-Bold.svg#svgFontName") format("svg"); }
 
 /*#49483E
 #F92672
@@ -330,10 +309,43 @@ input[type="password"] {
   .kanban-board .kanban-board-item__title {
     background: #ffd866;
     color: #575558;
-    padding: 5px;
+    padding: 5px 15px;
     margin: -5px;
     margin-bottom: 10px;
-    border-bottom: 1px solid #e0bf60; }
+    border-bottom: 1px solid #e0bf60;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; }
+  .kanban-board .kanban-board-item__footer {
+    margin-top: 15px;
+    padding: 10px;
+    color: rgba(77, 80, 97, 0.6);
+    font-size: 12px;
+    text-align: center;
+    position: relative; }
+    .kanban-board .kanban-board-item__footer span {
+      color: #4d5061; }
+    .kanban-board .kanban-board-item__footer::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 30px;
+      right: 30px;
+      height: 1px;
+      background-color: rgba(77, 80, 97, 0.1); }
+  .kanban-board .kanban-board-item__developer-avatar {
+    width: 31px;
+    height: 31px;
+    background: white;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+  .kanban-board .kanban-board-item__developer-username {
+    margin-left: auto;
+    margin-right: 10px;
+    font-weight: 700; }
 
 * {
   box-sizing: border-box; }

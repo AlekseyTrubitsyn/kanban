@@ -69,9 +69,52 @@ $border-radius: 5px;
   .kanban-board-item__title {
     background: $item-title-bg;
     color: $item-title-color;
-    padding: $padding / 2;
+    padding: $padding / 2 $padding * 1.5;
     margin: -$padding / 2;
     margin-bottom: $padding;
     border-bottom: 1px solid #e0bf60;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .kanban-board-item__footer {
+    margin-top: $padding * 1.5;
+    padding: $padding;
+    color: rgba($i-grey, .6);
+    font-size: 12px;
+    text-align: center;
+    position: relative;
+
+    span {
+      color: $i-grey;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: $padding * 3;
+      right: $padding * 3;
+      height: 1px;
+      background-color: rgba($i-grey, .1);
+    }
+  }
+
+  .kanban-board-item__developer-avatar {
+    width: 31px;
+    height: 31px;
+    background: white;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .kanban-board-item__developer-username {
+    margin-left: auto;
+    margin-right: 10px;
+    font-weight: 700;
   }
 }

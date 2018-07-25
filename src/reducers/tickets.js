@@ -2,13 +2,26 @@ import {
   MOVE_TICKET
 } from '../constants/ActionTypes';
 
+import moment from 'moment';
+
 class Task {
   constructor() {
     this.id = Task.counter;
     this.title = 'Title',
     this.text = 'Text',
-    this.author = 'User-A',
-    this.developer = 'User-B'
+    this.author = {
+      userId: 2,
+      userName: 'Supertester',
+      avatar: 'img/default-woman.png'
+    },
+    this.developer = {
+      userId: 1,
+      userName: 'Lorem I',
+      avatar: 'img/default-man.png'
+    },
+    this.projectCode = 'TEST',
+    this.deadline = moment(moment()).add(1, 'days'),
+    this.creationDate = moment(moment()).subtract(2, 'days')
   }
 
   static get counter() {
