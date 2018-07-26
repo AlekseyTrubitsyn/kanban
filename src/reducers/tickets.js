@@ -3,55 +3,32 @@ import {
 } from '../constants/ActionTypes';
 
 import moment from 'moment';
+import { getDefaultTasks } from '../utilities/BIF';
 
-class Task {
-  constructor() {
-    this.id = Task.counter;
-    this.title = 'Title',
-    this.text = 'Text',
-    this.author = {
-      userId: 2,
-      userName: 'Supertester',
-      avatar: 'img/default-woman.png'
-    },
-    this.developer = {
-      userId: 1,
-      userName: 'Lorem I',
-      avatar: 'img/default-man.png'
-    },
-    this.projectCode = 'TEST',
-    this.deadline = moment(moment()).add(1, 'days'),
-    this.creationDate = moment(moment()).subtract(2, 'days')
-  }
-
-  static get counter() {
-    Task._counter = (Task._counter || 0) + 1;
-    return Task._counter;
-  }
-}
+const tasks = getDefaultTasks();
 
 const initialState = {
   isFetching: false,
   isEmpty: false,
   discuss: {
     name: 'Discuss',
-    values: [(new Task())]
+    values: tasks.discuss
   },
   toDo: {
     name: 'To do',
-    values: [(new Task()), (new Task())]
+    values: tasks.toDo
   },
   inProgress: {
     name: 'In progress',
-    values: [(new Task()), (new Task()), (new Task())]
+    values: tasks.inProgress
   },
   testing: {
     name: 'Testing',
-    values: []
+    values: tasks.testing
   },
   done: {
     name: 'Done',
-    values: []
+    values: tasks.done
   },
 }
 
