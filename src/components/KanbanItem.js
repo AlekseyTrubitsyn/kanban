@@ -13,7 +13,7 @@ const KanbanItem = (props) => {
       ref={rf}
       {...deafultProps}
     >
-      <p className="kanban-board-item__title">
+      <div className="kanban-board-item__header">
         <span>
           {item.name || item.projectCode + ' #' + item.id}
         </span>
@@ -28,10 +28,18 @@ const KanbanItem = (props) => {
             height="auto"
           />
         </div>
+      </div>
+      <div className="kanban-board-item__deadline translucent">
+        <span>deadline: </span>
+        <span>{moment(item.deadline).format('LL')} </span>
+        <span>({moment(item.deadline).fromNow()})</span>
+      </div>
+      <p className="kanban-board-item__title">
+        {item.title}
       </p>
-      <p className="kanban-board-item__text">{item.text}</p>
-      <p className="kanban-board-item__developer">{item.developer.userName}</p>
-      <p className="kanban-board-item__deadline">{moment(item.deadline).format('LL')}</p>
+      <p className="kanban-board-item__text">
+        {item.text}
+      </p>
       <div className="kanban-board-item__footer">
         Created <span>{moment(item.creationDate).fromNow()}</span> by <span>{item.author.userName}</span>
       </div>
@@ -40,13 +48,30 @@ const KanbanItem = (props) => {
   )
 };
 
-/*KanbanItem.propTypes = {
-  PropTypes.shape({
+KanbanItem.propTypes = {
+  item: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
-    author: PropTypes.string.isRequired,
-    developer: PropTypes.string.isRequired,
-  })
-}*/
+    author: PropTypes.shape({
+      userName: PropTypes.string.isRequired,
+      avatar: PropTypes.string.isRequired
+    }).isRequired,
+    developer: PropTypes.shape({
+      userName: PropTypes.string.isRequired,
+      avatar: PropTypes.string.isRequired
+    }),
+    projectCode: PropTypes.string.isRequired,
+    deadline: PropTypes.oneOfType([
+      PropTypes.instanceOf(Date),
+      PropTypes.instanceOf(moment)
+    ]).isRequired,
+    creationDate: PropTypes.oneOfType([
+      PropTypes.instanceOf(Date),
+      PropTypes.instanceOf(moment)
+    ]).isRequired
+  }),
+  rf: PropTypes.func.isRequired
+}
 
 export default KanbanItem;

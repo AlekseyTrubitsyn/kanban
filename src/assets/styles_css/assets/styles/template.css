@@ -73,6 +73,9 @@ input[type="password"] {
   .btn-primary:hover {
     background: #0a7aeb; }
 
+.translucent {
+  opacity: .4; }
+
 @keyframes fadeIn {
   from {
     opacity: 0; }

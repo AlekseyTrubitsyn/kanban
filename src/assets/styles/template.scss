@@ -66,6 +66,10 @@ input[type="password"] {
   }
 }
 
+.translucent {
+  opacity: .4;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;

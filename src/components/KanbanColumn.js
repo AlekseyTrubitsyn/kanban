@@ -61,7 +61,7 @@ const KanbanColumn = (props) => {
 KanbanColumn.propTypes = {
   data: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    values: PropTypes.arrayOf(PropTypes.object).isRequired
+    values: PropTypes.arrayOf(PropTypes.object)
   })
 };
 
