@@ -1,34 +1,32 @@
-import {
-  MOVE_TICKET
-} from '../constants/ActionTypes';
+import { MOVE_TICKET } from '../constants/ActionTypes';
 
 import moment from 'moment';
-import { getDefaultTasks } from '../utilities/BIF';
+import { getTickets } from '../utilities/backInFront/index';
 
-const tasks = getDefaultTasks();
+const ticketsData = getTickets();
 
 const initialState = {
   isFetching: false,
   isEmpty: false,
   discuss: {
     name: 'Discuss',
-    values: tasks.discuss
+    values: ticketsData.discuss || []
   },
   toDo: {
     name: 'To do',
-    values: tasks.toDo
+    values: ticketsData.toDo || []
   },
   inProgress: {
     name: 'In progress',
-    values: tasks.inProgress
+    values: ticketsData.inProgress || []
   },
   testing: {
     name: 'Testing',
-    values: tasks.testing
+    values: ticketsData.testing || []
   },
   done: {
     name: 'Done',
-    values: tasks.done
+    values: ticketsData.done || []
   },
 }
 

@@ -61,14 +61,16 @@ KanbanItem.propTypes = {
       userName: PropTypes.string.isRequired,
       avatar: PropTypes.string.isRequired
     }),
-    projectCode: PropTypes.string.isRequired,
+    projectName: PropTypes.string.isRequired,
     deadline: PropTypes.oneOfType([
       PropTypes.instanceOf(Date),
-      PropTypes.instanceOf(moment)
+      PropTypes.instanceOf(moment),
+      PropTypes.string
     ]).isRequired,
     creationDate: PropTypes.oneOfType([
       PropTypes.instanceOf(Date),
-      PropTypes.instanceOf(moment)
+      PropTypes.instanceOf(moment),
+      PropTypes.string
     ]).isRequired
   }),
   rf: PropTypes.func.isRequired
