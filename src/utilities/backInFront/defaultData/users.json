@@ -1,0 +1,39 @@
+[
+  {
+    "id": 1,
+    "userName": "Lorem",
+    "firstName": "Lorem",
+    "secondName": "Ipsun",
+    "gender": "Male",
+    "avatar": "img/default-man.png",
+    "email": "",
+    "role": "front-end developer"
+  }, {
+    "id": 2,
+    "userName": "blaster",
+    "firstName": "Ramona",
+    "secondName": "Pierce",
+    "gender": "Female",
+    "avatar": "img/default-woman.png",
+    "email": "",
+    "role": "front-end developer"
+  }, {
+    "id": 3,
+    "userName": "Supertester",
+    "firstName": "Nelson",
+    "secondName": "May",
+    "gender": "Male",
+    "avatar": "img/default-man.png",
+    "email": "",
+    "role": "tester"
+  }, {
+    "id": 4,
+    "userName": "smokey_ln",
+    "firstName": "Mario",
+    "secondName": "Warren",
+    "gender": "Male",
+    "avatar": "img/default-man.png",
+    "email": "",
+    "role": "team lead"
+  }
+]

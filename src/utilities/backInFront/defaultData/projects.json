@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "name": "My first project",
+    "default": true
+  }, {
+    "id": 2,
+    "name": "My second project",
+    "default": false
+  }
+]
