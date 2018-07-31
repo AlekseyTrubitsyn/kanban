@@ -1,11 +1,10 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 
 const KanbanItem = (props) => {
   const { item, rf, ...deafultProps } = props;
   const developerAvatar = `${process.env.PUBLIC_URL}/${item.developer.avatar}`;
-  const authorAvatar = `${process.env.PUBLIC_URL}/${item.author.avatar}`;
 
   return (
     <div
@@ -30,9 +29,17 @@ const KanbanItem = (props) => {
         </div>
       </div>
       <div className="kanban-board-item__deadline translucent">
-        <span>deadline: </span>
-        <span>{moment(item.deadline).format('LL')} </span>
-        <span>({moment(item.deadline).fromNow()})</span>
+        { item.deadline ?
+          <Fragment>
+            <span>deadline: </span>
+            <span>{moment(item.deadline).format('LL')} </span>
+            <span>({moment(item.deadline).fromNow()})</span>
+          </Fragment>
+          :
+          <Fragment>
+            <span>No deadline!</span>
+          </Fragment>
+        }
       </div>
       <p className="kanban-board-item__title">
         {item.title}
@@ -61,12 +68,11 @@ KanbanItem.propTypes = {
       userName: PropTypes.string.isRequired,
       avatar: PropTypes.string.isRequired
     }),
-    projectName: PropTypes.string.isRequired,
     deadline: PropTypes.oneOfType([
       PropTypes.instanceOf(Date),
       PropTypes.instanceOf(moment),
       PropTypes.string
-    ]).isRequired,
+    ]),
     creationDate: PropTypes.oneOfType([
       PropTypes.instanceOf(Date),
       PropTypes.instanceOf(moment),
@@ -76,4 +82,4 @@ KanbanItem.propTypes = {
   rf: PropTypes.func.isRequired
 }
 
-export default KanbanItem;
+export default (KanbanItem);
