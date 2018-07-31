@@ -10,7 +10,7 @@ import { fab } from '@fortawesome/free-brands-svg-icons';
 import { faClipboard, faUmbrella, faCoffee, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 import LoginRegisterForm from './containers/LoginRegisterForm';
-import KanbanBoard from './containers/KanbanBoard';
+import KanbanBoardContainer from './containers/KanbanBoardContainer';
 import Header from './containers/Header';
 
 library.add(fab, faClipboard, faCoffee, faUmbrella, faSignOutAlt);
@@ -24,7 +24,7 @@ const App = (props) => {
       {!showLoginForm && (
         <Fragment>
           <Header />
-          <KanbanBoard />
+          <KanbanBoardContainer />
         </Fragment>
       )}
     </div>

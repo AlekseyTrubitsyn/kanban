@@ -47,7 +47,8 @@
     color: #4d5061; }
   .kanban-board .kanban-board__droppable {
     padding-top: 1px;
-    flex-grow: 1; }
+    flex-grow: 1;
+    min-height: 300px; }
   .kanban-board .kanban-board-item {
     text-align: center;
     background: #f5efed;

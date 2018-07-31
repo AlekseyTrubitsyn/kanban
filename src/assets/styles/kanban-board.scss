@@ -51,6 +51,7 @@ $border-radius: 5px;
   .kanban-board__droppable {
     padding-top: 1px;
     flex-grow: 1;
+    min-height: 300px;
   }
 
   /*.kanban-board__droppable--over {
