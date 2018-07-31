@@ -1,7 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-const Loader = ({}) => (
+const Loader = () => (
   <div className="spinner-container">
     <div className="spinner">
       <div className="rect1"></div>

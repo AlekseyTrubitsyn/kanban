@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 
@@ -7,17 +7,11 @@ import _isEmpty from 'lodash/isEmpty';
 import KanbanItem from './KanbanItem';
 
 const KanbanColumn = (props) => {
+  const {droppableId, data} = props;
+
   const handleClick = () => {
     console.log('handleClick');
   }
-
-  const getListClassName = (isDraggingOver) => {
-    return isDraggingOver
-      ? "kanban-board__droppable kanban-board__droppable--over"
-      : "kanban-board__droppable";
-  }
-
-  const {droppableId, data} = props;
 
   return (
     <div className="kanban-board__column">
@@ -40,7 +34,7 @@ const KanbanColumn = (props) => {
               >
                 {(provided, snapshot) => (
                   <KanbanItem
-                    onClick={this.handleClick}
+                    onClick={handleClick}
                     rf={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
