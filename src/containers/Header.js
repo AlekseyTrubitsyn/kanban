@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
 
-import * as UserActions from '../actions/UserActions';
+import * as UserSettingsActions from '../actions/UserSettingsActions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class Header extends Component {
@@ -30,13 +30,13 @@ class Header extends Component {
 
 function mapStateToProps(state) {
   return {
-    userData: state.user.userData
+    userData: state.userSettings.userData
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    logout: bindActionCreators(UserActions, dispatch).logout
+    logout: bindActionCreators(UserSettingsActions, dispatch).logout
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

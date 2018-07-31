@@ -34,7 +34,7 @@ const App = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    showLoginForm: !state.user.userData
+    showLoginForm: !state.userSettings.userData
   }
 }
 

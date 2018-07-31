@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
 
-import * as UserActions from '../actions/UserActions';
+import * as UserSettingsActions from '../actions/UserSettingsActions';
 
 import Loader from '../components/Loader';
 
@@ -29,7 +29,7 @@ class LoginRegisterForm extends Component {
   }
 
   render() {
-    const { login, isFetching } = this.props;
+    const { isFetching } = this.props;
     const { loginValue, passwordValue, isLoginState } = this.state;
 
     if (isFetching) return <Loader />
@@ -81,13 +81,13 @@ class LoginRegisterForm extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    isFetching: state.user.isFetching
+    isFetching: state.userSettings.isFetching
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    login: bindActionCreators(UserActions, dispatch).login
+    login: bindActionCreators(UserSettingsActions, dispatch).login
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(LoginRegisterForm);
