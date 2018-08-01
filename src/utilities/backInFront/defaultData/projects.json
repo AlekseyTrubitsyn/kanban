@@ -2,10 +2,12 @@
   {
     "id": 1,
     "name": "My first project",
+    "key": "test",
     "default": true
   }, {
     "id": 2,
     "name": "My second project",
+    "key": "test2",
     "default": false
   }
 ]

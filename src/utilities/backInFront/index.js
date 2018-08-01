@@ -57,9 +57,11 @@ const _users = loadFromLS('users') || users;
 
 const mapTicketsFromJSON = (arr, projectId) => {
   arr.map(item => {
-    item.author = _users.filter(subitem => subitem.id === item.authorId)[0] || {};
-    item.developer = _users.filter(subitem => subitem.id === item.developerId)[0] || {};
-    item.project = _projects.filter(subitem => subitem.id === projectId)[0] || {};
+    item.author = _users.filter(subitem => subitem.id === item.reporterId)[0] || {};
+    item.developer = _users.filter(subitem => subitem.id === item.assigneeId)[0] || {};
+
+    let _project = _projects.filter(subitem => subitem.id === projectId)[0] || {};
+    item.projectKey = !_isEmpty(_project) ? _project.key : '';
 
     return item;
   })
