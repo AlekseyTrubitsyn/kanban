@@ -2,28 +2,6 @@
 body {
   font-family: Montserrat, Arial, sans-serif; }
 
-/*#49483E
-#F92672
-#A6E22E
-#FD971F
-#66D9EF
-#AE81FF
-#A1EFE4
-#F8F8F2
-
-## secondary
-#75715E
-#FC5C94
-#C1F161
-#FEB257
-#8DE6F7
-#C2A1FF
-#BBF7EF
-#F8F8F0
-#1B1D1E
-#272822
-#49483E
-#75715E*/
 body {
   background: #4B7C9C url("../img/bg-calm.jpg");
   background-size: cover;
@@ -40,7 +18,8 @@ button {
   outline: none; }
 
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+textarea {
   width: 100%;
   padding: 10px 20px;
   background: rgba(245, 239, 237, 0.7);
@@ -50,10 +29,12 @@ input[type="password"] {
   margin: 0 0 10px;
   transition: background-color 0.3s; }
   input[type="text"]:focus,
-  input[type="password"]:focus {
+  input[type="password"]:focus,
+  textarea:focus {
     background: white; }
   input[type="text"]:invalid,
-  input[type="password"]:invalid {
+  input[type="password"]:invalid,
+  textarea:invalid {
     border-color: #d8315b; }
 
 .App {
@@ -129,28 +110,37 @@ input[type="password"] {
   20% {
     transform: scaleY(1); } }
 
-/*#49483E
-#F92672
-#A6E22E
-#FD971F
-#66D9EF
-#AE81FF
-#A1EFE4
-#F8F8F2
+.modal-container {
+  z-index: 100;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  padding-top: 45px;
+  background: white;
+  border-radius: 5px;
+  overflow: hidden; }
+  .modal-container .modal-container__close-button {
+    font-size: 30px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #064789;
+    transition: 0.5s color; }
+    .modal-container .modal-container__close-button:hover {
+      color: #0860ba; }
 
-## secondary
-#75715E
-#FC5C94
-#C1F161
-#FEB257
-#8DE6F7
-#C2A1FF
-#BBF7EF
-#F8F8F0
-#1B1D1E
-#272822
-#49483E
-#75715E*/
+.modal-container__overlay {
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.7);
+  animation: fadeIn 0.5s; }
+
 .login-form {
   position: absolute;
   width: 300px;
@@ -195,28 +185,6 @@ input[type="password"] {
   to {
     transform: rotate(360deg); } }
 
-/*#49483E
-#F92672
-#A6E22E
-#FD971F
-#66D9EF
-#AE81FF
-#A1EFE4
-#F8F8F2
-
-## secondary
-#75715E
-#FC5C94
-#C1F161
-#FEB257
-#8DE6F7
-#C2A1FF
-#BBF7EF
-#F8F8F0
-#1B1D1E
-#272822
-#49483E
-#75715E*/
 .header {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -252,28 +220,6 @@ input[type="password"] {
   width: auto;
   margin-bottom: 0; }
 
-/*#49483E
-#F92672
-#A6E22E
-#FD971F
-#66D9EF
-#AE81FF
-#A1EFE4
-#F8F8F2
-
-## secondary
-#75715E
-#FC5C94
-#C1F161
-#FEB257
-#8DE6F7
-#C2A1FF
-#BBF7EF
-#F8F8F0
-#1B1D1E
-#272822
-#49483E
-#75715E*/
 .kanban-board {
   padding: 30px;
   display: grid;
@@ -330,7 +276,7 @@ input[type="password"] {
       background: #f52e17;
       color: white;
       border-bottom-color: #b71a08; }
-  .kanban-board .kanban-board-item__developer-avatar {
+  .kanban-board .kanban-board-item__assignee-avatar {
     width: 31px;
     height: 31px;
     background: white;
@@ -339,7 +285,7 @@ input[type="password"] {
     display: flex;
     justify-content: center;
     align-items: center; }
-  .kanban-board .kanban-board-item__developer-username {
+  .kanban-board .kanban-board-item__assignee-username {
     margin-left: auto;
     margin-right: 10px;
     font-weight: 700; }
@@ -404,6 +350,29 @@ input[type="password"] {
     color: #4d5061;
     transform: translateX(-50%);
     font-size: 8px; }
+
+.card {
+  width: 30vw;
+  min-width: 300px;
+  border-radius: 5px;
+  overflow: hidden; }
+  .card .card__info {
+    margin-bottom: 10px;
+    color: #4d5061; }
+  .card .card__buttons {
+    display: flex;
+    justify-content: center;
+    padding: 10px; }
+    .card .card__buttons .btn {
+      margin: 10px; }
+  .card input, .card textarea {
+    width: 100%;
+    margin: 0 0 20px;
+    border: 1px solid transparent; }
+    .card input:focus, .card textarea:focus {
+      background: #f2f9ff;
+      border-color: #66a9d7;
+      color: #064789; }
 
 * {
   box-sizing: border-box; }

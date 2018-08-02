@@ -1,25 +1,3 @@
-/*#49483E
-#F92672
-#A6E22E
-#FD971F
-#66D9EF
-#AE81FF
-#A1EFE4
-#F8F8F2
-
-## secondary
-#75715E
-#FC5C94
-#C1F161
-#FEB257
-#8DE6F7
-#C2A1FF
-#BBF7EF
-#F8F8F0
-#1B1D1E
-#272822
-#49483E
-#75715E*/
 .header {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

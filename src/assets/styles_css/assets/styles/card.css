@@ -1,0 +1,22 @@
+.card {
+  width: 30vw;
+  min-width: 300px;
+  border-radius: 5px;
+  overflow: hidden; }
+  .card .card__info {
+    margin-bottom: 10px;
+    color: #4d5061; }
+  .card .card__buttons {
+    display: flex;
+    justify-content: center;
+    padding: 10px; }
+    .card .card__buttons .btn {
+      margin: 10px; }
+  .card input, .card textarea {
+    width: 100%;
+    margin: 0 0 20px;
+    border: 1px solid transparent; }
+    .card input:focus, .card textarea:focus {
+      background: #f2f9ff;
+      border-color: #66a9d7;
+      color: #064789; }
