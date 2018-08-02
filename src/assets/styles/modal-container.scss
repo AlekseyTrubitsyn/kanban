@@ -1,0 +1,38 @@
+$zIndex: 100;
+
+.modal-container {
+  z-index: $zIndex;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  padding-top: 45px;
+  background: white;
+  border-radius: 5px;
+  overflow: hidden;
+
+  .modal-container__close-button {
+    font-size: 30px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: $dark-cerulean;
+    transition: 0.5s color;
+
+    &:hover {
+      color: lighten($dark-cerulean, 10%);
+    }
+  }
+}
+
+.modal-container__overlay {
+  position: fixed;
+  z-index: $zIndex - 1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(#000, .7);
+  animation: fadeIn 0.5s;
+}
