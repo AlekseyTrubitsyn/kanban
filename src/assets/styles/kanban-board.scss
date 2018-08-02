@@ -95,7 +95,7 @@ $border-radius: 5px;
     }
   }
 
-  .kanban-board-item__developer-avatar {
+  .kanban-board-item__assignee-avatar {
     width: 31px;
     height: 31px;
     background: white;
@@ -106,7 +106,7 @@ $border-radius: 5px;
     align-items: center;
   }
 
-  .kanban-board-item__developer-username {
+  .kanban-board-item__assignee-username {
     margin-left: auto;
     margin-right: 10px;
     font-weight: 700;

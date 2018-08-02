@@ -8,10 +8,17 @@ import * as TicketsActions from '../actions/TicketsActions';
 import Loader from '../components/Loader';
 import KanbanColumn from '../components/KanbanColumn';
 import StorageButtons from '../components/StorageButtons';
+import Card from '../components/Card';
 
 class KanbanBoardContainer extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      showItemCard: false,
+      itemCardId: 0,
+      columnName: ''
+    }
 
     props.getTickets();
 
@@ -19,6 +26,9 @@ class KanbanBoardContainer extends Component {
     this.onSaveClick = this.onSaveClick.bind(this);
     this.onLoadClick = this.onLoadClick.bind(this);
     this.onResetClick = this.onResetClick.bind(this);
+    this.onOpenCardClick = this.onOpenCardClick.bind(this);
+    this.onCloseCardClick = this.onCloseCardClick.bind(this);
+    this.onSaveCardClick = this.onSaveCardClick.bind(this);
   }
 
   onDragEnd(result) {
@@ -64,6 +74,28 @@ class KanbanBoardContainer extends Component {
     this.props.resetTickets();
   }
 
+  onOpenCardClick(columnName, itemCardId) {
+    console.log('onOpenCardClick', );
+
+    this.setState({
+      showItemCard: true,
+      itemCardId,
+      columnName
+    })
+  }
+
+  onCloseCardClick() {
+    this.setState({
+      showItemCard: false,
+      itemCardId: 0,
+      columnName: ''
+    })
+  }
+
+  onSaveCardClick(item) {
+    console.log('onSaveCardClick');
+  }
+
   render() {
     const {
       discuss,
@@ -74,8 +106,15 @@ class KanbanBoardContainer extends Component {
       isFetching
     } = this.props;
 
+    const {
+      showItemCard,
+      itemCardId,
+      columnName
+    } = this.state;
+
     if (isFetching) return (<Loader/>);
 
+    // if (showItemCard && itemCardId && columnName)
     return (
       <div>
         <StorageButtons
@@ -83,32 +122,44 @@ class KanbanBoardContainer extends Component {
           onLoadClick={this.onLoadClick}
           onResetClick={this.onResetClick}
         />
+        {showItemCard && itemCardId && columnName && (
+          <Card
+            onCloseClick={this.onCloseCardClick}
+            onSaveClick={this.onSaveCardClick}
+            item={this.props[columnName].values.filter(item => item.id === itemCardId)[0]}
+          />
+        )}
         <div className="kanban-board">
           <DragDropContext onDragEnd={this.onDragEnd}>
             <KanbanColumn
               droppableId="discuss"
               key="discuss"
               data={discuss}
+              onItemClick={(id) => this.onOpenCardClick('discuss', id)}
             />
             <KanbanColumn
               droppableId="toDo"
               key="toDo"
               data={toDo}
+              onItemClick={(id) => this.onOpenCardClick('toDo', id)}
             />
             <KanbanColumn
               droppableId="inProgress"
               key="inProgress"
               data={inProgress}
+              onItemClick={(id) => this.onOpenCardClick('inProgress', id)}
             />
             <KanbanColumn
               droppableId="testing"
               key="testing"
               data={testing}
+              onItemClick={(id) => this.onOpenCardClick('testing', id)}
             />
             <KanbanColumn
               droppableId="done"
               key="done"
               data={done}
+              onItemClick={(id) => this.onOpenCardClick('done', id)}
             />
           </DragDropContext>
         </div>

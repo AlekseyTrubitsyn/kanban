@@ -21,7 +21,8 @@ button {
 }
 
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+textarea {
   width: 100%;
   padding: $padding $padding * 2;
   background: rgba($i-white, .7);

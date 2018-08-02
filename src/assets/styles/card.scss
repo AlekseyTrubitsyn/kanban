@@ -1,0 +1,35 @@
+@import './colors';
+
+.card {
+  width: 30vw;
+  min-width: 300px;
+  border-radius: 5px;
+  overflow: hidden;
+
+  .card__info {
+    margin-bottom: 10px;
+    color: $i-grey;
+  }
+
+  .card__buttons {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+
+    .btn {
+      margin: 10px;
+    }
+  }
+
+  input, textarea {
+    width: 100%;
+    margin: 0 0 20px;
+    border: 1px solid transparent;
+
+    &:focus {
+      background: lighten(#b6dcfe, 12%);
+      border-color: lighten($celestial-blue, 10%);
+      color: $dark-cerulean;
+    }
+  }
+}

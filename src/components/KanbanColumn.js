@@ -7,10 +7,11 @@ import _isEmpty from 'lodash/isEmpty';
 import KanbanItem from './KanbanItem';
 
 const KanbanColumn = (props) => {
-  const {droppableId, data} = props;
+  const { droppableId, data, onItemClick } = props;
 
-  const handleClick = () => {
-    console.log('handleClick');
+  const handleClick = (id) => {
+    console.log('handleClick', id);
+    onItemClick(id);
   }
 
   return (
@@ -34,7 +35,7 @@ const KanbanColumn = (props) => {
               >
                 {(provided, snapshot) => (
                   <KanbanItem
-                    onClick={handleClick}
+                    onClick={() => handleClick(item.id)}
                     rf={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}

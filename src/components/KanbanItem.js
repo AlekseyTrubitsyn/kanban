@@ -5,22 +5,28 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const KanbanItem = (props) => {
   const { item, rf, ...deafultProps } = props;
-  const developerAvatar = `${process.env.PUBLIC_URL}/${item.developer.avatar}`;
+  const { id, title, text, project, reporter, assignee, deadline, creationDate, priority} = item;
+  const projectKey = project.key || "";
 
-  const deadlineDate = new Date(item.deadline);
-  const deadlineExpired = item.deadline && deadlineDate < new Date();
-  const deadlineIsClose = !deadlineExpired
-                          && item.deadline
-                          && deadlineDate <= moment().add(12, 'hours').toDate();
+  const assigneeAvatar = `${process.env.PUBLIC_URL}/${assignee.avatar}`;
 
-  let deadlineClassName = "kanban-board-item__deadline";
+  const deadlineDate = new Date(deadline);
+  const deadlineWarningTime = moment().add(12, 'hours').toDate();
+
+  const deadlineExpired = deadline && deadlineDate < new Date();
+  const deadlineIsClose = deadline && deadlineDate <= deadlineWarningTime;
+
+  let deadlineCN = "kanban-board-item__deadline";
+  let headerCN = "kanban-board-item__header";
 
   if (deadlineExpired) {
-    deadlineClassName += " kanban-board-item__deadline--expired";
+    deadlineCN += " kanban-board-item__deadline--expired";
+    headerCN += " expired";
   } else if (deadlineIsClose) {
-    deadlineClassName += " kanban-board-item__deadline--soon";
+    deadlineCN += " kanban-board-item__deadline--soon";
+    headerCN += " warning";
   } else {
-    deadlineClassName += " translucent";
+    deadlineCN += " translucent";
   }
 
   return (
@@ -29,28 +35,28 @@ const KanbanItem = (props) => {
       ref={rf}
       {...deafultProps}
     >
-      <div className={"kanban-board-item__header" + (deadlineExpired ? " expired" : "") + (deadlineIsClose ? " warning" : "")}>
+      <div className={headerCN}>
         <span>
-          {(item.projectKey || '') + ' #' + item.id}
+          {projectKey + ' #' + id}
         </span>
-        <span className="kanban-board-item__developer-username">
-          {item.developer.userName}
+        <span className="kanban-board-item__assignee-username">
+          {assignee.userName}
         </span>
-        <div className="kanban-board-item__developer-avatar">
+        <div className="kanban-board-item__assignee-avatar">
           <img
-            src={developerAvatar}
-            alt={item.developer.userName}
+            src={assigneeAvatar}
+            alt={assignee.userName}
             width="30"
             height="auto"
           />
         </div>
       </div>
-      <div className={deadlineClassName}>
-        { item.deadline ?
+      <div className={deadlineCN}>
+        { deadline ?
           <Fragment>
             <span>deadline: </span>
-            <span>{moment(item.deadline).format('LL')} </span>
-            <span>({moment(item.deadline).fromNow()})</span>
+            <span>{moment(deadline).format('LL')} </span>
+            <span>({moment(deadline).fromNow()})</span>
           </Fragment>
           :
           <Fragment>
@@ -59,18 +65,20 @@ const KanbanItem = (props) => {
         }
       </div>
       <p className="kanban-board-item__title">
-        {item.title}
+        {title}
       </p>
       <p className="kanban-board-item__text">
-        {item.text}
+        {text}
       </p>
       <div className="kanban-board-item__footer">
         <div className="kanban-board-item__priority-stars">
-          {item.priority && Array.from(new Array(item.priority)).map(() =>
-            <FontAwesomeIcon icon="star" />
+          {priority && Array.from(new Array(priority)).map((item, index) =>
+            <FontAwesomeIcon icon="star" key={index}/>
           )}
         </div>
-        Created <span>{moment(item.creationDate).fromNow()}</span> by <span>{item.author.userName}</span>
+        <span>Created </span>
+        <span> {moment(creationDate).fromNow()}</span>
+        <span> by {reporter.userName}</span>
       </div>
     </div>
   )
@@ -81,11 +89,14 @@ KanbanItem.propTypes = {
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
-    author: PropTypes.shape({
+    project: PropTypes.shape({
+      key: PropTypes.string.isRequired
+    }).isRequired,
+    reporter: PropTypes.shape({
       userName: PropTypes.string.isRequired,
       avatar: PropTypes.string.isRequired
     }).isRequired,
-    developer: PropTypes.shape({
+    assignee: PropTypes.shape({
       userName: PropTypes.string.isRequired,
       avatar: PropTypes.string.isRequired
     }),
@@ -98,7 +109,10 @@ KanbanItem.propTypes = {
       PropTypes.instanceOf(Date),
       PropTypes.instanceOf(moment),
       PropTypes.string
-    ]).isRequired
+    ]).isRequired,
+    priority: PropTypes.number.isRequired,
+    subtasks: PropTypes.array,
+    activity: PropTypes.array
   }),
   rf: PropTypes.func.isRequired
 }
