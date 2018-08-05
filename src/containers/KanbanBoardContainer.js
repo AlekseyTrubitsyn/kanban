@@ -23,9 +23,6 @@ class KanbanBoardContainer extends Component {
     props.getTickets();
 
     this.onDragEnd = this.onDragEnd.bind(this);
-    this.onSaveClick = this.onSaveClick.bind(this);
-    this.onLoadClick = this.onLoadClick.bind(this);
-    this.onResetClick = this.onResetClick.bind(this);
     this.onOpenCardClick = this.onOpenCardClick.bind(this);
     this.onCloseCardClick = this.onCloseCardClick.bind(this);
     this.onSaveCardClick = this.onSaveCardClick.bind(this);
@@ -47,36 +44,7 @@ class KanbanBoardContainer extends Component {
     });
   }
 
-  onSaveClick() {
-    const {
-      discuss,
-      toDo,
-      inProgress,
-      testing,
-      done,
-      setTickets
-    } = this.props;
-
-    setTickets({
-      discuss: discuss.values,
-      toDo: toDo.values,
-      inProgress: inProgress.values,
-      testing: testing.values,
-      done: done.values
-    });
-  }
-
-  onLoadClick() {
-    this.props.getTickets();
-  }
-
-  onResetClick() {
-    this.props.resetTickets();
-  }
-
   onOpenCardClick(columnName, itemCardId) {
-    console.log('onOpenCardClick', );
-
     this.setState({
       showItemCard: true,
       itemCardId,
@@ -117,11 +85,6 @@ class KanbanBoardContainer extends Component {
     // if (showItemCard && itemCardId && columnName)
     return (
       <div>
-        <StorageButtons
-          onSaveClick={this.onSaveClick}
-          onLoadClick={this.onLoadClick}
-          onResetClick={this.onResetClick}
-        />
         {showItemCard && itemCardId && columnName && (
           <Card
             onCloseClick={this.onCloseCardClick}
@@ -183,8 +146,6 @@ function mapDispatchToProps(dispatch) {
   return {
     moveTicket: bindActionCreators(TicketsActions, dispatch).moveTicket,
     getTickets: bindActionCreators(TicketsActions, dispatch).getTickets,
-    setTickets: bindActionCreators(TicketsActions, dispatch).setTickets,
-    resetTickets: bindActionCreators(TicketsActions, dispatch).resetTickets,
   }
 }
 

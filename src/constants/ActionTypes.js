@@ -13,3 +13,6 @@ export const UPDATE_PROJECTS = 'UPDATE_PROJECTS';*/
 export const REQUEST_USER_DATA = 'REQUEST_USER_DATA';
 export const RECEIVE_USER_DATA = 'RECEIVE_USER_DATA';
 export const RESET_USER = 'RESET_USER';
+
+export const SHOW_SIDE_MENU = 'SHOW_SIDE_MENU';
+export const HIDE_SIDE_MENU = 'HIDE_SIDE_MENU';
