@@ -186,9 +186,7 @@ $border-radius: 5px;
   }
 
   .kanban-board-item__footer {
-    padding: $padding;
-    padding-top: $padding * 1.5;
-    padding-bottom: $padding / 2;
+    padding: 15px 25px 5px;
     color: rgba($i-grey, .6);
     font-size: 10px;
     text-align: center;

@@ -1,12 +1,121 @@
-import React, { Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 
 import ModalContainer from './ModalContainer';
+import PrioritySelector from './PrioritySelector';
 
-const Card = ({item, onSaveClick, onCloseClick}) => {
+class Card extends Component {
+  constructor(props) {
+    super(props);
+
+    const {
+      title,
+      text,
+      deadline,
+      priority
+    } = this.props.item;
+
+    this.state = {
+      title,
+      text,
+      deadline,
+      priority
+    }
+
+    this.handleSaveClick = this.handleSaveClick.bind(this);
+    this.handleCloseClick = this.handleCloseClick.bind(this);
+    this.handlePriorityChange = this.handlePriorityChange.bind(this);
+  }
+
+  handleSaveClick() {
+    console.log('onSaveClick');
+    this.props.onSaveClick();
+  }
+
+  handleCloseClick() {
+    console.log('onCloseClick');
+    this.props.onCloseClick();
+  }
+
+  handlePriorityChange(num) {
+    this.setState({
+      priority: num
+    })
+  }
+
+  render() {
+    const { item } = this.props;
+
+    const {
+      id,
+      project,
+      reporter,
+      assignee,
+      creationDate
+    } = item;
+
+    const {
+      title,
+      text,
+      deadline,
+      priority
+    } = this.state;
+
+    return (
+      <ModalContainer
+        onCloseClick={this.handleCloseClick}
+      >
+        <div className="card">
+          <p className="card__info">Project: {project.name} ({project.key})</p>
+          <p className="card__info">Task number: {id}</p>
+          {/* <p className="card__info">Priority: {priority}</p> */}
+          <p className="card__info">
+            <span>Created:</span>
+            <span> {moment(creationDate).format('MMMM Do YYYY, h:mm:ss a')}</span>
+          </p>
+          <p className="card__info">
+            <span>Reporter:</span>
+            <span> {reporter.firstName} {reporter.secondName}</span>
+            <span> ({reporter.userName})</span>
+          </p>
+          {/* <p>
+            {creationDate}
+          </p>
+          <p>
+            {assignee}
+          </p> */}
+          <div className="card__priority-selector">
+            <span>Priority: </span>
+            <PrioritySelector
+              value={priority}
+              onChange={this.handlePriorityChange}
+            />
+          </div>
+          <input type="text" defaultValue={title}/>
+          <textarea rows="5" defaultValue={text}/>
+          <input type="text" defaultValue={deadline}/>
+          <div className="card__buttons">
+            <button className="btn btn-primary" onClick={this.handleSaveClick}>Save</button>
+            <button className="btn btn-primary" onClick={this.handleCloseClick}>Cancel</button>
+          </div>
+        </div>
+      </ModalContainer>
+    )
+  }
+}
+
+/*<p className="card__info">
+  <span>Deadline:</span>
+  { deadline
+    ? <span> {moment(deadline).format('MMMM Do YYYY, h:mm:ss a')}</span>
+    : <span> unset</span>
+  }
+</p>*/
+
+/*const Card = ({item, onSaveClick, onCloseClick}) => {
   const {id, title, text, project, reporter, assignee, deadline, creationDate, priority} = item;
-  console.log(reporter);
+
   return (
     <ModalContainer
       onCloseClick={onCloseClick}
@@ -35,7 +144,7 @@ const Card = ({item, onSaveClick, onCloseClick}) => {
         <input type="text" defaultValue={title}/>
         <textarea rows="5" defaultValue={text}/>
         <input type="text" defaultValue={deadline}/>
-        <input type="text" defaultValue={creationDate}/>
+        <p type="text" defaultValue={creationDate}/>
         <p type="text" defaultValue={assignee}/>
         <div className="card__buttons">
           <button className="btn btn-primary" onClick={onSaveClick}>Save</button>
@@ -45,7 +154,7 @@ const Card = ({item, onSaveClick, onCloseClick}) => {
     </ModalContainer>
   )
 }
-
+*/
 Card.propTypes = {
   item: PropTypes.shape({
     id: PropTypes.number.isRequired,
