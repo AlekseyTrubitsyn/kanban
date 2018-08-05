@@ -29,12 +29,10 @@ class Card extends Component {
   }
 
   handleSaveClick() {
-    console.log('onSaveClick');
     this.props.onSaveClick();
   }
 
   handleCloseClick() {
-    console.log('onCloseClick');
     this.props.onCloseClick();
   }
 
@@ -69,7 +67,6 @@ class Card extends Component {
         <div className="card">
           <p className="card__info">Project: {project.name} ({project.key})</p>
           <p className="card__info">Task number: {id}</p>
-          {/* <p className="card__info">Priority: {priority}</p> */}
           <p className="card__info">
             <span>Created:</span>
             <span> {moment(creationDate).format('MMMM Do YYYY, h:mm:ss a')}</span>
@@ -79,12 +76,6 @@ class Card extends Component {
             <span> {reporter.firstName} {reporter.secondName}</span>
             <span> ({reporter.userName})</span>
           </p>
-          {/* <p>
-            {creationDate}
-          </p>
-          <p>
-            {assignee}
-          </p> */}
           <div className="card__priority-selector">
             <span>Priority: </span>
             <PrioritySelector
@@ -105,56 +96,6 @@ class Card extends Component {
   }
 }
 
-/*<p className="card__info">
-  <span>Deadline:</span>
-  { deadline
-    ? <span> {moment(deadline).format('MMMM Do YYYY, h:mm:ss a')}</span>
-    : <span> unset</span>
-  }
-</p>*/
-
-/*const Card = ({item, onSaveClick, onCloseClick}) => {
-  const {id, title, text, project, reporter, assignee, deadline, creationDate, priority} = item;
-
-  return (
-    <ModalContainer
-      onCloseClick={onCloseClick}
-    >
-      <div className="card">
-        <p className="card__info">Project: {project.name} ({project.key})</p>
-        <p className="card__info">Task number: {id}</p>
-        <p className="card__info">Priority: {priority}</p>
-        <p className="card__info">
-          <span>Created:</span>
-          <span> {moment(deadline).format('MMMM Do YYYY, h:mm:ss a')}</span>
-        </p>
-        <p className="card__info">
-          <span>Reporter:</span>
-          <span> {reporter.firstName} {reporter.secondName}</span>
-          <span> ({reporter.userName})</span>
-        </p>
-        <p className="card__info">
-          <span>Deadline:</span>
-          { deadline
-            ? <span> {moment(deadline).format('MMMM Do YYYY, h:mm:ss a')}</span>
-            : <span> unset</span>
-          }
-        </p>
-
-        <input type="text" defaultValue={title}/>
-        <textarea rows="5" defaultValue={text}/>
-        <input type="text" defaultValue={deadline}/>
-        <p type="text" defaultValue={creationDate}/>
-        <p type="text" defaultValue={assignee}/>
-        <div className="card__buttons">
-          <button className="btn btn-primary" onClick={onSaveClick}>Save</button>
-          <button className="btn btn-primary" onClick={onCloseClick}>Cancel</button>
-        </div>
-      </div>
-    </ModalContainer>
-  )
-}
-*/
 Card.propTypes = {
   item: PropTypes.shape({
     id: PropTypes.number.isRequired,
