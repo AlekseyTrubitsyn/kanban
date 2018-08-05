@@ -1,8 +1,7 @@
 .card {
   width: 30vw;
   min-width: 300px;
-  border-radius: 5px;
-  overflow: hidden; }
+  border-radius: 5px; }
   .card .card__info {
     margin-bottom: 10px;
     color: #4d5061; }

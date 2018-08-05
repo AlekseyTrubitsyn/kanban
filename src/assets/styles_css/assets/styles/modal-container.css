@@ -7,8 +7,7 @@
   padding: 20px;
   padding-top: 45px;
   background: white;
-  border-radius: 5px;
-  overflow: hidden; }
+  border-radius: 5px; }
   .modal-container .modal-container__close-button {
     font-size: 30px;
     position: absolute;

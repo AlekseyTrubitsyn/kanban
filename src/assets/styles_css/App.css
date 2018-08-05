@@ -132,8 +132,7 @@ textarea {
   padding: 20px;
   padding-top: 45px;
   background: white;
-  border-radius: 5px;
-  overflow: hidden; }
+  border-radius: 5px; }
   .modal-container .modal-container__close-button {
     font-size: 30px;
     position: absolute;
@@ -379,8 +378,7 @@ textarea {
 .card {
   width: 30vw;
   min-width: 300px;
-  border-radius: 5px;
-  overflow: hidden; }
+  border-radius: 5px; }
   .card .card__info {
     margin-bottom: 10px;
     color: #4d5061; }

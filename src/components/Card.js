@@ -1,6 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import DatePicker from 'react-datepicker';
+
+import 'react-datepicker/dist/react-datepicker.css';
 
 import ModalContainer from './ModalContainer';
 import PrioritySelector from './PrioritySelector';
@@ -15,17 +18,19 @@ class Card extends Component {
       deadline,
       priority
     } = this.props.item;
+    // console.log(deadline, typeof deadline, moment(deadline));
 
     this.state = {
       title,
       text,
-      deadline,
+      deadline: moment(deadline),
       priority
     }
 
     this.handleSaveClick = this.handleSaveClick.bind(this);
     this.handleCloseClick = this.handleCloseClick.bind(this);
     this.handlePriorityChange = this.handlePriorityChange.bind(this);
+    this.handleDeadlineChange = this.handleDeadlineChange.bind(this);
   }
 
   handleSaveClick() {
@@ -40,6 +45,12 @@ class Card extends Component {
     this.setState({
       priority: num
     })
+  }
+
+  handleDeadlineChange(date) {
+    this.setState({
+      deadline: moment.utc(date)
+    });
   }
 
   render() {
@@ -85,7 +96,13 @@ class Card extends Component {
           </div>
           <input type="text" defaultValue={title}/>
           <textarea rows="5" defaultValue={text}/>
-          <input type="text" defaultValue={deadline}/>
+          <DatePicker
+            selected={this.state.deadline}
+            onChange={this.handleDeadlineChange}
+            showTimeSelect
+            dateFormat="LLL"
+          />
+          {/* <input type="text" defaultValue={deadline}/> */}
           <div className="card__buttons">
             <button className="btn btn-primary" onClick={this.handleSaveClick}>Save</button>
             <button className="btn btn-primary" onClick={this.handleCloseClick}>Cancel</button>
