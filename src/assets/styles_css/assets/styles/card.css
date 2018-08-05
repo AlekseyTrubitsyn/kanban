@@ -20,3 +20,6 @@
       background: #f2f9ff;
       border-color: #66a9d7;
       color: #064789; }
+  .card textarea {
+    resize: vertical;
+    max-height: 300px; }

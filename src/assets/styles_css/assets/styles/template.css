@@ -11,7 +11,20 @@ button {
   cursor: pointer;
   border: none;
   background: none;
-  outline: none; }
+  outline: none;
+  font: inherit;
+  line-height: normal;
+  overflow: visible;
+  padding: 5px;
+  -webkit-user-select: none;
+  /* for button */
+  -moz-user-select: none;
+  -ms-user-select: none; }
+
+input::-moz-focus-inner,
+button::-moz-focus-inner {
+  border: 0;
+  padding: 5px; }
 
 input[type="text"],
 input[type="password"],

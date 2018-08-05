@@ -80,6 +80,9 @@ const KanbanItem = (props) => {
         <span> {moment(creationDate).fromNow()}</span>
         <span> by {reporter.userName}</span>
       </div>
+      <button className="kanban-board-item__edit-button">
+        <FontAwesomeIcon icon="info-circle"/>
+      </button>
     </div>
   )
 };

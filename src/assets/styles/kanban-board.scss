@@ -56,9 +56,9 @@ $border-radius: 5px;
     min-height: 300px;
   }
 
-  /*.kanban-board__droppable--over {
-    background-color: rgba(lighten($column-title-bg, 30%), .4);
-  }*/
+  .kanban-board__droppable--over {
+    background-color: rgba(lighten($column-title-bg, 10%), .9);
+  }
 
   .kanban-board-item {
     text-align: center;
@@ -69,6 +69,32 @@ $border-radius: 5px;
     box-shadow: 1px 3px 5px rgba($gun-grey, .15);
     border-radius: 5px;
     overflow: hidden;
+    transition: background 0.2s;
+    position: relative;
+    z-index: 0;
+
+    &:hover {
+      background: lighten($item-bg, 3%);
+
+      & .kanban-board-item__edit-button {
+        display: block;
+      }
+    }
+  }
+
+  .kanban-board-item__edit-button {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    right: 5px;
+    cursor: pointer;
+    color: $i-grey;
+    opacity: 0.6;
+    transition: 0.3s color;
+
+    &:hover {
+      opacity: 1;
+    }
   }
 
   .kanban-board-item__header {

@@ -11,9 +11,6 @@
     display: inline-block;
     margin: 0 10px; }
 
-.header-left > * {
-  opacity: 0.6; }
-
 .header .header-logo {
   display: flex;
   justify-content: center;

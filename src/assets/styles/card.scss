@@ -32,4 +32,9 @@
       color: $dark-cerulean;
     }
   }
+
+  textarea {
+    resize: vertical;
+    max-height: 300px;
+  }
 }

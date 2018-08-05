@@ -36,12 +36,6 @@ const Card = ({item, onSaveClick, onCloseClick}) => {
         <textarea rows="5" defaultValue={text}/>
         <input type="text" defaultValue={deadline}/>
         <input type="text" defaultValue={creationDate}/>
-        <div>
-          <span>Reporter:</span>
-          <span> {reporter.firstName} {reporter.secondName}</span>
-          <span> ({reporter.userName})</span>
-          <img src={reporter.avatar} width="30" height="auto"/>
-        </div>
         <p type="text" defaultValue={assignee}/>
         <div className="card__buttons">
           <button className="btn btn-primary" onClick={onSaveClick}>Save</button>
