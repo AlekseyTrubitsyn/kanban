@@ -22,3 +22,9 @@
   .card textarea {
     resize: vertical;
     max-height: 300px; }
+  .card .react-datepicker-wrapper,
+  .card .react-datepicker__input-container {
+    width: 100%; }
+    .card .react-datepicker-wrapper input,
+    .card .react-datepicker__input-container input {
+      text-align: center; }

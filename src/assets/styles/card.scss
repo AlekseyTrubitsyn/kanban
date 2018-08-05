@@ -37,4 +37,13 @@
     resize: vertical;
     max-height: 300px;
   }
+
+  .react-datepicker-wrapper,
+  .react-datepicker__input-container {
+    width: 100%;
+
+    input {
+      text-align: center;
+    }
+  }
 }
