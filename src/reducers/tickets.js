@@ -1,13 +1,20 @@
+import _isEmpty from 'lodash/isEmpty';
+
 import {
   MOVE_TICKET,
   RESET_TICKETS,
   REQUEST_TICKETS,
   RECEIVE_TICKETS,
-  SAVE_TICKETS
+  SAVE_TICKETS,
+  CREATE_NEW_ITEM,
+  OPEN_ITEM_CARD,
+  CLOSE_ITEM_CARD
 } from '../constants/ActionTypes';
 
 const initialState = {
+  showCardModal: false,
   isFetching: false,
+  nextId: 1,
   discuss: {
     name: 'Discuss',
     values: []
@@ -32,6 +39,21 @@ const initialState = {
 
 export default function tickets(state = initialState, action) {
   switch (action.type) {
+    case OPEN_ITEM_CARD:
+      const {itemId, columnName} = action.payload;
+      const values = state[columnName] && state[columnName].values;
+      const itemToModity = values
+                          && !_isEmpty(values)
+                          && values.filter(o => o.id === itemId)[0];
+
+      return { ...state, showCardModal: true, itemToModity }
+
+    case CREATE_NEW_ITEM:
+      return {...state, showCardModal: true, itemToModity: undefined }
+
+    case CLOSE_ITEM_CARD:
+      return {...state, showCardModal: false, itemToModity: undefined }
+
     case MOVE_TICKET:
       const { source, destination } = action.payload;
 
@@ -65,16 +87,19 @@ export default function tickets(state = initialState, action) {
           values: destValues
         }
       }
+
     case REQUEST_TICKETS:
       return {
         ...state,
         isFetching: true
       }
+
     case SAVE_TICKETS:
       return {
         ...state,
         saveAt: action.payload
       }
+
     case RESET_TICKETS:
     case RECEIVE_TICKETS:
       return {

@@ -5,9 +5,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import * as UserSettingsActions from '../actions/UserSettingsActions';
 import * as SideMenuActions from '../actions/SideMenuActions';
+import * as TicketsActions from '../actions/TicketsActions';
 
 const Header = (props) => {
-  const { userData, logout, showSideMenu } = props;
+  const { userData, logout, showSideMenu, createNewItem } = props;
   const userName = userData.firstName + ' ' + userData.secondName.slice(0, 1);
 
   return (
@@ -16,8 +17,14 @@ const Header = (props) => {
         <button
           className="btn btn-primary"
           onClick={showSideMenu}
-          >
+        >
           <FontAwesomeIcon icon="bars" />
+        </button>
+        <button
+          className="btn btn-primary"
+          onClick={createNewItem}
+          >
+          <FontAwesomeIcon icon="plus" />
         </button>
         {/* <input className="header__search" type="text" placeholder="Search"/> */}
       </div>
@@ -41,7 +48,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     logout: bindActionCreators(UserSettingsActions, dispatch).logout,
-    showSideMenu: bindActionCreators(SideMenuActions, dispatch).showSideMenu
+    showSideMenu: bindActionCreators(SideMenuActions, dispatch).showSideMenu,
+    createNewItem: bindActionCreators(TicketsActions, dispatch).createNewItem
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
