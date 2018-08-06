@@ -9,11 +9,6 @@ import KanbanItem from './KanbanItem';
 const KanbanColumn = (props) => {
   const { droppableId, data, onItemClick } = props;
 
-  const handleClick = (id) => {
-    console.log('handleClick', id);
-    onItemClick(id);
-  }
-
   return (
     <div className="kanban-board__column">
       <Droppable droppableId={droppableId}>
@@ -35,7 +30,7 @@ const KanbanColumn = (props) => {
               >
                 {(provided, snapshot) => (
                   <KanbanItem
-                    onClick={() => handleClick(item.id)}
+                    onClick={() => onItemClick(item.id)}
                     rf={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}

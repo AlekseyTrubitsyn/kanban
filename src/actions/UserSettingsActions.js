@@ -4,6 +4,9 @@ import {
   RESET_USER
 } from '../constants/ActionTypes';
 
+import { getProjects } from './ProjectsActions';
+import { getTickets } from './TicketsActions';
+
 export const login = (login, password) => {
   return (dispatch) => {
     dispatch({
@@ -15,7 +18,7 @@ export const login = (login, password) => {
         type: RECEIVE_USER_DATA,
         payload: {
           id: 1,
-          username: login,
+          userName: 'Lorem',
           firstName: 'Lorem',
           secondName: 'Ipsum',
           gender: 'male',

@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 import { DragDropContext } from 'react-beautiful-dnd';
 
 import * as TicketsActions from '../actions/TicketsActions';
+import * as ProjectsActions from '../actions/ProjectsActions';
 
 import Loader from '../components/Loader';
 import KanbanColumn from '../components/KanbanColumn';
 import StorageButtons from '../components/StorageButtons';
-import Card from '../components/Card';
 
 class KanbanBoardContainer extends Component {
   constructor(props) {
@@ -20,12 +20,8 @@ class KanbanBoardContainer extends Component {
       columnName: ''
     }
 
-    props.getTickets();
-
     this.onDragEnd = this.onDragEnd.bind(this);
     this.onOpenCardClick = this.onOpenCardClick.bind(this);
-    this.onCloseCardClick = this.onCloseCardClick.bind(this);
-    this.onSaveCardClick = this.onSaveCardClick.bind(this);
   }
 
   onDragEnd(result) {
@@ -44,24 +40,11 @@ class KanbanBoardContainer extends Component {
     });
   }
 
-  onOpenCardClick(columnName, itemCardId) {
-    this.setState({
-      showItemCard: true,
-      itemCardId,
+  onOpenCardClick(columnName, itemId) {
+    this.props.openItemCard({
+      itemId,
       columnName
     })
-  }
-
-  onCloseCardClick() {
-    this.setState({
-      showItemCard: false,
-      itemCardId: 0,
-      columnName: ''
-    })
-  }
-
-  onSaveCardClick(item) {
-    console.log('onSaveCardClick');
   }
 
   render() {
@@ -82,16 +65,8 @@ class KanbanBoardContainer extends Component {
 
     if (isFetching) return (<Loader/>);
 
-    // if (showItemCard && itemCardId && columnName)
     return (
       <div>
-        {showItemCard && itemCardId && columnName && (
-          <Card
-            onCloseClick={this.onCloseCardClick}
-            onSaveClick={this.onSaveCardClick}
-            item={this.props[columnName].values.filter(item => item.id === itemCardId)[0]}
-          />
-        )}
         <div className="kanban-board">
           <DragDropContext onDragEnd={this.onDragEnd}>
             <KanbanColumn
@@ -145,7 +120,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     moveTicket: bindActionCreators(TicketsActions, dispatch).moveTicket,
-    getTickets: bindActionCreators(TicketsActions, dispatch).getTickets,
+    openItemCard: bindActionCreators(TicketsActions, dispatch).openItemCard,
   }
 }
 

@@ -1,12 +1,17 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux';
+
 import moment from 'moment';
 import DatePicker from 'react-datepicker';
 
+import * as TicketsActions from '../actions/TicketsActions';
+
 import 'react-datepicker/dist/react-datepicker.css';
 
-import ModalContainer from './ModalContainer';
-import PrioritySelector from './PrioritySelector';
+import ModalContainer from '../components/ModalContainer';
+import PrioritySelector from '../components/PrioritySelector';
 
 class Card extends Component {
   constructor(props) {
@@ -18,7 +23,6 @@ class Card extends Component {
       deadline,
       priority
     } = this.props.item;
-    // console.log(deadline, typeof deadline, moment(deadline));
 
     this.state = {
       title,
@@ -34,11 +38,7 @@ class Card extends Component {
   }
 
   handleSaveClick() {
-    this.props.onSaveClick();
-  }
-
-  handleCloseClick() {
-    this.props.onCloseClick();
+    console.log('save click');
   }
 
   handlePriorityChange(num) {
@@ -54,30 +54,21 @@ class Card extends Component {
   }
 
   render() {
-    const { item } = this.props;
+    const { title, text, deadline, priority } = this.state;
+    const { item, currentProject, userData, onCloseClick } = this.props;
 
-    const {
-      id,
-      project,
-      reporter,
-      assignee,
-      creationDate
-    } = item;
+    const { id, assignee, creationDate } = item;
 
-    const {
-      title,
-      text,
-      deadline,
-      priority
-    } = this.state;
+    const project = item.project || currentProject;
+    const reporter = item.reporter || userData;
 
     return (
       <ModalContainer
-        onCloseClick={this.handleCloseClick}
+        onCloseClick={onCloseClick}
       >
         <div className="card">
           <p className="card__info">Project: {project.name} ({project.key})</p>
-          <p className="card__info">Task number: {id}</p>
+          {!!id && <p className="card__info">Task number: {id}</p>}
           <p className="card__info">
             <span>Created:</span>
             <span> {moment(creationDate).format('MMMM Do YYYY, h:mm:ss a')}</span>
@@ -96,13 +87,13 @@ class Card extends Component {
           </div>
           <input type="text" defaultValue={title}/>
           <textarea rows="5" defaultValue={text}/>
+          <p>Deadline:</p>
           <DatePicker
             selected={this.state.deadline}
             onChange={this.handleDeadlineChange}
             showTimeSelect
             dateFormat="LLL"
           />
-          {/* <input type="text" defaultValue={deadline}/> */}
           <div className="card__buttons">
             <button className="btn btn-primary" onClick={this.handleSaveClick}>Save</button>
             <button className="btn btn-primary" onClick={this.handleCloseClick}>Cancel</button>
@@ -113,18 +104,46 @@ class Card extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    item: state.tickets.itemToModity,
+    currentProject: state.projects.currentProject,
+    userData: state.userSettings.userData
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    onCloseClick: bindActionCreators(TicketsActions, dispatch).closeItemCard,
+  }
+}
+
+Card.defaultProps = {
+  item: {
+    id: 0,
+    title: '',
+    text: '',
+    creationDate: new Date(),
+    priority: 1
+  }
+}
+
 Card.propTypes = {
   item: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.number,
     title: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
     reporter: PropTypes.shape({
-      userName: PropTypes.string.isRequired,
-      avatar: PropTypes.string.isRequired
-    }).isRequired,
+      userName: PropTypes.string,
+      avatar: PropTypes.string
+    }),
     assignee: PropTypes.shape({
       userName: PropTypes.string.isRequired,
       avatar: PropTypes.string.isRequired
+    }),
+    project: PropTypes.shape({
+      name: PropTypes.string,
+      key: PropTypes.string
     }),
     deadline: PropTypes.oneOfType([
       PropTypes.instanceOf(Date),
@@ -140,8 +159,8 @@ Card.propTypes = {
     subtasks: PropTypes.array,
     activity: PropTypes.array
   }),
-  onSaveClick: PropTypes.func.isRequired,
+  // onSaveClick: PropTypes.func.isRequired,
   onCloseClick: PropTypes.func.isRequired
 }
 
-export default Card;
+export default connect(mapStateToProps, mapDispatchToProps)(Card);
