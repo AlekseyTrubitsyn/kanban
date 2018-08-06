@@ -31,7 +31,7 @@ class KanbanBoard extends Component {
     return (
       <Fragment>
         {showCardModal && <Card/>}
-        {showSideMenu && <SideMenu />}
+        <SideMenu />
         <Header />
         <KanbanColumnsContainer />
       </Fragment>

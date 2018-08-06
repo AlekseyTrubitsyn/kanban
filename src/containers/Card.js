@@ -32,13 +32,13 @@ class Card extends Component {
     }
 
     this.handleSaveClick = this.handleSaveClick.bind(this);
-    this.handleCloseClick = this.handleCloseClick.bind(this);
     this.handlePriorityChange = this.handlePriorityChange.bind(this);
     this.handleDeadlineChange = this.handleDeadlineChange.bind(this);
   }
 
   handleSaveClick() {
     console.log('save click');
+    this.props.onCloseClick();
   }
 
   handlePriorityChange(num) {
@@ -96,7 +96,7 @@ class Card extends Component {
           />
           <div className="card__buttons">
             <button className="btn btn-primary" onClick={this.handleSaveClick}>Save</button>
-            <button className="btn btn-primary" onClick={this.handleCloseClick}>Cancel</button>
+            <button className="btn btn-primary" onClick={onCloseClick}>Cancel</button>
           </div>
         </div>
       </ModalContainer>
