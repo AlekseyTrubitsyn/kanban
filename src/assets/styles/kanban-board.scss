@@ -19,10 +19,19 @@ $item-title-color: $mid-grey;
 $border-radius: 5px;
 
 .kanban-board {
-  // min-height: calc(100vh - 50px);
   padding: $padding * 3;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
+
+  .kanban-board__dummy-item {
+    height: 200px;
+    animation: halfFadeIn 1.5s infinite ease-in;
+    background: $item-bg;
+
+    &:first-of-type {
+      margin-top: 20px;
+    }
+  }
 
   .kanban-board__column {
     display: flex;
@@ -41,6 +50,14 @@ $border-radius: 5px;
       .kanban-board__column-title {
         color: $column-title-color--hover
       }
+    }
+  }
+
+  .kanban-board__column--loading {
+    background: rgba($column-bg, 0.8);
+
+    &:hover {
+      background: rgba($column-bg, 0.8);
     }
   }
 

@@ -63,7 +63,17 @@ class KanbanBoardContainer extends Component {
       columnName
     } = this.state;
 
-    if (isFetching) return (<Loader/>);
+    if (isFetching) return (
+      <div className="kanban-board">
+        {Array.from(new Array(5)).map((item, index) =>
+          <div className="kanban-board__column kanban-board__column--loading" key={index}>
+            {Array.from(new Array(3)).map((subitem, subindex) => (
+              <div className="kanban-board__dummy-item kanban-board-item" key={subindex}></div>
+            ))}
+          </div>
+        )}
+      </div>
+    );
 
     return (
       <div>

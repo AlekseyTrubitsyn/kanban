@@ -1,41 +1,134 @@
 @import './colors';
 
-.card {
-  width: 30vw;
-  min-width: 300px;
-  border-radius: 5px;
-  // overflow: hidden;
+$bgInputFocus: lighten($celestial-blue, 42%);
+$borderInputFocus: lighten($celestial-blue, 10%);
 
-  .card__info {
-    margin-bottom: 10px;
-    color: $i-grey;
+.card {
+  width: 1000px;
+  height: 70vh;
+  min-height: 200px;
+  border-radius: 5px;
+  display: grid;
+  grid-gap: 25px;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: auto 80px;
+
+  .card__left {
+    display: flex;
+    flex-direction: column;
+
+    .card__info {
+      margin-bottom: 20px;
+    }
+  }
+
+  .card__right {
+    padding: 25px 0;
+    position: relative;
+    font-size: 14px;
+
+    .card__info span {
+      line-height: 20px;
+      vertical-align: middle;
+    }
   }
 
   .card__buttons {
+    grid-column-end: span 2;
     display: flex;
     justify-content: center;
     padding: 10px;
 
     .btn {
       margin: 10px;
+      align-self: center;
     }
+  }
+
+  .card__info-label {
+    margin-bottom: 5px;
+    opacity: 0.4;
+  }
+
+  .card__info {
+    margin-bottom: 10px;
+    color: $i-grey;
+    line-height: 28px;
+
+    .card__link {
+      border: 1px dotted $borderInputFocus;
+    }
+
+    .btn-inline {
+      display: inline-block;
+    }
+  }
+
+  .card__avatar {
+    margin-left: 5px;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
   }
 
   input, textarea {
     width: 100%;
     margin: 0 0 20px;
     border: 1px solid transparent;
+    background: rgba($i-white, .9);
 
     &:focus {
-      background: lighten(#b6dcfe, 12%);
-      border-color: lighten($celestial-blue, 10%);
+      background: $bgInputFocus;
+      border-color: $borderInputFocus;
       color: $dark-cerulean;
     }
   }
 
   textarea {
-    resize: vertical;
-    max-height: 300px;
+    flex: 1;
+    resize: none;
+  }
+
+  .react-datepicker {
+    border-color: $borderInputFocus;
+    box-shadow: 2px 2px 7px rgba($i-grey,0.5);
+  }
+
+  .react-datepicker,
+  .react-datepicker__header,
+  .react-datepicker__time-container {
+    border-color: lighten($borderInputFocus, 15%);
+  }
+
+  .react-datepicker__header { background: $bgInputFocus; }
+
+  .react-datepicker__current-month,
+  .react-datepicker-time__header {
+    color: $dark-cerulean;
+  }
+
+  .react-datepicker__day,
+  .react-datepicker__time-list-item {
+    // transition: background-color 1s ease-out;
+
+    &:hover {
+      color: white;
+      background: lighten($dark-cerulean, 20%) !important;
+    }
+  }
+
+  .react-datepicker__day--selected,
+  .react-datepicker__time-list-item--selected {
+    background: lighten($dark-cerulean, 10%) !important;
+
+    &:hover {
+      background: lighten($dark-cerulean, 5%) !important;
+    }
+  }
+
+  .react-datepicker__time-list-item {
+    width: 69px;
   }
 
   .react-datepicker-wrapper,

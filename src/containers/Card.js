@@ -2,9 +2,10 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
-
 import moment from 'moment';
 import DatePicker from 'react-datepicker';
+
+import _isEmpty from 'lodash/isEmpty';
 
 import * as TicketsActions from '../actions/TicketsActions';
 
@@ -67,33 +68,86 @@ class Card extends Component {
         onCloseClick={onCloseClick}
       >
         <div className="card">
-          <p className="card__info">Project: {project.name} ({project.key})</p>
-          {!!id && <p className="card__info">Task number: {id}</p>}
-          <p className="card__info">
-            <span>Created:</span>
-            <span> {moment(creationDate).format('MMMM Do YYYY, h:mm:ss a')}</span>
-          </p>
-          <p className="card__info">
-            <span>Reporter:</span>
-            <span> {reporter.firstName} {reporter.secondName}</span>
-            <span> ({reporter.userName})</span>
-          </p>
-          <div className="card__priority-selector">
-            <span>Priority: </span>
-            <PrioritySelector
-              value={priority}
-              onChange={this.handlePriorityChange}
+          <div className="card__left">
+            <label className="card__info-label" htmlFor="title">Title:</label>
+            <input className="card__info" id="title" type="text" defaultValue={title}/>
+            <label className="card__info-label" htmlFor="text">Description:</label>
+            <textarea className="card__info" id="text"  rows="5" defaultValue={text}/>
+            <label className="card__info-label" htmlFor="deadline">Deadline:</label>
+            <DatePicker
+              selected={this.state.deadline}
+              onChange={this.handleDeadlineChange}
+              showTimeSelect
+              dateFormat="LLL"
+              id="deadline"
             />
           </div>
-          <input type="text" defaultValue={title}/>
-          <textarea rows="5" defaultValue={text}/>
-          <p>Deadline:</p>
-          <DatePicker
-            selected={this.state.deadline}
-            onChange={this.handleDeadlineChange}
-            showTimeSelect
-            dateFormat="LLL"
-          />
+          <div className="card__right">
+            <p className="card__info">Project: {project.name} ({project.key})</p>
+            {!!id && <p className="card__info">Task number: {id}</p>}
+            <p className="card__info">
+              <span>Created:</span>
+              <span> {moment(creationDate).format('MMMM Do YYYY, h:mm:ss a')}</span>
+            </p>
+            <p className="card__info">
+              <span>Reporter:</span>
+              <span> {reporter.firstName} {reporter.secondName}</span>
+              <span> ({reporter.userName})</span>
+              <img
+                className="card__avatar"
+                height="20"
+                width="auto"
+                src={reporter.avatar}
+                alt="reporter"
+              />
+            </p>
+            <div className="card__info card__priority-selector">
+              <span>Priority: </span>
+              <PrioritySelector
+                value={priority}
+                onChange={this.handlePriorityChange}
+              />
+            </div>
+            <div className="card__info">
+              <span>Assignee:</span>
+              {_isEmpty(assignee)
+                ? <button>assign to me</button>
+                : (
+                  <Fragment>
+                    <span> {assignee.firstName} {assignee.secondName}</span>
+                    <span> ({assignee.userName})</span>
+                    <img
+                      className="card__avatar"
+                      height="20"
+                      width="auto"
+                      src={assignee.avatar}
+                      alt="assignee"
+                    />
+                  </Fragment>
+                )
+              }
+            </div>
+            <div className="card__info">
+              <span>Change status: </span>
+              <select>
+                <option value="discuss">Discuss</option>
+                <option value="todo">To do</option>
+                <option value="inProgress">In progress</option>
+                <option value="testing">Testing</option>
+                <option value="done">Done</option>
+              </select>
+            </div>
+            <div className="card__info">
+              <button className="btn btn-inline btn-secondary">Assign to me</button>
+              <button className="btn btn-inline btn-secondary">Move to archive</button>
+            </div>
+            <div className="card__info card__subtasks">
+              {/*TODO todo list of subtasks*/}
+            </div>
+            <div className="card__info card__comments">
+              {/*TODO list of comments*/}
+            </div>
+          </div>
           <div className="card__buttons">
             <button className="btn btn-primary" onClick={this.handleSaveClick}>Save</button>
             <button className="btn btn-primary" onClick={onCloseClick}>Cancel</button>
