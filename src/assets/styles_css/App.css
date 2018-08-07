@@ -404,7 +404,7 @@ textarea {
 
 .card {
   width: 1000px;
-  height: 70vh;
+  height: 75vh;
   min-height: 200px;
   border-radius: 5px;
   display: grid;
@@ -417,9 +417,11 @@ textarea {
     .card .card__left .card__info {
       margin-bottom: 20px; }
   .card .card__right {
-    padding: 25px 0;
+    margin-top: 25px;
+    padding: 0;
     position: relative;
-    font-size: 14px; }
+    font-size: 14px;
+    overflow-y: auto; }
     .card .card__right .card__info span {
       line-height: 20px;
       vertical-align: middle; }
@@ -436,12 +438,18 @@ textarea {
     opacity: 0.4; }
   .card .card__info {
     margin-bottom: 10px;
-    color: #4d5061;
-    line-height: 28px; }
+    color: #4d5061; }
     .card .card__info .card__link {
       border: 1px dotted #66a9d7; }
     .card .card__info .btn-inline {
       display: inline-block; }
+  .card .card__info--large {
+    margin: 20px 0; }
+  .card .card__info-container {
+    border-bottom: 1px dashed #e3d2cc;
+    padding: 10px 0; }
+  .card .card__info-container--texts .card__info {
+    color: #064789; }
   .card .card__avatar {
     margin-left: 5px;
     border-radius: 50%;
@@ -460,6 +468,16 @@ textarea {
   .card textarea {
     flex: 1;
     resize: none; }
+  .card .card__subtasks {
+    margin-top: 20px; }
+  .card .todo-item {
+    display: flex;
+    align-items: center;
+    padding: 10px; }
+    .card .todo-item input,
+    .card .todo-item textarea {
+      margin: 0;
+      line-height: 1.5; }
   .card .react-datepicker {
     border-color: #66a9d7;
     box-shadow: 2px 2px 7px rgba(77, 80, 97, 0.5); }

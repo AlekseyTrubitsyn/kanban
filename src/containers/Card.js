@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
 import moment from 'moment';
 import DatePicker from 'react-datepicker';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import _isEmpty from 'lodash/isEmpty';
 
@@ -63,6 +64,7 @@ class Card extends Component {
     const project = item.project || currentProject;
     const reporter = item.reporter || userData;
 
+    /*TODO create title of the ModalContainer like "new item" or "edit item @title"*/
     return (
       <ModalContainer
         onCloseClick={onCloseClick}
@@ -83,69 +85,83 @@ class Card extends Component {
             />
           </div>
           <div className="card__right">
-            <p className="card__info">Project: {project.name} ({project.key})</p>
-            {!!id && <p className="card__info">Task number: {id}</p>}
-            <p className="card__info">
-              <span>Created:</span>
-              <span> {moment(creationDate).format('MMMM Do YYYY, h:mm:ss a')}</span>
-            </p>
-            <p className="card__info">
-              <span>Reporter:</span>
-              <span> {reporter.firstName} {reporter.secondName}</span>
-              <span> ({reporter.userName})</span>
-              <img
-                className="card__avatar"
-                height="20"
-                width="auto"
-                src={reporter.avatar}
-                alt="reporter"
-              />
-            </p>
-            <div className="card__info card__priority-selector">
-              <span>Priority: </span>
-              <PrioritySelector
-                value={priority}
-                onChange={this.handlePriorityChange}
-              />
+            <div className="card__info-container card__info-container--texts">
+              <p className="card__info">Project: {project.name} ({project.key})</p>
+              {!!id && <p className="card__info">Task number: {id}</p>}
+              <p className="card__info">
+                <span>Created:</span>
+                <span> {moment(creationDate).format('MMMM Do YYYY, h:mm:ss a')}</span>
+              </p>
+              <p className="card__info">
+                <span>Reporter:</span>
+                <span> {reporter.firstName} {reporter.secondName}</span>
+                <span> ({reporter.userName})</span>
+                <img
+                  className="card__avatar"
+                  height="20"
+                  width="auto"
+                  src={reporter.avatar}
+                  alt="reporter"
+                />
+              </p>
+              <div className="card__info">
+                <span>Assignee:</span>
+                {_isEmpty(assignee)
+                  ? <button>assign to me</button>
+                  : (
+                    <Fragment>
+                      <span> {assignee.firstName} {assignee.secondName}</span>
+                      <span> ({assignee.userName})</span>
+                      <img
+                        className="card__avatar"
+                        height="20"
+                        width="auto"
+                        src={assignee.avatar}
+                        alt="assignee"
+                      />
+                    </Fragment>
+                  )
+                }
+              </div>
             </div>
-            <div className="card__info">
-              <span>Assignee:</span>
-              {_isEmpty(assignee)
-                ? <button>assign to me</button>
-                : (
-                  <Fragment>
-                    <span> {assignee.firstName} {assignee.secondName}</span>
-                    <span> ({assignee.userName})</span>
-                    <img
-                      className="card__avatar"
-                      height="20"
-                      width="auto"
-                      src={assignee.avatar}
-                      alt="assignee"
-                    />
-                  </Fragment>
-                )
-              }
+            <div className="card__info-container">
+              <div className="card__info card__priority-selector">
+                <span>Priority: </span>
+                <PrioritySelector
+                  value={priority}
+                  onChange={this.handlePriorityChange}
+                />
+              </div>
+              <div className="card__info">
+                <span>Change status: </span>
+                <select>
+                  <option value="discuss">Discuss</option>
+                  <option value="todo">To do</option>
+                  <option value="inProgress">In progress</option>
+                  <option value="testing">Testing</option>
+                  <option value="done">Done</option>
+                </select>
+              </div>
+              <div className="card__info">
+                <button className="btn btn-inline btn-secondary">Assign to me</button>
+                <button className="btn btn-inline btn-secondary">Move to archive</button>
+              </div>
             </div>
-            <div className="card__info">
-              <span>Change status: </span>
-              <select>
-                <option value="discuss">Discuss</option>
-                <option value="todo">To do</option>
-                <option value="inProgress">In progress</option>
-                <option value="testing">Testing</option>
-                <option value="done">Done</option>
-              </select>
-            </div>
-            <div className="card__info">
-              <button className="btn btn-inline btn-secondary">Assign to me</button>
-              <button className="btn btn-inline btn-secondary">Move to archive</button>
-            </div>
-            <div className="card__info card__subtasks">
+            <div className="card__info card__info--large card__subtasks">
               {/*TODO todo list of subtasks*/}
+              <h3>Subtasks: </h3>
+              <div className="card__subtask todo-item">
+                <textarea type="text" placeholder="Breake up the task into a few smaller tasks"/>
+                <button className="btn btn-inline btn-primary">+</button>
+              </div>
             </div>
-            <div className="card__info card__comments">
+            <div className="card__info card__info--large card__comments">
               {/*TODO list of comments*/}
+              <h3>Comments: </h3>
+              <div className="card__subtask todo-item">
+                <textarea type="text" placeholder="Type your comment here"/>
+                <button className="btn btn-inline btn-primary">+</button>
+              </div>
             </div>
           </div>
           <div className="card__buttons">
