@@ -2,6 +2,8 @@
   padding: 30px;
   display: grid;
   grid-template-columns: repeat(5, 1fr); }
+  .kanban-board.highlight .kanban-board-item:not(.highlighted) {
+    opacity: 0.2; }
   .kanban-board .kanban-board__dummy-item {
     height: 200px;
     animation: halfFadeIn 1.5s infinite ease-in;
@@ -45,7 +47,7 @@
     box-shadow: 1px 3px 5px rgba(48, 50, 61, 0.15);
     border-radius: 5px;
     overflow: hidden;
-    transition: background 0.2s;
+    transition: background 0.2s, 0.4s opacity;
     position: relative;
     z-index: 0; }
     .kanban-board .kanban-board-item:hover {
@@ -72,7 +74,9 @@
     border-bottom: 1px solid #e0bf60;
     display: flex;
     justify-content: space-between;
-    align-items: center; }
+    align-items: center;
+    height: 42px;
+    overflow: hidden; }
     .kanban-board .kanban-board-item__header.expired {
       background: #d83336;
       color: white;
@@ -81,6 +85,9 @@
       background: #f52e17;
       color: white;
       border-bottom-color: #b71a08; }
+    .kanban-board .kanban-board-item__header--done {
+      background: #a7cf7b;
+      border-bottom-color: #679436; }
   .kanban-board .kanban-board-item__assignee-avatar {
     width: 31px;
     height: 31px;

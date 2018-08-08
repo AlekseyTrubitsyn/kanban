@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import _isEmpty from 'lodash/isEmpty';
+
 const KanbanItem = (props) => {
-  const { item, rf, ...deafultProps } = props;
+  const { item, rf, highlighted, onAvatarOver, ...deafultProps } = props;
   const { id, title, text, project, reporter, assignee, deadline, creationDate, priority} = item;
   const projectKey = project.key || "";
 
-  const assigneeAvatar = `${process.env.PUBLIC_URL}/${assignee.avatar}`;
+  const assigneeAvatar = assignee ? `${process.env.PUBLIC_URL}/${assignee.avatar}` : '';
 
   const deadlineDate = new Date(deadline);
   const deadlineWarningTime = moment().add(12, 'hours').toDate();
@@ -19,19 +21,23 @@ const KanbanItem = (props) => {
   let deadlineCN = "kanban-board-item__deadline";
   let headerCN = "kanban-board-item__header";
 
-  if (deadlineExpired) {
-    deadlineCN += " kanban-board-item__deadline--expired";
-    headerCN += " expired";
-  } else if (deadlineIsClose) {
-    deadlineCN += " kanban-board-item__deadline--soon";
-    headerCN += " warning";
+  if (item.status === 'done') {
+    headerCN = "kanban-board-item__header kanban-board-item__header--done";
   } else {
-    deadlineCN += " translucent";
+    if (deadlineExpired) {
+      deadlineCN += " kanban-board-item__deadline--expired";
+      headerCN += " expired";
+    } else if (deadlineIsClose) {
+      deadlineCN += " kanban-board-item__deadline--soon";
+      headerCN += " warning";
+    } else {
+      deadlineCN += " translucent";
+    }
   }
 
   return (
     <div
-      className="kanban-board-item"
+      className={"kanban-board-item" + (highlighted ? " highlighted" : "")}
       ref={rf}
       {...deafultProps}
     >
@@ -39,17 +45,25 @@ const KanbanItem = (props) => {
         <span>
           {projectKey + ' #' + id}
         </span>
-        <span className="kanban-board-item__assignee-username">
-          {assignee.userName}
-        </span>
-        <div className="kanban-board-item__assignee-avatar">
-          <img
-            src={assigneeAvatar}
-            alt={assignee.userName}
-            width="30"
-            height="auto"
-          />
-        </div>
+        {!_isEmpty(assignee) && (
+          <Fragment>
+            <span className="kanban-board-item__assignee-username">
+              {assignee && assignee.userName}
+            </span>
+            <div
+              className="kanban-board-item__assignee-avatar"
+              onMouseOver={() => onAvatarOver((assignee && assignee.id) || -1)}
+              onMouseLeave={() => onAvatarOver(-1)}
+            >
+              <img
+                src={assigneeAvatar}
+                alt={assignee && assignee.userName}
+                width="30"
+                height="auto"
+              />
+            </div>
+          </Fragment>
+        )}
       </div>
       <div className={deadlineCN}>
         { deadline ?

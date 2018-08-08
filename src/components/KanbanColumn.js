@@ -7,7 +7,7 @@ import _isEmpty from 'lodash/isEmpty';
 import KanbanItem from './KanbanItem';
 
 const KanbanColumn = (props) => {
-  const { droppableId, data, onItemClick } = props;
+  const { droppableId, data, onItemClick, selectedAssigneeId, onAssigneeSelect } = props;
 
   return (
     <div className="kanban-board__column">
@@ -36,6 +36,8 @@ const KanbanColumn = (props) => {
                     {...provided.dragHandleProps}
                     style={provided.draggableProps.style}
                     item={item}
+                    highlighted={item.assignee && item.assignee.id === selectedAssigneeId}
+                    onAvatarOver={(id) => onAssigneeSelect(id)}
                   />
                 )}
               </Draggable>

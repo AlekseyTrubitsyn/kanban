@@ -15,9 +15,7 @@ class KanbanBoardContainer extends Component {
     super(props);
 
     this.state = {
-      showItemCard: false,
-      itemCardId: 0,
-      columnName: ''
+      selectedAssigneeId: -1
     }
 
     this.onDragEnd = this.onDragEnd.bind(this);
@@ -41,9 +39,16 @@ class KanbanBoardContainer extends Component {
   }
 
   onOpenCardClick(columnName, itemId) {
+    //TODO check why 'discuss' is set as default
     this.props.openItemCard({
       itemId,
       columnName
+    })
+  }
+
+  onAssigneeSelect(id) {
+    this.setState({
+      selectedAssigneeId: id
     })
   }
 
@@ -57,11 +62,7 @@ class KanbanBoardContainer extends Component {
       isFetching
     } = this.props;
 
-    const {
-      showItemCard,
-      itemCardId,
-      columnName
-    } = this.state;
+    const { selectedAssigneeId } = this.state;
 
     if (isFetching) return (
       <div className="kanban-board">
@@ -77,36 +78,46 @@ class KanbanBoardContainer extends Component {
 
     return (
       <div>
-        <div className="kanban-board">
+        <div className={"kanban-board" + (selectedAssigneeId !== -1 ? " highlight" : "")}>
           <DragDropContext onDragEnd={this.onDragEnd}>
             <KanbanColumn
               droppableId="discuss"
               key="discuss"
               data={discuss}
+              selectedAssigneeId={selectedAssigneeId}
+              onAssigneeSelect={(id) => this.onAssigneeSelect(id)}
               onItemClick={(id) => this.onOpenCardClick('discuss', id)}
             />
             <KanbanColumn
               droppableId="toDo"
               key="toDo"
               data={toDo}
+              selectedAssigneeId={selectedAssigneeId}
+              onAssigneeSelect={(id) => this.onAssigneeSelect(id)}
               onItemClick={(id) => this.onOpenCardClick('toDo', id)}
             />
             <KanbanColumn
               droppableId="inProgress"
               key="inProgress"
               data={inProgress}
+              selectedAssigneeId={selectedAssigneeId}
+              onAssigneeSelect={(id) => this.onAssigneeSelect(id)}
               onItemClick={(id) => this.onOpenCardClick('inProgress', id)}
             />
             <KanbanColumn
               droppableId="testing"
               key="testing"
               data={testing}
+              selectedAssigneeId={selectedAssigneeId}
+              onAssigneeSelect={(id) => this.onAssigneeSelect(id)}
               onItemClick={(id) => this.onOpenCardClick('testing', id)}
             />
             <KanbanColumn
               droppableId="done"
               key="done"
               data={done}
+              selectedAssigneeId={selectedAssigneeId}
+              onAssigneeSelect={(id) => this.onAssigneeSelect(id)}
               onItemClick={(id) => this.onOpenCardClick('done', id)}
             />
           </DragDropContext>
