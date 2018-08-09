@@ -1,0 +1,30 @@
+.todo-list {
+  padding: 10px; }
+
+.todo-create {
+  display: flex;
+  align-items: center; }
+  .todo-create .todo-create__textarea {
+    width: auto;
+    flex-grow: 1;
+    margin: 0;
+    margin-right: 10px;
+    overflow: hidden;
+    resize: vertical; }
+
+.todo-line {
+  display: flex;
+  background: red;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  overflow: hidden; }
+  .todo-line .todo-line__checkbox {
+    display: none; }
+    .todo-line .todo-line__checkbox:checked ~ .todo-line__text {
+      text-decoration: line-through;
+      opacity: 0.4; }
+    .todo-line .todo-line__checkbox:checked ~ .todo-line__label {
+      background: green;
+      display: inline-block; }

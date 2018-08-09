@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
+
 import moment from 'moment';
 import DatePicker from 'react-datepicker';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -14,6 +15,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 import ModalContainer from '../components/ModalContainer';
 import PrioritySelector from '../components/PrioritySelector';
+import Todo from '../components/Todo';
 
 class Card extends Component {
   constructor(props) {
@@ -148,12 +150,9 @@ class Card extends Component {
               </div>
             </div>
             <div className="card__info card__info--large card__subtasks">
-              {/*TODO todo list of subtasks*/}
+              {/*TODO connect subtasks to redux*/}
               <h3>Subtasks: </h3>
-              <div className="card__subtask todo-item">
-                <textarea type="text" placeholder="Breake up the task into a few smaller tasks"/>
-                <button className="btn btn-inline btn-primary">+</button>
-              </div>
+              <Todo />
             </div>
             <div className="card__info card__info--large card__comments">
               {/*TODO list of comments*/}

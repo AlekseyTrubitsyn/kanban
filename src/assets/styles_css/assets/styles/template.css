@@ -27,6 +27,10 @@ button::-moz-focus-inner {
   padding: 5px;
   border: none; }
 
+input[type="checkbox"],
+input[type="radio"] {
+  display: none; }
+
 input[type="text"],
 input[type="password"],
 textarea {
@@ -59,6 +63,9 @@ textarea {
   border-radius: 7px;
   box-shadow: 2px 2px 5px rgba(48, 50, 61, 0.4);
   margin: 20px auto; }
+
+.btn.disabled {
+  opacity: 0.6; }
 
 .btn-inline {
   margin: 0 5px;

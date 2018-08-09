@@ -31,6 +31,10 @@ button::-moz-focus-inner {
   padding: 5px;
   border: none; }
 
+input[type="checkbox"],
+input[type="radio"] {
+  display: none; }
+
 input[type="text"],
 input[type="password"],
 textarea {
@@ -63,6 +67,9 @@ textarea {
   border-radius: 7px;
   box-shadow: 2px 2px 5px rgba(48, 50, 61, 0.4);
   margin: 20px auto; }
+
+.btn.disabled {
+  opacity: 0.6; }
 
 .btn-inline {
   margin: 0 5px;
@@ -412,7 +419,7 @@ textarea {
 .card {
   width: 1000px;
   height: 75vh;
-  min-height: 200px;
+  min-height: 500px;
   border-radius: 5px;
   display: grid;
   grid-gap: 25px;
@@ -573,6 +580,56 @@ textarea {
     color: #0a7aeb; }
     .priority-selector:hover .priority-selector__star:hover ~ .priority-selector__star {
       color: #4d5061; }
+
+.todo-list {
+  padding: 10px 0; }
+  .todo-list .todo-create__textarea,
+  .todo-list .todo-line__textarea {
+    width: auto;
+    flex-grow: 1;
+    margin: 0;
+    margin-right: 10px;
+    overflow: hidden;
+    resize: vertical; }
+  .todo-list .btn-inline {
+    width: 28px;
+    height: 28px;
+    color: white;
+    text-align: center;
+    line-height: 20px;
+    padding: 0; }
+
+.todo-create {
+  display: flex;
+  align-items: center; }
+
+.todo-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+  padding: 5px 10px;
+  padding-right: 0;
+  border: 1px dashed #e3d2cc; }
+  .todo-line--checked .todo-line__label {
+    background: #0860ba; }
+  .todo-line--checked .todo-line__text {
+    opacity: 0.4;
+    text-decoration: line-through; }
+  .todo-line .todo-line__label {
+    border: 4px solid #0860ba;
+    cursor: pointer;
+    transition: .2s all; }
+  .todo-line .todo-line__text {
+    flex-grow: 1;
+    align-self: stretch;
+    margin-right: 10px;
+    border-radius: 5px;
+    line-height: 28px;
+    padding: 0 10px;
+    color: #000; }
 
 * {
   box-sizing: border-box; }
