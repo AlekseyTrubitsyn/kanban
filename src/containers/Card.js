@@ -158,12 +158,9 @@ class Card extends Component {
               <Todo />
             </div>
             <div className="card-info card-info--large card__comments">
-              {/*TODO list of comments*/}
-              <h3>Comments: </h3>
-              <div className="card__subtask todo-item">
-                <textarea type="text" placeholder="Type your comment here"/>
-                <button className="btn btn-inline btn-primary">+</button>
-              </div>
+              {/*TODO connect comments to redux*/}
+              <h3 className="card-info__title">Comments: </h3>
+              <Comments />
             </div>
           </div>
           <div className="card__buttons">
