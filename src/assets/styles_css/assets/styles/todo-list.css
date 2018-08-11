@@ -33,7 +33,10 @@
   padding-right: 0;
   border: 1px dashed #e3d2cc; }
   .todo-line .todo-line__label {
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
     width: 25px;
     height: 25px;
     line-height: 23px;
@@ -44,12 +47,15 @@
     .todo-line .todo-line__label:hover {
       background: #0860ba;
       color: white; }
-    .todo-line .todo-line__label .cancel-icon {
+    .todo-line .todo-line__label .hover-icon {
       display: none; }
     .todo-line .todo-line__label .done-icon {
       display: inline; }
   .todo-line--checked .todo-line__label {
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
     width: 25px;
     height: 25px;
     line-height: 23px;
@@ -60,11 +66,11 @@
     .todo-line--checked .todo-line__label:hover {
       background: #0860ba;
       color: white; }
-    .todo-line--checked .todo-line__label .cancel-icon {
+    .todo-line--checked .todo-line__label .hover-icon {
       display: none; }
     .todo-line--checked .todo-line__label .done-icon {
       display: inline; }
-    .todo-line--checked .todo-line__label:hover .cancel-icon {
+    .todo-line--checked .todo-line__label:hover .hover-icon {
       display: inline; }
     .todo-line--checked .todo-line__label:hover .done-icon {
       display: none; }

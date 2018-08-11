@@ -1,57 +1,52 @@
-.comments .comments-item--focused,
-.comments .comments-create {
-  display: flex;
-  justify-content: space-between;
-  align-items: center; }
-
-.comments .comments-item {
-  padding: 5px;
-  position: relative;
-  margin-bottom: 10px;
-  background: rgba(245, 239, 237, 0.5);
-  margin-right: 5px;
-  border-radius: 5px; }
-  .comments .comments-item:hover .comment-item__buttons {
-    display: block; }
-
-.comments .comments-item__date,
-.comments .comments-item__author {
-  color: #aaa;
-  font-size: 10px;
-  padding: 0 5px; }
-
-.comments .comments__text {
-  font-size: 16px;
-  margin: 5px 0;
-  padding: 5px; }
-
-.comments .comments-item__author {
-  text-align: right;
-  padding-right: 20px; }
-
-.comments .comment-item__buttons {
-  display: none;
-  position: absolute;
-  top: -10px;
-  right: 0;
-  padding: 5px;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 5px; }
-
-.comments .comments__textarea {
-  width: auto;
-  flex-grow: 1;
-  margin: 0;
-  margin-right: 10px;
-  overflow: hidden;
-  resize: vertical;
+.comments {
   line-height: 1.5; }
-
-.comments .btn-inline {
-  width: 25px;
-  height: 25px;
-  color: white;
-  text-align: center;
-  line-height: 20px;
-  padding: 0;
-  flex-shrink: 0; }
+  .comments .comments-item--focused,
+  .comments .comments-create {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; }
+  .comments .comments-item {
+    padding: 5px;
+    position: relative;
+    margin-bottom: 10px;
+    background: rgba(245, 239, 237, 0.8);
+    border: 1px dashed #d1b5ab;
+    margin-right: 5px;
+    border-radius: 5px; }
+    .comments .comments-item:hover .comment-item__buttons {
+      display: block; }
+  .comments .comments-item__date,
+  .comments .comments-item__author {
+    color: #aaa;
+    font-size: 10px;
+    padding: 0 5px; }
+  .comments .comments__text {
+    font-size: 16px;
+    padding: 5px; }
+  .comments .comments-item__author {
+    text-align: right;
+    padding-right: 20px; }
+  .comments .comment-item__buttons {
+    display: none;
+    position: absolute;
+    top: -10px;
+    right: 0;
+    padding: 5px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 5px; }
+  .comments .comments__textarea {
+    width: auto;
+    flex-grow: 1;
+    margin: 0;
+    margin-right: 10px;
+    overflow: hidden;
+    resize: vertical;
+    line-height: 1.5; }
+  .comments .btn-inline {
+    width: 25px;
+    height: 25px;
+    color: white;
+    text-align: center;
+    line-height: 20px;
+    padding: 0;
+    flex-shrink: 0; }

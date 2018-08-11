@@ -6,22 +6,31 @@
   transform: translate(-50%, -50%);
   background: rgba(245, 239, 237, 0.6);
   border-radius: 5px;
-  padding: 0 20px 20px;
-  overflow: hidden; }
+  padding: 0 20px 20px; }
 
 .login-form__tabs {
   display: flex;
-  margin-bottom: 20px; }
+  margin-bottom: 20px;
+  margin-top: -15px;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 2px 2px 3px rgba(77, 80, 97, 0.6); }
 
 .login-form__tab {
   flex-grow: 1;
   margin: 0;
   outline: none;
   border: none;
-  background: none;
-  min-height: 2em; }
+  min-height: 2em;
+  background: #f5efed;
+  font-weight: 400;
+  transition: all 0.2s; }
+  .login-form__tab:hover:not(.login-form__tab--selected) {
+    background: #096dd2;
+    color: white; }
   .login-form__tab--selected {
-    background: #f5efed; }
+    background: #0860ba;
+    color: white; }
 
 .login-form__submit {
   margin-bottom: 0; }
