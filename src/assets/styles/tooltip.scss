@@ -1,0 +1,54 @@
+@import "./colors";
+
+.tooltip {
+  $side: 12px;
+
+  position: fixed;
+  background: $mid-cerulean;
+  color: white;
+  padding: 10px 15px;
+  min-width: 50px;
+  max-width: 150px;
+  line-height: 1.5;
+  border-radius: 5px;
+  z-index: 150;
+  box-shadow: 5px 5px 15px rgba(#000, .3);
+
+  .tooltip__text {
+    overflow: hidden;
+    word-wrap: break-word;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    width: $side;
+    height: $side;
+    background: $mid-cerulean;
+  }
+
+  &.tooltip-right::before {
+    left: 0;
+  }
+
+  &.tooltip-left::before {
+    left: auto;
+    right: -1 * $side
+  }
+
+  &.tooltip-top::before {
+    top: auto;
+    bottom: -1 * $side / 2;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+  }
+
+  &.tooltip-bottom::before {
+    top: -1 * $side / 2;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+  }
+}

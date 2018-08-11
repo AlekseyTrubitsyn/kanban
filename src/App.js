@@ -14,7 +14,7 @@ import KanbanBoard from './containers/KanbanBoard';
 library.add(fab, faSignOutAlt, faStar, faTimes, faTimesCircle, faInfoCircle, faChevronCircleLeft, faBars, faPlus, faCheck, faPen);
 
 const App = (props) => {
-  const {showLoginForm} = props;
+  const { showLoginForm, showMessage } = props;
 
   return (
     <div className="App">
@@ -22,13 +22,15 @@ const App = (props) => {
         ? <LoginRegisterForm />
         : <KanbanBoard />
       }
+      {showMessage && <Tooltip />}
     </div>
   );
 }
 
 const mapStateToProps = (state) => {
   return {
-    showLoginForm: !state.userSettings.userData
+    showLoginForm: !state.userSettings.userData,
+    showMessage: state.tooltip.showMessage
   }
 }
 
