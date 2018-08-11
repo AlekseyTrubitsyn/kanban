@@ -2,6 +2,8 @@
 @import "./mixins";
 
 .comments {
+  line-height: 1.5;
+
   .comments-item--focused,
   .comments-create {
     display: flex;
@@ -13,7 +15,8 @@
     padding: 5px;
     position: relative;
     margin-bottom: 10px;
-    background: rgba(245, 239, 237, 0.5);
+    background: rgba($i-white, .8);
+    border: 1px dashed darken($i-white, 20%);
     margin-right: 5px;
     border-radius: 5px;
 
@@ -31,7 +34,6 @@
 
   .comments__text {
     font-size: 16px;
-    margin: 5px 0;
     padding: 5px;
   }
 

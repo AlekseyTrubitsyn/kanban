@@ -1,8 +1,8 @@
 
 import React, { Component } from "react";
 
-import TodoLine from './TodoLine';
-import TodoCreate from './TodoCreate';
+import TodoLine from './todo/TodoLine';
+import TodoCreate from './todo/TodoCreate';
 
 class Todo extends Component {
   constructor(props) {

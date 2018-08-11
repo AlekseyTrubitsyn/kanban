@@ -1,8 +1,8 @@
 
 import React, { Component } from "react";
 
-import CommentsItem from './CommentsItem';
-import CommentsCreate from './CommentsCreate';
+import CommentsItem from './comments/CommentsItem';
+import CommentsCreate from './comments/CommentsCreate';
 
 class Comments extends Component {
   constructor(props) {

@@ -2,7 +2,10 @@
 @import "./mixins";
 
 @mixin iconButton($checked) {
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
   width: 25px;
   height: 25px;
   line-height: 23px;
@@ -15,14 +18,14 @@
     color: white;
   }
 
-  .cancel-icon { display: none; }
+  .hover-icon { display: none; }
   .done-icon { display: inline; }
 
   @if $checked {
     color: $green;
 
     &:hover {
-      .cancel-icon { display: inline; }
+      .hover-icon { display: inline; }
       .done-icon { display: none; }
     }
   } @else {

@@ -20,13 +20,13 @@ const TodoLine = ({ item, focused, onTextClick, onItemBlured, onTextChange, onCh
       :
       <Fragment>
         <label
-          className="btn btn-inline todo-line__label"
+          className="todo-line__label"
         >
-          <span className="cancel-icon">
-            <FontAwesomeIcon icon="times"/>
+          <span className="hover-icon">
+            <FontAwesomeIcon icon={item.checked ? "chevron-left" : "check"}/>
           </span>
           <span className="done-icon">
-            <FontAwesomeIcon icon="check"/>
+            <FontAwesomeIcon icon={item.checked ? "check" : "chevron-right"}/>
           </span>
           <input
             className="todo-line__checkbox"
