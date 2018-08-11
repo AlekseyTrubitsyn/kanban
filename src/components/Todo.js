@@ -53,15 +53,9 @@ class Todo extends Component {
   }
 
   handleTextClick(id) {
-    console.log('handleTextClick', id);
     this.setState({
       focusedId: id
     })
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log(nextState);
-    return true;
   }
 
   render() {
@@ -80,7 +74,10 @@ class Todo extends Component {
             onCheckboxChange={(v) => this.handleItemChange('checkbox', index, v)}
           />
         ))}
-        <TodoCreate onCreate={this.handleCreate} />
+        <TodoCreate
+          placeholder="Split your task into a few smaller tasks"
+          onCreate={this.handleCreate}
+        />
       </div>
     )
   }

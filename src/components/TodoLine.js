@@ -32,14 +32,15 @@ const TodoLine = ({ item, focused, onTextClick, onItemBlured, onTextChange, onCh
             className="todo-line__checkbox"
             type="checkbox"
             defaultChecked={item.checked}
-            onChange={(e) => onCheckboxChange(e.target.checked)} />
+            onChange={(e) => onCheckboxChange(e.target.checked)}
+          />
         </label>
         <p
           className="todo-line__text"
           onClick={onTextClick}
         >
-          {item.text.length > 30
-            ? item.text.slice(0, 25) + '...'
+          {item.text.length > 33
+            ? item.text.slice(0, 30) + '...'
             : item.text
           }
         </p>
