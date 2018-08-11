@@ -1,0 +1,21 @@
+@import "./colors";
+
+@mixin card-textarea {
+  width: auto;
+  flex-grow: 1;
+  margin: 0;
+  margin-right: 10px;
+  overflow: hidden;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+@mixin card-inline-button {
+  width: 25px;
+  height: 25px;
+  color: white;
+  text-align: center;
+  line-height: 20px;
+  padding: 0;
+  flex-shrink: 0;
+}

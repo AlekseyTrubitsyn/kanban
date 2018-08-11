@@ -16,6 +16,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import ModalContainer from '../components/ModalContainer';
 import PrioritySelector from '../components/PrioritySelector';
 import Todo from '../components/Todo';
+import Comments from '../components/Comments';
 
 class Card extends Component {
   constructor(props) {
@@ -73,28 +74,30 @@ class Card extends Component {
       >
         <div className="card">
           <div className="card__left">
-            <label className="card__info-label" htmlFor="title">Title:</label>
-            <input className="card__info" id="title" type="text" defaultValue={title}/>
-            <label className="card__info-label" htmlFor="text">Description:</label>
-            <textarea className="card__info" id="text"  rows="5" defaultValue={text}/>
-            <label className="card__info-label" htmlFor="deadline">Deadline:</label>
-            <DatePicker
-              selected={this.state.deadline}
-              onChange={this.handleDeadlineChange}
-              showTimeSelect
-              dateFormat="LLL"
-              id="deadline"
-            />
+            <label className="card-info__label" htmlFor="title">Title:</label>
+            <input className="card-info" id="title" type="text" defaultValue={title}/>
+            <label className="card-info__label" htmlFor="text">Description:</label>
+            <textarea className="card-info" id="text"  rows="5" defaultValue={text}/>
+            <label className="card-info__label" htmlFor="deadline">Deadline:</label>
+            <div className="card__deadline">
+              <DatePicker
+                selected={this.state.deadline}
+                onChange={this.handleDeadlineChange}
+                showTimeSelect
+                dateFormat="LLL"
+                id="deadline"
+              />
+            </div>
           </div>
           <div className="card__right">
-            <div className="card__info-container card__info-container--texts">
-              <p className="card__info">Project: {project.name} ({project.key})</p>
-              {!!id && <p className="card__info">Task number: {id}</p>}
-              <p className="card__info">
+            <div className="card-info__container card-info__container--texts">
+              <p className="card-info">Project: {project.name} ({project.key})</p>
+              {!!id && <p className="card-info">Task number: {id}</p>}
+              <p className="card-info">
                 <span>Created:</span>
                 <span> {moment(creationDate).format('MMMM Do YYYY, h:mm:ss a')}</span>
               </p>
-              <p className="card__info">
+              <p className="card-info">
                 <span>Reporter:</span>
                 <span> {reporter.firstName} {reporter.secondName}</span>
                 <span> ({reporter.userName})</span>
@@ -106,7 +109,7 @@ class Card extends Component {
                   alt="reporter"
                 />
               </p>
-              <div className="card__info">
+              <div className="card-info">
                 <span>Assignee:</span>
                 {_isEmpty(assignee)
                   ? <button>assign to me</button>
@@ -126,15 +129,15 @@ class Card extends Component {
                 }
               </div>
             </div>
-            <div className="card__info-container">
-              <div className="card__info card__priority-selector">
+            <div className="card-info__container">
+              <div className="card-info card__priority-selector">
                 <span>Priority: </span>
                 <PrioritySelector
                   value={priority}
                   onChange={this.handlePriorityChange}
                 />
               </div>
-              <div className="card__info">
+              <div className="card-info">
                 <span>Change status: </span>
                 <select>
                   <option value="discuss">Discuss</option>
@@ -144,17 +147,17 @@ class Card extends Component {
                   <option value="done">Done</option>
                 </select>
               </div>
-              <div className="card__info">
+              <div className="card-info">
                 <button className="btn btn-inline btn-secondary">Assign to me</button>
                 <button className="btn btn-inline btn-secondary">Move to archive</button>
               </div>
             </div>
-            <div className="card__info card__info--large card__subtasks">
+            <div className="card-info card-info--large card__subtasks">
               {/*TODO connect subtasks to redux*/}
-              <h3>Subtasks: </h3>
+              <h3 className="card-info__title">Subtasks: </h3>
               <Todo />
             </div>
-            <div className="card__info card__info--large card__comments">
+            <div className="card-info card-info--large card__comments">
               {/*TODO list of comments*/}
               <h3>Comments: </h3>
               <div className="card__subtask todo-item">

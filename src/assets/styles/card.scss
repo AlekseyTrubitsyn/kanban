@@ -11,7 +11,7 @@ $borderInputFocus: lighten($celestial-blue, 10%);
   display: grid;
   grid-gap: 25px;
   grid-template-columns: 2fr 1fr;
-  grid-template-rows: auto 80px;
+  grid-template-rows: auto 60px;
 
   .card__left {
     display: flex;
@@ -39,7 +39,6 @@ $borderInputFocus: lighten($celestial-blue, 10%);
     grid-column-end: span 2;
     display: flex;
     justify-content: center;
-    padding: 10px;
 
     .btn {
       margin: 10px;
@@ -47,37 +46,41 @@ $borderInputFocus: lighten($celestial-blue, 10%);
     }
   }
 
-  .card__info-label {
+  .card-info__container {
+    border-bottom: 1px dashed darken($i-white, 10%);
+    padding: 10px 0;
+
+    .card-info__title { margin-bottom: 10px; }
+  }
+
+  .card-info__container--texts .card__info {
+    color: $dark-cerulean;
+  }
+
+  .card-info {
+    margin-bottom: 10px;
+    color: $i-grey;
+
+    .card__link { border: 1px dotted $borderInputFocus; }
+
+    .btn-inline {
+      display: inline-block;
+      flex-shrink: 0;
+    }
+  }
+
+  .card-info--large { margin: 20px 0; }
+
+  .card-info__title {
+    margin-bottom: 10px;
+  }
+
+  .card-info__label {
     margin-bottom: 5px;
     opacity: 0.4;
   }
 
-  .card__info {
-    margin-bottom: 10px;
-    color: $i-grey;
-    // line-height: 28px;
-
-    .card__link {
-      border: 1px dotted $borderInputFocus;
-    }
-
-    .btn-inline {
-      display: inline-block;
-    }
-  }
-
-  .card__info--large {
-    margin: 20px 0;
-  }
-
-  .card__info-container {
-    border-bottom: 1px dashed darken($i-white, 10%);
-    padding: 10px 0;
-  }
-
-  .card__info-container--texts .card__info {
-    color: $dark-cerulean;
-  }
+  .card__deadline input { margin: 0; }
 
   .card__avatar {
     margin-left: 5px;
@@ -141,8 +144,6 @@ $borderInputFocus: lighten($celestial-blue, 10%);
 
   .react-datepicker__day,
   .react-datepicker__time-list-item {
-    // transition: background-color 1s ease-out;
-
     &:hover {
       color: white;
       background: lighten($dark-cerulean, 20%) !important;

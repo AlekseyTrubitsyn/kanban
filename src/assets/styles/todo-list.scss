@@ -1,4 +1,5 @@
 @import "./colors";
+@import "./mixins";
 
 @mixin iconButton($checked) {
   display: inline-block;
@@ -30,25 +31,13 @@
 }
 
 .todo-list {
-  padding: 10px 0;
-
   .todo-create__textarea,
   .todo-line__textarea {
-    width: auto;
-    flex-grow: 1;
-    margin: 0;
-    margin-right: 10px;
-    overflow: hidden;
-    resize: vertical;
+    @include card-textarea;
   }
 
   .btn-inline {
-    width: 25px;
-    height: 25px;
-    color: white;
-    text-align: center;
-    line-height: 20px;
-    padding: 0;
+    @include card-inline-button;
   }
 }
 
