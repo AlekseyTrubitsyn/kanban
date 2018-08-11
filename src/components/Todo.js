@@ -27,7 +27,8 @@ class Todo extends Component {
             ...items.slice(0, index),
             { ...items[index], text: value },
             ...items.slice(index + 1)
-          ]
+          ],
+          focusedId: -1
         })
         break;
       case 'checkbox':
@@ -36,7 +37,8 @@ class Todo extends Component {
             ...items.slice(0, index),
             { ...items[index], checked: value },
             ...items.slice(index + 1)
-          ]
+          ],
+          focusedId: -1
         })
         break;
       default:

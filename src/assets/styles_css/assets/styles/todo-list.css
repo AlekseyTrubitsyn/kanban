@@ -1,30 +1,80 @@
 .todo-list {
-  padding: 10px; }
-
-.todo-create {
-  display: flex;
-  align-items: center; }
-  .todo-create .todo-create__textarea {
+  padding: 10px 0; }
+  .todo-list .todo-create__textarea,
+  .todo-list .todo-line__textarea {
     width: auto;
     flex-grow: 1;
     margin: 0;
     margin-right: 10px;
     overflow: hidden;
     resize: vertical; }
+  .todo-list .btn-inline {
+    width: 25px;
+    height: 25px;
+    color: white;
+    text-align: center;
+    line-height: 20px;
+    padding: 0; }
+
+.todo-create {
+  display: flex;
+  align-items: center; }
 
 .todo-line {
   display: flex;
-  background: red;
   align-items: center;
   justify-content: space-between;
+  margin-right: 5px;
   margin-bottom: 10px;
-  border-radius: 5px;
-  overflow: hidden; }
-  .todo-line .todo-line__checkbox {
-    display: none; }
-    .todo-line .todo-line__checkbox:checked ~ .todo-line__text {
-      text-decoration: line-through;
-      opacity: 0.4; }
-    .todo-line .todo-line__checkbox:checked ~ .todo-line__label {
-      background: green;
-      display: inline-block; }
+  border-radius: 3px;
+  overflow: hidden;
+  padding: 5px;
+  padding-right: 0;
+  border: 1px dashed #e3d2cc; }
+  .todo-line .todo-line__label {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    line-height: 23px;
+    box-shadow: none;
+    background: transparent;
+    cursor: pointer;
+    color: #0860ba; }
+    .todo-line .todo-line__label:hover {
+      background: #0860ba;
+      color: white; }
+    .todo-line .todo-line__label .cancel-icon {
+      display: none; }
+    .todo-line .todo-line__label .done-icon {
+      display: inline; }
+  .todo-line--checked .todo-line__label {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    line-height: 23px;
+    box-shadow: none;
+    background: transparent;
+    cursor: pointer;
+    color: #679436; }
+    .todo-line--checked .todo-line__label:hover {
+      background: #0860ba;
+      color: white; }
+    .todo-line--checked .todo-line__label .cancel-icon {
+      display: none; }
+    .todo-line--checked .todo-line__label .done-icon {
+      display: inline; }
+    .todo-line--checked .todo-line__label:hover .cancel-icon {
+      display: inline; }
+    .todo-line--checked .todo-line__label:hover .done-icon {
+      display: none; }
+  .todo-line--checked .todo-line__text {
+    opacity: 0.4;
+    text-decoration: line-through; }
+  .todo-line .todo-line__text {
+    flex-grow: 1;
+    align-self: stretch;
+    margin-right: 10px;
+    border-radius: 5px;
+    line-height: 28px;
+    padding: 0 10px;
+    color: #000; }

@@ -592,8 +592,8 @@ textarea {
     overflow: hidden;
     resize: vertical; }
   .todo-list .btn-inline {
-    width: 28px;
-    height: 28px;
+    width: 25px;
+    height: 25px;
     color: white;
     text-align: center;
     line-height: 20px;
@@ -607,21 +607,52 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-right: 5px;
   margin-bottom: 10px;
-  border-radius: 5px;
+  border-radius: 3px;
   overflow: hidden;
-  padding: 5px 10px;
+  padding: 5px;
   padding-right: 0;
   border: 1px dashed #e3d2cc; }
+  .todo-line .todo-line__label {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    line-height: 23px;
+    box-shadow: none;
+    background: transparent;
+    cursor: pointer;
+    color: #0860ba; }
+    .todo-line .todo-line__label:hover {
+      background: #0860ba;
+      color: white; }
+    .todo-line .todo-line__label .cancel-icon {
+      display: none; }
+    .todo-line .todo-line__label .done-icon {
+      display: inline; }
   .todo-line--checked .todo-line__label {
-    background: #0860ba; }
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    line-height: 23px;
+    box-shadow: none;
+    background: transparent;
+    cursor: pointer;
+    color: #679436; }
+    .todo-line--checked .todo-line__label:hover {
+      background: #0860ba;
+      color: white; }
+    .todo-line--checked .todo-line__label .cancel-icon {
+      display: none; }
+    .todo-line--checked .todo-line__label .done-icon {
+      display: inline; }
+    .todo-line--checked .todo-line__label:hover .cancel-icon {
+      display: inline; }
+    .todo-line--checked .todo-line__label:hover .done-icon {
+      display: none; }
   .todo-line--checked .todo-line__text {
     opacity: 0.4;
     text-decoration: line-through; }
-  .todo-line .todo-line__label {
-    border: 4px solid #0860ba;
-    cursor: pointer;
-    transition: .2s all; }
   .todo-line .todo-line__text {
     flex-grow: 1;
     align-self: stretch;

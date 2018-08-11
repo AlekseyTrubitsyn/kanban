@@ -1,3 +1,34 @@
+@import "./colors";
+
+@mixin iconButton($checked) {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  line-height: 23px;
+  box-shadow: none;
+  background: transparent;
+  cursor: pointer;
+
+  &:hover {
+    background: lighten($dark-cerulean, 10%);
+    color: white;
+  }
+
+  .cancel-icon { display: none; }
+  .done-icon { display: inline; }
+
+  @if $checked {
+    color: $green;
+
+    &:hover {
+      .cancel-icon { display: inline; }
+      .done-icon { display: none; }
+    }
+  } @else {
+    color: lighten($dark-cerulean, 10%);
+  }
+}
+
 .todo-list {
   padding: 10px 0;
 
@@ -12,8 +43,8 @@
   }
 
   .btn-inline {
-    width: 28px;
-    height: 28px;
+    width: 25px;
+    height: 25px;
     color: white;
     text-align: center;
     line-height: 20px;
@@ -27,31 +58,30 @@
 }
 
 .todo-line {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	margin-bottom: 10px;
-  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 5px;
+  margin-bottom: 10px;
+  border-radius: 3px;
   overflow: hidden;
-  padding: 5px 10px;
+  padding: 5px;
   padding-right: 0;
   border: 1px dashed darken($i-white, 10%);
 
+  .todo-line__label {
+    @include iconButton(false);
+  }
+
   &--checked {
     .todo-line__label {
-      background: lighten($dark-cerulean, 10%);
+      @include iconButton(true);
     }
 
     .todo-line__text {
       opacity: 0.4;
       text-decoration: line-through;
     }
-  }
-
-  .todo-line__label {
-    border: 4px solid lighten($dark-cerulean, 10%);
-    cursor: pointer;
-    transition: .2s all;
   }
 
   .todo-line__text {
@@ -63,9 +93,4 @@
     padding: 0 10px;
     color: #000;
   }
-  //
-  // .todo-line__textarea {
-  //   resize: vertical;
-  //   overflow: hidden;
-  // }
 }

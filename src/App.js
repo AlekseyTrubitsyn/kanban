@@ -6,12 +6,12 @@ import './assets/styles_css/App.css';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
-import { faSignOutAlt, faStar, faTimesCircle, faInfoCircle, faChevronCircleLeft, faBars, faPlus, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faSignOutAlt, faStar, faTimes, faTimesCircle, faInfoCircle, faChevronCircleLeft, faBars, faPlus, faCheck } from '@fortawesome/free-solid-svg-icons';
 
 import LoginRegisterForm from './containers/LoginRegisterForm';
 import KanbanBoard from './containers/KanbanBoard';
 
-library.add(fab, faSignOutAlt, faStar, faTimesCircle, faInfoCircle, faChevronCircleLeft, faBars, faPlus, faCheck);
+library.add(fab, faSignOutAlt, faStar, faTimes, faTimesCircle, faInfoCircle, faChevronCircleLeft, faBars, faPlus, faCheck);
 
 const App = (props) => {
   const {showLoginForm} = props;

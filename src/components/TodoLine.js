@@ -19,6 +19,21 @@ const TodoLine = ({ item, focused, onTextClick, onItemBlured, onTextChange, onCh
       </Fragment>
       :
       <Fragment>
+        <label
+          className="btn btn-inline todo-line__label"
+        >
+          <span className="cancel-icon">
+            <FontAwesomeIcon icon="times"/>
+          </span>
+          <span className="done-icon">
+            <FontAwesomeIcon icon="check"/>
+          </span>
+          <input
+            className="todo-line__checkbox"
+            type="checkbox"
+            defaultChecked={item.checked}
+            onChange={(e) => onCheckboxChange(e.target.checked)} />
+        </label>
         <p
           className="todo-line__text"
           onClick={onTextClick}
@@ -28,16 +43,6 @@ const TodoLine = ({ item, focused, onTextClick, onItemBlured, onTextChange, onCh
             : item.text
           }
         </p>
-        <label
-          className="btn btn-inline todo-line__label"
-        >
-          {item.checked && <FontAwesomeIcon icon="check"/>}
-          <input
-            className="todo-line__checkbox"
-            type="checkbox"
-            defaultChecked={item.checked}
-            onChange={(e) => onCheckboxChange(e.target.checked)} />
-        </label>
       </Fragment>
     }
   </div>
