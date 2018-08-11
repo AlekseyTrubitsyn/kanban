@@ -1,20 +1,21 @@
-.todo-list {
-  padding: 10px 0; }
-  .todo-list .todo-create__textarea,
-  .todo-list .todo-line__textarea {
-    width: auto;
-    flex-grow: 1;
-    margin: 0;
-    margin-right: 10px;
-    overflow: hidden;
-    resize: vertical; }
-  .todo-list .btn-inline {
-    width: 25px;
-    height: 25px;
-    color: white;
-    text-align: center;
-    line-height: 20px;
-    padding: 0; }
+.todo-list .todo-create__textarea,
+.todo-list .todo-line__textarea {
+  width: auto;
+  flex-grow: 1;
+  margin: 0;
+  margin-right: 10px;
+  overflow: hidden;
+  resize: vertical;
+  line-height: 1.5; }
+
+.todo-list .btn-inline {
+  width: 25px;
+  height: 25px;
+  color: white;
+  text-align: center;
+  line-height: 20px;
+  padding: 0;
+  flex-shrink: 0; }
 
 .todo-create {
   display: flex;

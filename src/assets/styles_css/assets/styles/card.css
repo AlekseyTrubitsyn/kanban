@@ -6,7 +6,7 @@
   display: grid;
   grid-gap: 25px;
   grid-template-columns: 2fr 1fr;
-  grid-template-rows: auto 80px; }
+  grid-template-rows: auto 60px; }
   .card .card__left {
     display: flex;
     flex-direction: column; }
@@ -24,28 +24,34 @@
   .card .card__buttons {
     grid-column-end: span 2;
     display: flex;
-    justify-content: center;
-    padding: 10px; }
+    justify-content: center; }
     .card .card__buttons .btn {
       margin: 10px;
       align-self: center; }
-  .card .card__info-label {
-    margin-bottom: 5px;
-    opacity: 0.4; }
-  .card .card__info {
-    margin-bottom: 10px;
-    color: #4d5061; }
-    .card .card__info .card__link {
-      border: 1px dotted #66a9d7; }
-    .card .card__info .btn-inline {
-      display: inline-block; }
-  .card .card__info--large {
-    margin: 20px 0; }
-  .card .card__info-container {
+  .card .card-info__container {
     border-bottom: 1px dashed #e3d2cc;
     padding: 10px 0; }
-  .card .card__info-container--texts .card__info {
+    .card .card-info__container .card-info__title {
+      margin-bottom: 10px; }
+  .card .card-info__container--texts .card__info {
     color: #064789; }
+  .card .card-info {
+    margin-bottom: 10px;
+    color: #4d5061; }
+    .card .card-info .card__link {
+      border: 1px dotted #66a9d7; }
+    .card .card-info .btn-inline {
+      display: inline-block;
+      flex-shrink: 0; }
+  .card .card-info--large {
+    margin: 20px 0; }
+  .card .card-info__title {
+    margin-bottom: 10px; }
+  .card .card-info__label {
+    margin-bottom: 5px;
+    opacity: 0.4; }
+  .card .card__deadline input {
+    margin: 0; }
   .card .card__avatar {
     margin-left: 5px;
     border-radius: 50%;
