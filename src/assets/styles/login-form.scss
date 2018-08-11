@@ -10,12 +10,15 @@ $padding: 10px;
   background: rgba($i-white, 0.6);
   border-radius: 5px;
   padding: 0 $padding * 2 $padding * 2;
-  overflow: hidden;
 }
 
 .login-form__tabs {
   display: flex;
   margin-bottom: $padding * 2;
+  margin-top: -15px;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 2px 2px 3px rgba($i-grey, .6);
 }
 
 .login-form__tab {
@@ -23,11 +26,19 @@ $padding: 10px;
   margin: 0;
   outline: none;
   border: none;
-  background: none;
   min-height: 2em;
+  background: $i-white;
+  font-weight: 400;
+  transition: all 0.2s;
+
+  &:hover:not(.login-form__tab--selected) {
+    background: lighten($mid-cerulean, 5%);
+    color: white;
+  }
 
   &--selected {
-    background: $i-white;
+    background: $mid-cerulean;
+    color: white;
   }
 }
 
