@@ -8,7 +8,12 @@ import {
   SAVE_TICKETS,
   CREATE_NEW_ITEM,
   OPEN_ITEM_CARD,
-  CLOSE_ITEM_CARD
+  CLOSE_ITEM_CARD,
+  UPDATE_DEADLINE,
+  UPDATE_STATUS,
+  UPDATE_PRIORITY,
+  UPDATE_TODO_LIST,
+  UPDATE_COMMENTS
 } from '../constants/ActionTypes';
 
 const initialState = {
@@ -42,17 +47,17 @@ export default function tickets(state = initialState, action) {
     case OPEN_ITEM_CARD:
       const {itemId, columnName} = action.payload;
       const values = state[columnName] && state[columnName].values;
-      const itemToModity = values
+      const itemToModify = values
                           && !_isEmpty(values)
                           && values.filter(o => o.id === itemId)[0];
 
-      return { ...state, showCardModal: true, itemToModity }
+      return { ...state, showCardModal: true, itemToModify }
 
     case CREATE_NEW_ITEM:
-      return {...state, showCardModal: true, itemToModity: undefined }
+      return {...state, showCardModal: true, itemToModify: undefined }
 
     case CLOSE_ITEM_CARD:
-      return {...state, showCardModal: false, itemToModity: undefined }
+      return {...state, showCardModal: false, itemToModify: undefined }
 
     case MOVE_TICKET:
       const { source, destination } = action.payload;
@@ -126,6 +131,58 @@ export default function tickets(state = initialState, action) {
           values: action.payload.done || []
         }
       }
+
+    case UPDATE_DEADLINE:
+      return {
+        ...state,
+        itemToModify: {
+          ...state.itemToModify,
+          deadline: action.payload
+        }
+      }
+
+    case UPDATE_STATUS:
+      return {
+        ...state,
+        itemToModify: {
+          ...state.itemToModify,
+          status: action.payload
+        }
+      }
+
+    case UPDATE_PRIORITY:
+      return {
+        ...state,
+        itemToModify: {
+          ...state.itemToModify,
+          priority: action.payload
+        }
+      }
+
+    case UPDATE_TODO_LIST:
+      const subtasks = action.payload;
+
+      return {
+        ...state,
+        itemToModify: {
+          ...state.itemToModify,
+          subtasks,
+          subtasksCount: subtasks.length
+        }
+      }
+
+    case UPDATE_COMMENTS:
+      const comments = action.payload;
+
+      return {
+        ...state,
+        itemToModify: {
+          ...state.itemToModify,
+          comments,
+          commentsCount: comments.length
+        }
+      }
+
     default:
       return state;
   }

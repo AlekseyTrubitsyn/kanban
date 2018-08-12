@@ -11,7 +11,7 @@
     "status": "discuss",
     "priority": 2,
     "subtasks": [],
-    "activity": []
+    "comments": []
   }, {
     "id": 2,
     "title": "Example 2",
@@ -23,8 +23,28 @@
     "creationDate": "2018-07-27T12:00:00.555Z",
     "status": "discuss",
     "priority": 2,
-    "subtasks": [],
-    "activity": []
+    "subtasks": [
+      {
+        "text": "Task 1",
+        "checked": true
+      }, {
+        "text": "Task 2",
+        "checked": true
+      }, {
+        "text": "Task 3",
+        "checked": false
+      }
+    ],
+    "subtasksCount": 3,
+    "comments": [
+      {
+        "author": "anon",
+        "created": "2018-08-12T19:44:36.918Z",
+        "edited": "2018-08-12T19:44:51.215Z",
+        "text": "\"Mist enveloped the ship three hours out from port.\" - whaat?"
+      }
+    ],
+    "commentsCount": 1
   }, {
     "id": 3,
     "title": "Example 3",
@@ -37,7 +57,7 @@
     "status": "toDo",
     "priority": 1,
     "subtasks": [],
-    "activity": []
+    "comments": []
   }, {
     "id": 4,
     "title": "Example 4",
@@ -50,7 +70,7 @@
     "status": "inProgress",
     "priority": 3,
     "subtasks": [],
-    "activity": []
+    "comments": []
   }, {
     "id": 5,
     "title": "Example 5",
@@ -63,7 +83,7 @@
     "status": "inProgress",
     "priority": 1,
     "subtasks": [],
-    "activity": []
+    "comments": []
   }, {
     "id": 6,
     "title": "Example 6",
@@ -76,7 +96,7 @@
     "status": "testing",
     "priority": 1,
     "subtasks": [],
-    "activity": []
+    "comments": []
   }, {
     "id": 7,
     "title": "Example 7",
@@ -89,7 +109,7 @@
     "status": "done",
     "priority": 1,
     "subtasks": [],
-    "activity": []
+    "comments": []
   }, {
     "id": 8,
     "title": "Example 8",
@@ -100,6 +120,6 @@
     "status": "discuss",
     "priority": 1,
     "subtasks": [],
-    "activity": []
+    "comments": []
   }
 ]

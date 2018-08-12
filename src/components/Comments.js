@@ -1,5 +1,5 @@
-
 import React, { Component } from "react";
+import PropTypes from 'prop-types';
 
 import CommentsItem from './comments/CommentsItem';
 import CommentsCreate from './comments/CommentsCreate';
@@ -9,7 +9,7 @@ class Comments extends Component {
     super(props);
 
     this.state = {
-      items: props.items || []
+      focusedId: -1
     }
 
     this.handleTextClick = this.handleTextClick.bind(this);
@@ -19,46 +19,39 @@ class Comments extends Component {
   }
 
   handleItemChange(key, index, value) {
-    const { items } = this.state;
-    const newItem = {
-      ...items[index],
-      text: value,
-      edited: new Date()
-    }
+    const { items, onItemsUpdate } = this.props;
 
-    this.setState({
-      items: [
-        ...items.slice(0, index),
-        newItem,
-        ...items.slice(index + 1)
-      ],
-      focusedId: -1
-    })
+    onItemsUpdate([
+      ...items.slice(0, index),
+      {
+        ...items[index],
+        text: value,
+        edited: new Date()
+      },
+      ...items.slice(index + 1)
+    ])
   }
 
   handleCreate(value) {
-    this.setState({
-      items: [
-        ...this.state.items,
-        {
-          author: 'anon',
-          text: value,
-          created: new Date()
-        }
-      ]
-    });
+    const { items, onItemsUpdate } = this.props;
+
+    onItemsUpdate([
+      ...items,
+      {
+        author: 'anon',
+        text: value,
+        created: new Date()
+      }
+    ]);
   }
 
   handleDelete(index) {
-    const { items } = this.state;
+    const { items, onItemsUpdate } = this.props;
 
-    this.setState({
-      items: [
-        ...items.slice(0, index),
-        ...items.slice(index + 1)
-      ],
-      focusedId: -1
-    });
+    onItemsUpdate([
+      ...items.slice(0, index),
+      ...items.slice(index + 1)
+    ]);
   }
 
   handleTextClick(id) {
@@ -68,7 +61,8 @@ class Comments extends Component {
   }
 
   render() {
-    const { items, focusedId } = this.state;
+    const { items } = this.props;
+    const { focusedId } = this.state;
 
     return (
       <div className="comments">
@@ -90,6 +84,11 @@ class Comments extends Component {
       </div>
     )
   }
+}
+
+Comments.propTypes = {
+  items: PropTypes.array.isRequired,
+  onItemsUpdate: PropTypes.func.isRequired
 }
 
 export default Comments;

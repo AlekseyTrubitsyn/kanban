@@ -1,5 +1,5 @@
-
 import React, { Component } from "react";
+import PropTypes from 'prop-types';
 
 import TodoLine from './todo/TodoLine';
 import TodoCreate from './todo/TodoCreate';
@@ -9,7 +9,7 @@ class Todo extends Component {
     super(props);
 
     this.state = {
-      items: props.items || []
+      focusedId: -1
     }
 
     this.handleTextClick = this.handleTextClick.bind(this);
@@ -18,28 +18,35 @@ class Todo extends Component {
   }
 
   handleItemChange(key, index, value) {
-    const { items } = this.state;
+    const { items, onItemsUpdate } = this.props;
 
     switch (key) {
       case 'text':
+        onItemsUpdate([
+          ...items.slice(0, index),
+          {
+            ...items[index],
+            text: value
+          },
+          ...items.slice(index + 1)
+        ]);
+
         this.setState({
-          items: [
-            ...items.slice(0, index),
-            { ...items[index], text: value },
-            ...items.slice(index + 1)
-          ],
           focusedId: -1
         })
         break;
+
       case 'checkbox':
+        onItemsUpdate([
+          ...items.slice(0, index),
+          { ...items[index], checked: value },
+          ...items.slice(index + 1)
+        ]);
+
         this.setState({
-          items: [
-            ...items.slice(0, index),
-            { ...items[index], checked: value },
-            ...items.slice(index + 1)
-          ],
           focusedId: -1
         })
+
         break;
       default:
         console.log('wrong key "${key}"');
@@ -47,9 +54,15 @@ class Todo extends Component {
   }
 
   handleCreate(value) {
-    this.setState({
-      items: [...this.state.items, { text: value, checked: false }]
-    });
+    const { items, onUpdate } = this.props;
+
+    onUpdate([
+      ...items,
+      {
+        text: value,
+        checked: false
+      }
+    ])
   }
 
   handleTextClick(id) {
@@ -59,7 +72,8 @@ class Todo extends Component {
   }
 
   render() {
-    const { items, focusedId } = this.state;
+    const { items } = this.props;
+    const { focusedId } = this.state;
 
     return (
       <div className="todo-list">
@@ -81,6 +95,11 @@ class Todo extends Component {
       </div>
     )
   }
+}
+
+Todo.propTypes = {
+  items: PropTypes.array.isRequired,
+  onItemsUpdate: PropTypes.func.isRequired
 }
 
 export default Todo;
