@@ -12,7 +12,7 @@ const ModalContainer = ({children, onCloseClick}) => (
       </button>
       {children}
     </div>
-    <div className="modal-container__overlay" onClick={onCloseClick}/>
+    <div className="overlay" onClick={onCloseClick}/>
   </Fragment>
 );
 

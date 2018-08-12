@@ -86,6 +86,8 @@ class LoginRegisterForm extends Component {
                 onClick={this.handleClick}
                 handleSubmit={this.handleSubmit}
                 handleError={this.handleError}
+                loginValue="admin"
+                passwordValue="123"
               />}
           </div>
         </div>

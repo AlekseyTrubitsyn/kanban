@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -45,25 +45,28 @@ const SideMenu = (props) => {
   }
 
   return (
-    <div className={"side-menu" + (show ? " opened" : "")}>
-      <button
-        className="side-menu__close-button"
-        onClick={onCloseClick}>
-          <FontAwesomeIcon icon="chevron-circle-left"/>
-        </button>
-      <button
-        className="side-menu__item"
-        onClick={onBoardsClick}>Boards</button>
-      <button
-        className="side-menu__item"
-        onClick={onSaveClick}>Save</button>
-      <button
-        className="side-menu__item"
-        onClick={onLoadClick}>Load</button>
-      <button
-        className="side-menu__item"
-        onClick={onResetClick}>Reset</button>
-    </div>
+    <Fragment>
+      {show && <div className="side-menu__overlay overlay" onClick={onCloseClick}></div>}
+      <div className={"side-menu" + (show ? " opened" : "")}>
+        <button
+          className="side-menu__close-button"
+          onClick={onCloseClick}>
+            <FontAwesomeIcon icon="chevron-circle-left"/>
+          </button>
+        <button
+          className="side-menu__item"
+          onClick={onBoardsClick}>Boards</button>
+        <button
+          className="side-menu__item"
+          onClick={onSaveClick}>Save</button>
+        <button
+          className="side-menu__item"
+          onClick={onLoadClick}>Load</button>
+        <button
+          className="side-menu__item"
+          onClick={onResetClick}>Reset</button>
+      </div>
+    </Fragment>
   );
 }
 

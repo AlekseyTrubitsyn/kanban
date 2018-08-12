@@ -114,8 +114,8 @@ KanbanItem.propTypes = {
       avatar: PropTypes.string.isRequired
     }).isRequired,
     assignee: PropTypes.shape({
-      userName: PropTypes.string.isRequired,
-      avatar: PropTypes.string.isRequired
+      userName: PropTypes.string,
+      avatar: PropTypes.string
     }),
     deadline: PropTypes.oneOfType([
       PropTypes.instanceOf(Date),

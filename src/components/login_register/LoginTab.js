@@ -4,9 +4,11 @@ class LoginTab extends Component {
   constructor(props) {
     super(props);
 
+    const { passwordValue,  loginValue } = props;
+
     this.state = {
-      loginValue: '',
-      passwordValue: '',
+      loginValue: loginValue || '',
+      passwordValue: passwordValue || '',
       submitAvailable: false,
       showMessage: false,
       message: '',

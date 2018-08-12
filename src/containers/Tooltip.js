@@ -19,7 +19,7 @@ function getPositionStyles(elem, position) {
   const { left, top, right, bottom } = elem.getBoundingClientRect();
   const xMiddle = (left + right) / 2;
   const yMiddle = (top + bottom) / 2;
-  const margin = 10 + 'px';
+  const margin = 10;
 
   switch (position) {
     case 'top':
