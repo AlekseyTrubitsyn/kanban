@@ -57,7 +57,7 @@ const Card = (props) => {
           <label className="card-info__label" htmlFor="deadline">Deadline:</label>
           <div className="card__deadline">
             <DatePicker
-              selected={deadline}
+              selected={moment(deadline)}
               onChange={updateDeadline}
               showTimeSelect
               dateFormat="LLL"
