@@ -61,6 +61,30 @@ $padding: 10px;
   }
 }
 
+.input-container {
+  display: block;
+  padding-top: 15px;
+  position: relative;
+
+  input:focus {
+    outline: $mid-cerulean;
+  }
+
+  .input-label {
+    position: absolute;
+    top: 25px;
+    left: 20px;
+    color: $i-grey;
+    transition: 0.3s all ease-out;
+  }
+
+  .input-label--up {
+    color: $mid-cerulean;
+    top: 0;
+    font-size: 0.8em;
+  }
+}
+
 @keyframes rotate {
   to {
     transform: rotate(360deg);

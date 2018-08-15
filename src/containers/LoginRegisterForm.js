@@ -7,6 +7,7 @@ import * as TooltipActions from '../actions/TooltipActions';
 
 import Loader from '../components/Loader';
 import LoginTab from '../components/login_register/LoginTab';
+import RegisterTab from '../components/login_register/RegisterTab';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -15,9 +16,7 @@ class LoginRegisterForm extends Component {
     super(props);
 
     this.state = {
-      isLoginState: true,
-      loginValue: 'admin',
-      passwordValue: 'admin'
+      isLoginState: true
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,6 +29,8 @@ class LoginRegisterForm extends Component {
     this.setState({
       isLoginState
     });
+
+    this.props.hideTooltip();
   }
 
   handleSubmit() {
@@ -55,7 +56,7 @@ class LoginRegisterForm extends Component {
 
   render() {
     const { isFetching } = this.props;
-    const { loginValue, passwordValue, isLoginState } = this.state;
+    const { isLoginState } = this.state;
 
     const loginButtonClass = "login-form__tab" + (isLoginState ? " login-form__tab--selected" : "");
     const registerButtonClass = "login-form__tab" + (!isLoginState ? " login-form__tab--selected" : "");
@@ -81,14 +82,22 @@ class LoginRegisterForm extends Component {
             >Register</button>
           </div>
           <div className="login-register-container" id="loginRegisterContainer" ref="loginRegisterContainer">
-            {isLoginState &&
-              <LoginTab
-                onClick={this.handleClick}
-                handleSubmit={this.handleSubmit}
-                handleError={this.handleError}
-                loginValue="admin"
-                passwordValue="123"
-              />}
+            {isLoginState
+              ? <LoginTab
+                  onInputClick={this.handleClick}
+                  handleSubmit={this.handleSubmit}
+                  handleError={this.handleError}
+                  loginValue="admin"
+                  passwordValue="123"
+                />
+              : <RegisterTab
+                  onInputClick={this.handleClick}
+                  handleSubmit={this.handleSubmit}
+                  handleError={this.handleError}
+                  loginValue="admin"
+                  passwordValue="123"
+                />
+            }
           </div>
         </div>
       </Fragment>

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 class LoginTab extends Component {
   constructor(props) {
@@ -7,8 +7,8 @@ class LoginTab extends Component {
     const { passwordValue,  loginValue } = props;
 
     this.state = {
-      loginValue: loginValue || '',
-      passwordValue: passwordValue || '',
+      hideLoginLabel: !!loginValue,
+      hidePasswordLabel: !!passwordValue,
       submitAvailable: false,
       showMessage: false,
       message: '',
@@ -16,6 +16,31 @@ class LoginTab extends Component {
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleInputFocus = this.handleInputFocus.bind(this);
+    this.handleInputBlur = this.handleInputBlur.bind(this);
+  }
+
+  handleInputFocus(e) {
+    const k = e.target.id === 'loginField' ? 'hideLoginLabel' : 'hidePasswordLabel';
+
+    if (this.state.showMessage) {
+      this.props.onInputClick();
+    }
+
+    this.setState({
+      [k]: true,
+      showMessage: false
+    })
+  }
+
+  handleInputBlur(e) {
+    const valueIsEmpty =  !e.target.value;
+
+    const k = e.target.id === 'loginField' ? 'hideLoginLabel' : 'hidePasswordLabel';
+
+    this.setState({
+      [k]: !valueIsEmpty
+    })
   }
 
   handleSubmit() {
@@ -24,42 +49,63 @@ class LoginTab extends Component {
 
     if (submitAvailable) {
       this.props.handleSubmit();
+
     } else {
-      const elem = this.refs[!loginField.value ? 'loginField' : 'passwordField'];
+      let elem;
+      let message;
 
-      const message = !loginField.value
-                      ? 'Login field should not be empty'
-                      : 'Password field should not be empty';
+      if (!loginField.value) {
+        elem = loginField;
+        message = 'Login';
+      } else {
+        elem = passwordField;
+        message = 'Password';
+      }
 
-      this.props.handleError(elem, message);
+      this.setState({
+        showMessage: true
+      });
+
+      this.props.handleError(elem, message + ' field should not be empty');
     }
   }
 
   render() {
-    const { onClick } = this.props;
-    const { loginValue, passwordValue, showMessage, message, elem } = this.state;
+    const { onInputClick, loginValue, passwordValue } = this.props;
+    const { hideLoginLabel, hidePasswordLabel } = this.state;
+
+    const loginSpanClass = "input-label" + (hideLoginLabel ? " input-label--up" : "");
+    const passwordSpanClass =  "input-label" + (hidePasswordLabel ? " input-label--up" : "")
 
     return (
       <div className="login-tab" id="login-tab">
-        <input
-          ref="loginField"
-          type="text"
-          data-tip='custom show'
-          data-event='click focus loginSubmitError'
-          placeholder="any login"
-          defaultValue={loginValue}
-          onClick={onClick}
-        />
-        <input
-          ref="passwordField"
-          type="password"
-          placeholder="any password?"
-          defaultValue={passwordValue}
-          onClick={onClick}
-        />
+        <label className="input-container">
+          <input
+            id="loginField"
+            ref="loginField"
+            type="text"
+            defaultValue={loginValue}
+            onClick={onInputClick}
+            onFocus={this.handleInputFocus}
+            onBlur={this.handleInputBlur}
+          />
+          <span className={loginSpanClass}>Login (any)</span>
+        </label>
+        <label className="input-container">
+          <input
+            id="passwordField"
+            ref="passwordField"
+            type="password"
+            defaultValue={passwordValue}
+            onClick={onInputClick}
+            onFocus={this.handleInputFocus}
+            onBlur={this.handleInputBlur}
+          />
+          <span className={passwordSpanClass}>Password (any)</span>
+        </label>
         <button
           className="btn btn-primary login-form__submit"
-          onClick={() => this.handleSubmit(loginValue, passwordValue)}
+          onClick={this.handleSubmit}
         >Let's start!</button>
       </div>
     )

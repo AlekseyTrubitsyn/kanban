@@ -47,6 +47,23 @@
     animation: 10s rotate infinite;
     animation-timing-function: linear; }
 
+.input-container {
+  display: block;
+  padding-top: 15px;
+  position: relative; }
+  .input-container input:focus {
+    outline: #0860ba; }
+  .input-container .input-label {
+    position: absolute;
+    top: 25px;
+    left: 20px;
+    color: #4d5061;
+    transition: 0.3s all ease-out; }
+  .input-container .input-label--up {
+    color: #0860ba;
+    top: 0;
+    font-size: 0.8em; }
+
 @keyframes rotate {
   to {
     transform: rotate(360deg); } }
