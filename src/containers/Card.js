@@ -37,11 +37,13 @@ class Card extends Component {
     }
 
     this.defaultStatus = statusName;
+
     this.updatePriority = this.updatePriority.bind(this);
     this.updateStatus = this.updateStatus.bind(this);
     this.updateComments = this.updateComments.bind(this);
     this.updateSubtasks = this.updateSubtasks.bind(this);
     this.handleSaveClick = this.handleSaveClick.bind(this);
+    this.updateDeadline = this.updateDeadline.bind(this);
   }
 
   updatePriority(priority) {
@@ -66,6 +68,12 @@ class Card extends Component {
     this.setState({
       subtasks
     })
+  }
+
+  updateDeadline(date) {
+    this.setState({
+      deadline: date.utc().format()
+    });
   }
 
   handleSaveClick() {
@@ -96,15 +104,10 @@ class Card extends Component {
             <label className="card-info__label" htmlFor="text">Description:</label>
             <textarea className="card-info" id="text"  rows="5" defaultValue={text}/>
             <label className="card-info__label" htmlFor="deadline">Deadline:</label>
-            {/* <div className="card__deadline">
-              <DatePicker
-                selected={moment(deadline)}
-                onChange={this.updateDeadline}
-                showTimeSelect
-                dateFormat="LLL"
-                id="deadline"
-              />
-            </div> */}
+            <CardDeadlinePicker
+              date={item.dealine}
+              updateDeadline={this.updateDeadline}
+            />
           </div>
           <div className="card__right">
             <CardInfoBlock
