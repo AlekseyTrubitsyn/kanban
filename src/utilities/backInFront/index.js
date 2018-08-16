@@ -37,7 +37,7 @@ const mapTicketsFromJSON = (arr, projectId) => {
     return item;
   })
 
-  return _groupBy(resultArr, 'status');
+  return _groupBy(resultArr, 'statusName');
 }
 
 /**

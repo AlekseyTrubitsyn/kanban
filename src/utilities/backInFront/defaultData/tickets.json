@@ -8,7 +8,7 @@
     "projectId": 1,
     "deadline": null,
     "creationDate": "2018-07-27T12:00:00.555Z",
-    "status": "discuss",
+    "statusName": "discuss",
     "priority": 2,
     "subtasks": [],
     "comments": []
@@ -21,7 +21,7 @@
     "projectId": 1,
     "deadline": null,
     "creationDate": "2018-07-27T12:00:00.555Z",
-    "status": "discuss",
+    "statusName": "discuss",
     "priority": 2,
     "subtasks": [
       {
@@ -54,7 +54,7 @@
     "projectId": 1,
     "deadline": "2018-08-20T12:00:00.555Z",
     "creationDate": "2018-07-26T12:00:00.555Z",
-    "status": "toDo",
+    "statusName": "toDo",
     "priority": 1,
     "subtasks": [],
     "comments": []
@@ -67,7 +67,7 @@
     "projectId": 1,
     "deadline": "2018-08-02T09:00:00.555Z",
     "creationDate": "2018-07-25T12:00:00.555Z",
-    "status": "inProgress",
+    "statusName": "inProgress",
     "priority": 3,
     "subtasks": [],
     "comments": []
@@ -80,7 +80,7 @@
     "projectId": 1,
     "deadline": "2018-08-01T12:00:00.555Z",
     "creationDate": "2018-07-25T12:00:00.555Z",
-    "status": "inProgress",
+    "statusName": "inProgress",
     "priority": 1,
     "subtasks": [],
     "comments": []
@@ -93,7 +93,7 @@
     "projectId": 1,
     "deadline": "2018-07-29T12:00:00.555Z",
     "creationDate": "2018-07-24T12:00:00.555Z",
-    "status": "testing",
+    "statusName": "testing",
     "priority": 1,
     "subtasks": [],
     "comments": []
@@ -106,7 +106,7 @@
     "projectId": 1,
     "deadline": "2018-07-29T12:00:00.555Z",
     "creationDate": "2018-07-24T12:00:00.555Z",
-    "status": "done",
+    "statusName": "done",
     "priority": 1,
     "subtasks": [],
     "comments": []
@@ -117,7 +117,7 @@
     "reporterId": 2,
     "projectId": 1,
     "creationDate": "2018-07-24T12:00:00.555Z",
-    "status": "discuss",
+    "statusName": "discuss",
     "priority": 1,
     "subtasks": [],
     "comments": []

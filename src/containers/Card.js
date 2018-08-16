@@ -17,8 +17,152 @@ import ModalContainer from '../components/ModalContainer';
 import PrioritySelector from '../components/PrioritySelector';
 import Todo from '../components/Todo';
 import Comments from '../components/Comments';
+import CardInfoBlock from '../components/card/CardInfoBlock';
+import CardDeadlinePicker from '../components/card/CardDeadlinePicker';
 
-const Card = (props) => {
+class Card extends Component {
+  constructor(props) {
+    super(props);
+
+    const { item } = props;
+    const { statusName, deadline, priority, assignee, subtasks, comments } = item;
+
+    this.state = {
+      statusName,
+      deadline,
+      priority,
+      assignee,
+      subtasks,
+      comments
+    }
+
+    this.defaultStatus = statusName;
+    this.updatePriority = this.updatePriority.bind(this);
+    this.updateStatus = this.updateStatus.bind(this);
+    this.updateComments = this.updateComments.bind(this);
+    this.updateSubtasks = this.updateSubtasks.bind(this);
+    this.handleSaveClick = this.handleSaveClick.bind(this);
+  }
+
+  updatePriority(priority) {
+    this.setState({
+      priority
+    })
+  }
+
+  updateStatus(statusName) {
+    this.setState({
+      statusName
+    })
+  }
+
+  updateComments(comments) {
+    this.setState({
+      comments
+    })
+  }
+
+  updateSubtasks(subtasks) {
+    this.setState({
+      subtasks
+    })
+  }
+
+  handleSaveClick() {
+    const item = {...this.props.item, ...this.state};
+    const shouldMove = this.defaultStatus !== this.state.statusName;
+    console.log('saved!');
+    // this.props.saveItem({
+    //   prevStatusName: this.defaultStatus,
+    //   shouldMove,
+    //   item
+    // })
+  }
+
+  render() {
+    const { item, onCloseClick } = this.props;
+    const { id, title, text, creationDate, project, reporter } = item;
+
+    const { deadline, priority, assignee, subtasks, comments } = this.state;
+
+    return (
+      <ModalContainer
+        onCloseClick={onCloseClick}
+      >
+        <div className="card">
+          <div className="card__left">
+            <label className="card-info__label" htmlFor="title">Title:</label>
+            <input className="card-info" id="title" type="text" defaultValue={title}/>
+            <label className="card-info__label" htmlFor="text">Description:</label>
+            <textarea className="card-info" id="text"  rows="5" defaultValue={text}/>
+            <label className="card-info__label" htmlFor="deadline">Deadline:</label>
+            {/* <div className="card__deadline">
+              <DatePicker
+                selected={moment(deadline)}
+                onChange={this.updateDeadline}
+                showTimeSelect
+                dateFormat="LLL"
+                id="deadline"
+              />
+            </div> */}
+          </div>
+          <div className="card__right">
+            <CardInfoBlock
+              id={id}
+              project={project}
+              reporter={reporter}
+              creationDate={creationDate}
+              assignee={assignee}
+            />
+            <div className="card-info__container">
+              <div className="card-info card__priority-selector">
+                <span>Priority: </span>
+                <PrioritySelector
+                  value={priority}
+                  onChange={this.updatePriority}
+                />
+              </div>
+              <div className="card-info">
+                <span>Change status: </span>
+                <select onChange={(e) => this.updateStatus(e.target.value)}>
+                  <option value="discuss">Discuss</option>
+                  <option value="todo">To do</option>
+                  <option value="inProgress">In progress</option>
+                  <option value="testing">Testing</option>
+                  <option value="done">Done</option>
+                </select>
+              </div>
+              <div className="card-info">
+                <button className="btn btn-inline btn-secondary">Assign to me</button>
+                <button className="btn btn-inline btn-secondary">Move to archive</button>
+              </div>
+            </div>
+            <div className="card-info card-info--large card__subtasks">
+              <h3 className="card-info__title">Subtasks: </h3>
+              <Todo
+                items={subtasks || []}
+                onItemsUpdate={this.updateSubtasks}
+              />
+            </div>
+            <div className="card-info card-info--large card__comments">
+              <h3 className="card-info__title">Comments: </h3>
+              <Comments
+                items={comments || []}
+                onItemsUpdate={this.updateComments}
+              />
+            </div>
+          </div>
+          <div className="card__buttons">
+            <button className="btn btn-primary" onClick={this.handleSaveClick}>Save</button>
+            <button className="btn btn-primary" onClick={onCloseClick}>Cancel</button>
+          </div>
+        </div>
+      </ModalContainer>
+    )
+  }
+}
+
+/*(props) => {
   const {
     item,
     currentProject,
@@ -55,6 +199,9 @@ const Card = (props) => {
           <label className="card-info__label" htmlFor="text">Description:</label>
           <textarea className="card-info" id="text"  rows="5" defaultValue={text}/>
           <label className="card-info__label" htmlFor="deadline">Deadline:</label>
+          <CardDeadlinePicker
+            itemId={id}
+          />
           <div className="card__deadline">
             <DatePicker
               selected={moment(deadline)}
@@ -131,14 +278,14 @@ const Card = (props) => {
           <div className="card-info card-info--large card__subtasks">
             <h3 className="card-info__title">Subtasks: </h3>
             <Todo
-              items={item.subtasks}
+              items={item.subtasks || []}
               onItemsUpdate={updateTodoList}
             />
           </div>
           <div className="card-info card-info--large card__comments">
             <h3 className="card-info__title">Comments: </h3>
             <Comments
-              items={item.comments}
+              items={item.comments || []}
               onItemsUpdate={updateComments}
             />
           </div>
@@ -150,7 +297,7 @@ const Card = (props) => {
       </div>
     </ModalContainer>
   )
-}
+}*/
 
 function mapStateToProps(state) {
   return {

@@ -49,14 +49,14 @@ class Todo extends Component {
 
         break;
       default:
-        console.log('wrong key "${key}"');
+        console.log(`wrong key ${key}`);
     }
   }
 
   handleCreate(value) {
-    const { items, onUpdate } = this.props;
+    const { items, onItemsUpdate } = this.props;
 
-    onUpdate([
+    onItemsUpdate([
       ...items,
       {
         text: value,

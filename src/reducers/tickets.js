@@ -1,4 +1,5 @@
 import _isEmpty from 'lodash/isEmpty';
+import _cloneDeep from 'lodash/cloneDeep';
 
 import {
   MOVE_TICKET,
@@ -40,6 +41,20 @@ const initialState = {
     name: 'Done',
     values: []
   },
+  newItem: {
+    "id": -1,
+    "title": "",
+    "text": "",
+    "reporterId": 1,
+    "assigneeId": null,
+    "projectId": 1,
+    "deadline": null,
+    "creationDate": "",
+    "statusName": "discuss",
+    "priority": 1,
+    "subtasks": [],
+    "comments": []
+  }
 }
 
 export default function tickets(state = initialState, action) {
@@ -54,7 +69,7 @@ export default function tickets(state = initialState, action) {
       return { ...state, showCardModal: true, itemToModify }
 
     case CREATE_NEW_ITEM:
-      return {...state, showCardModal: true, itemToModify: undefined }
+      return {...state, showCardModal: true, itemToModify: _cloneDeep(state.newItem) }
 
     case CLOSE_ITEM_CARD:
       return {...state, showCardModal: false, itemToModify: undefined }
@@ -64,7 +79,7 @@ export default function tickets(state = initialState, action) {
 
       let srcValues = [...state[source.name].values];
       const item = srcValues.splice(source.position, 1)[0];
-      item.status = destination.name;
+      item.statusName = destination.name;
 
       if (source.name === destination.name) {
         srcValues.splice(destination.position, 0, item);
@@ -146,7 +161,7 @@ export default function tickets(state = initialState, action) {
         ...state,
         itemToModify: {
           ...state.itemToModify,
-          status: action.payload
+          statusName: action.payload
         }
       }
 
