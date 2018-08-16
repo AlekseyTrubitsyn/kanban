@@ -10,7 +10,8 @@ const KanbanItem = (props) => {
   const { id, title, text, project, reporter, assignee, deadline, creationDate, priority} = item;
   const projectKey = project.key || "";
 
-  const assigneeAvatar = assignee ? `${process.env.PUBLIC_URL}/${assignee.avatar}` : '';
+  // const assigneeAvatar = assignee ? `${process.env.PUBLIC_URL}/${assignee.avatar}` : '';
+  const assigneeAvatar = assignee ? assignee.avatar : '';
 
   const deadlineDate = new Date(deadline);
   const deadlineWarningTime = moment().add(12, 'hours').toDate();

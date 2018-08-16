@@ -4,7 +4,6 @@
   "private": false,
   "author": "Aleksey Trubitsyn",
   "license": "ISC",
-  "homepage": "https://alekseytrubitsyn.github.io/agile-kanban/",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.2",
     "@fortawesome/free-brands-svg-icons": "^5.2.0",
