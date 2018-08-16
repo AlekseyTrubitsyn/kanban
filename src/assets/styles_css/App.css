@@ -681,6 +681,10 @@ textarea {
       display: none; }
     .todo-line .todo-line__label .done-icon {
       display: inline; }
+    .todo-line .todo-line__label:hover .hover-icon {
+      display: inline; }
+    .todo-line .todo-line__label:hover .done-icon {
+      display: none; }
   .todo-line--checked .todo-line__label {
     display: flex;
     justify-content: center;

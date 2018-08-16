@@ -21,12 +21,14 @@
   .hover-icon { display: none; }
   .done-icon { display: inline; }
 
-  @if $checked {
-    color: $green;
+  &:hover {
+    .hover-icon { display: inline; }
+    .done-icon { display: none; }
+  }
 
-    &:hover {
-      .hover-icon { display: inline; }
-      .done-icon { display: none; }
+  @if $checked {
+    .done-icon
+      color: $green;
     }
   } @else {
     color: lighten($dark-cerulean, 10%);
