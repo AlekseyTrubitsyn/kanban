@@ -26,12 +26,12 @@
     .done-icon { display: none; }
   }
 
-  @if $checked {
-    .done-icon
+  .done-icon {
+    @if $checked {
       color: $green;
+    } @else {
+      color: lighten($dark-cerulean, 10%);
     }
-  } @else {
-    color: lighten($dark-cerulean, 10%);
   }
 }
 

@@ -42,8 +42,7 @@
     line-height: 23px;
     box-shadow: none;
     background: transparent;
-    cursor: pointer;
-    color: #0860ba; }
+    cursor: pointer; }
     .todo-line .todo-line__label:hover {
       background: #0860ba;
       color: white; }
@@ -55,6 +54,8 @@
       display: inline; }
     .todo-line .todo-line__label:hover .done-icon {
       display: none; }
+    .todo-line .todo-line__label .done-icon {
+      color: #0860ba; }
   .todo-line--checked .todo-line__label {
     display: flex;
     justify-content: center;
@@ -65,8 +66,7 @@
     line-height: 23px;
     box-shadow: none;
     background: transparent;
-    cursor: pointer;
-    color: #679436; }
+    cursor: pointer; }
     .todo-line--checked .todo-line__label:hover {
       background: #0860ba;
       color: white; }
@@ -78,6 +78,8 @@
       display: inline; }
     .todo-line--checked .todo-line__label:hover .done-icon {
       display: none; }
+    .todo-line--checked .todo-line__label .done-icon {
+      color: #679436; }
   .todo-line--checked .todo-line__text {
     opacity: 0.4;
     text-decoration: line-through; }
