@@ -9,7 +9,8 @@ import {
   SAVE_TICKETS,
   CREATE_NEW_ITEM,
   OPEN_ITEM_CARD,
-  CLOSE_ITEM_CARD
+  CLOSE_ITEM_CARD,
+  REQUEST_TICKET_SAVE
 } from '../constants/ActionTypes';
 
 const initialState = {
@@ -103,6 +104,14 @@ export default function tickets(state = initialState, action) {
         }
       }
 
+    case REQUEST_TICKET_SAVE:
+      return {
+        ...state,
+        isFetching: true,
+        showCardModal: false,
+        itemToModify: undefined
+      }
+
     case REQUEST_TICKETS:
       return {
         ...state,
@@ -112,6 +121,7 @@ export default function tickets(state = initialState, action) {
     case SAVE_TICKETS:
       return {
         ...state,
+        isFetching: false,
         saveAt: action.payload
       }
 

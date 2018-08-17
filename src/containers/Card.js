@@ -85,14 +85,20 @@ class Card extends Component {
   }
 
   handleSaveClick() {
-    const item = {...this.props.item, ...this.state};
+    const item = {
+      ...this.props.item,
+      ...this.state,
+      title: this.refs.title.value,
+      text: this.refs.text.value
+    };
+
     const shouldMove = this.defaultStatus !== this.state.statusName;
-    console.log('saved!');
-    // this.props.saveItem({
-    //   prevStatusName: this.defaultStatus,
-    //   shouldMove,
-    //   item
-    // })
+
+    this.props.saveItem({
+      prevStatusName: this.defaultStatus,
+      shouldMove,
+      item
+    })
   }
 
   render() {
@@ -108,9 +114,9 @@ class Card extends Component {
         <div className="card">
           <div className="card__left">
             <label className="card-info__label" htmlFor="title">Title:</label>
-            <input className="card-info" id="title" type="text" defaultValue={title}/>
+            <input className="card-info" id="title" ref="title" type="text" defaultValue={title}/>
             <label className="card-info__label" htmlFor="text">Description:</label>
-            <textarea className="card-info" id="text"  rows="5" defaultValue={text}/>
+            <textarea className="card-info" id="text" ref="text"  rows="5" defaultValue={text}/>
             <label className="card-info__label" htmlFor="deadline">Deadline:</label>
             <CardDeadlinePicker
               date={item.dealine}
@@ -187,7 +193,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     onCloseClick: bindActionCreators(TicketsActions, dispatch).closeItemCard,
-    saveItem: bindActionCreators(TicketsActions, dispatch).updateTodoList
+    saveItem: bindActionCreators(TicketsActions, dispatch).saveItem
   }
 }
 
@@ -236,6 +242,7 @@ Card.propTypes = {
   currentProject: PropTypes.object,
   userData: PropTypes.object,
   onCloseClick: PropTypes.func.isRequired,
+  saveItem: PropTypes.func.isRequired,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Card);

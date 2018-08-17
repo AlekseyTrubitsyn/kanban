@@ -7,7 +7,8 @@ import {
   SAVE_TICKETS,
   CREATE_NEW_ITEM,
   OPEN_ITEM_CARD,
-  CLOSE_ITEM_CARD
+  CLOSE_ITEM_CARD,
+  REQUEST_TICKET_SAVE
 } from '../constants/ActionTypes';
 
 import { axiosWrapper } from '../utilities/axiosWrapper';
@@ -31,6 +32,29 @@ export const closeItemCard = () => {
   }
 }
 
+export const saveItem = (payload) => {
+  return (dispatch) => {
+    dispatch({
+      type: REQUEST_TICKET_SAVE
+    });
+
+    return axiosWrapper({
+              url: '/Ticket',
+              method: 'post',
+              data: payload
+            })
+            .then(response => {
+              dispatch(getTickets());
+            })
+            .catch(e => {
+              dispatch({
+                type: RECEIVE_TICKETS_ERROR,
+                payload: e
+              });
+            });
+  }
+}
+
 export const moveTicket = (payload) => {
   return {
     type: MOVE_TICKET,
@@ -40,6 +64,10 @@ export const moveTicket = (payload) => {
 
 export const setTickets = (payload) => {
   return (dispatch) => {
+    dispatch({
+      type: REQUEST_TICKETS
+    });
+
     return axiosWrapper({
               url: '/Tickets',
               method: 'post',

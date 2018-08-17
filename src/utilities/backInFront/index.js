@@ -69,7 +69,7 @@ const getDefaultTickets = (projectId) => mapTicketsFromJSON(tickets, 1);
  * Tickets getter: load from the localStorage
  * or return array of tickets by default
  *
- * @returns {array} array of tickets
+ * @returns {object} tickets array groupped by status key
  */
 const getTickets = (projectId) => {
   let arr = loadFromLS('tickets') || tickets;
@@ -77,6 +77,20 @@ const getTickets = (projectId) => {
   if (!Array.isArray(arr) || !arr.length) return [];
 
   return mapTicketsFromJSON(arr, projectId);
+};
+
+/**
+ * Tickets getter: load from the localStorage
+ * or return array of tickets by default
+ *
+ * @returns {array} array of tickets
+ */
+const getTicketsArray = (projectId) => {
+  let arr = loadFromLS('tickets') || tickets;
+
+  if (!Array.isArray(arr) || !arr.length) return [];
+
+  return arr;
 };
 
 /**
@@ -117,6 +131,30 @@ const setTickets = (data) => {
   let arr = Object.keys(data).reduce((result, item) => result.concat(data[item]), []);
 
   return !!saveToLS('tickets', arr);
+}
+
+/**
+ * Save changes of the ticket or create
+ * a new one, update/put into storage and report result
+ *
+ * @param   {object} item to save
+ *
+ * @returns {boolean} true if succeed
+ */
+const setTicket = (data) => {
+  if (_isEmpty(data)) return false;
+
+  let tickets = getTicketsArray(1);
+  let newItem = {...data.item};
+  newItem.creationDate = new Date().toISOString();
+
+  if (newItem.id === -1) {
+    newItem.id = tickets.reduce((result, item) => result > item.id ? result : item.id, 0);
+
+    return setTickets([...tickets, newItem]);
+  }
+
+  return setTickets(tickets.map(item => item.id === newItem.id ? newItem : item ));
 }
 
 /**
@@ -174,6 +212,10 @@ export const _post = (url, data) => {
 
     case 'Tickets':
       return setTickets(data || []);
+
+    case 'Ticket':
+      console.log('data', data);
+      return setTicket(data || {});
 
     default:
       return null;
