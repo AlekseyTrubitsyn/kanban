@@ -149,7 +149,7 @@ const setTicket = (data) => {
   newItem.creationDate = new Date().toISOString();
 
   if (newItem.id === -1) {
-    newItem.id = tickets.reduce((result, item) => result > item.id ? result : item.id, 0);
+    newItem.id = tickets.reduce((result, item) => result > item.id ? result : item.id, 0) + 1;
 
     return setTickets([...tickets, newItem]);
   }
