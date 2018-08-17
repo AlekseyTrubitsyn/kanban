@@ -36,6 +36,14 @@ class Card extends Component {
       comments
     }
 
+    this.statusSelectData = [
+      { key: 'discuss', name: 'Discuss' },
+      { key: 'toDo', name: 'To do' },
+      { key: 'inProgress', name: 'In progress' },
+      { key: 'testing', name: 'Testing'},
+      { key: 'done', name: 'Done'}
+    ];
+
     this.defaultStatus = statusName;
 
     this.updatePriority = this.updatePriority.bind(this);
@@ -91,7 +99,7 @@ class Card extends Component {
     const { item, onCloseClick } = this.props;
     const { id, title, text, creationDate, project, reporter } = item;
 
-    const { deadline, priority, assignee, subtasks, comments } = this.state;
+    const { deadline, statusName, priority, assignee, subtasks, comments } = this.state;
 
     return (
       <ModalContainer
@@ -127,12 +135,15 @@ class Card extends Component {
               </div>
               <div className="card-info">
                 <span>Change status: </span>
-                <select onChange={(e) => this.updateStatus(e.target.value)}>
-                  <option value="discuss">Discuss</option>
-                  <option value="todo">To do</option>
-                  <option value="inProgress">In progress</option>
-                  <option value="testing">Testing</option>
-                  <option value="done">Done</option>
+                <select
+                  value={statusName}
+                  onChange={(e) => this.updateStatus(e.target.value)}>
+                  {this.statusSelectData.map((item, i) => (
+                    <option
+                      key={i}
+                      value={item.key}
+                    >{item.name}</option>
+                  ))}
                 </select>
               </div>
               <div className="card-info">
@@ -165,143 +176,6 @@ class Card extends Component {
   }
 }
 
-/*(props) => {
-  const {
-    item,
-    currentProject,
-    userData,
-    onCloseClick,
-    updateDeadline,
-    updatePriority,
-    updateStatus,
-    updateComments,
-    updateTodoList,
-  } = props;
-
-  const {
-    id,
-    title,
-    text,
-    deadline,
-    priority,
-    assignee,
-    creationDate
-  } = item;
-
-  const project = item.project || currentProject;
-  const reporter = item.reporter || userData;
-
-  return (
-    <ModalContainer
-      onCloseClick={onCloseClick}
-    >
-      <div className="card">
-        <div className="card__left">
-          <label className="card-info__label" htmlFor="title">Title:</label>
-          <input className="card-info" id="title" type="text" defaultValue={title}/>
-          <label className="card-info__label" htmlFor="text">Description:</label>
-          <textarea className="card-info" id="text"  rows="5" defaultValue={text}/>
-          <label className="card-info__label" htmlFor="deadline">Deadline:</label>
-          <CardDeadlinePicker
-            itemId={id}
-          />
-          <div className="card__deadline">
-            <DatePicker
-              selected={moment(deadline)}
-              onChange={updateDeadline}
-              showTimeSelect
-              dateFormat="LLL"
-              id="deadline"
-            />
-          </div>
-        </div>
-        <div className="card__right">
-          <div className="card-info__container card-info__container--texts">
-            <p className="card-info">Project: {project.name} ({project.key})</p>
-            {!!id && <p className="card-info">Task number: {id}</p>}
-            <p className="card-info">
-              <span>Created:</span>
-              <span> {moment(creationDate).format('MMMM Do YYYY, h:mm:ss a')}</span>
-            </p>
-            <p className="card-info">
-              <span>Reporter:</span>
-              <span> {reporter.firstName} {reporter.secondName}</span>
-              <span> ({reporter.userName})</span>
-              <img
-                className="card__avatar"
-                height="20"
-                width="auto"
-                src={reporter.avatar}
-                alt="reporter"
-              />
-            </p>
-            <div className="card-info">
-              <span>Assignee:</span>
-              {_isEmpty(assignee)
-                ? <button>assign to me</button>
-                : (
-                  <Fragment>
-                    <span> {assignee.firstName} {assignee.secondName}</span>
-                    <span> ({assignee.userName})</span>
-                    <img
-                      className="card__avatar"
-                      height="20"
-                      width="auto"
-                      src={assignee.avatar}
-                      alt="assignee"
-                    />
-                  </Fragment>
-                )
-              }
-            </div>
-          </div>
-          <div className="card-info__container">
-            <div className="card-info card__priority-selector">
-              <span>Priority: </span>
-              <PrioritySelector
-                value={priority}
-                onChange={updatePriority}
-              />
-            </div>
-            <div className="card-info">
-              <span>Change status: </span>
-              <select onChange={updateStatus}>
-                <option value="discuss">Discuss</option>
-                <option value="todo">To do</option>
-                <option value="inProgress">In progress</option>
-                <option value="testing">Testing</option>
-                <option value="done">Done</option>
-              </select>
-            </div>
-            <div className="card-info">
-              <button className="btn btn-inline btn-secondary">Assign to me</button>
-              <button className="btn btn-inline btn-secondary">Move to archive</button>
-            </div>
-          </div>
-          <div className="card-info card-info--large card__subtasks">
-            <h3 className="card-info__title">Subtasks: </h3>
-            <Todo
-              items={item.subtasks || []}
-              onItemsUpdate={updateTodoList}
-            />
-          </div>
-          <div className="card-info card-info--large card__comments">
-            <h3 className="card-info__title">Comments: </h3>
-            <Comments
-              items={item.comments || []}
-              onItemsUpdate={updateComments}
-            />
-          </div>
-        </div>
-        <div className="card__buttons">
-          <button className="btn btn-primary" onClick={this.handleSaveClick}>Save</button>
-          <button className="btn btn-primary" onClick={onCloseClick}>Cancel</button>
-        </div>
-      </div>
-    </ModalContainer>
-  )
-}*/
-
 function mapStateToProps(state) {
   return {
     item: state.tickets.itemToModify,
@@ -313,11 +187,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     onCloseClick: bindActionCreators(TicketsActions, dispatch).closeItemCard,
-    updateDeadline: bindActionCreators(TicketsActions, dispatch).updateDeadline,
-    updateStatus: bindActionCreators(TicketsActions, dispatch).updateStatus,
-    updatePriority: bindActionCreators(TicketsActions, dispatch).updatePriority,
-    updateComments: bindActionCreators(TicketsActions, dispatch).updateComments,
-    updateTodoList: bindActionCreators(TicketsActions, dispatch).updateTodoList,
+    saveItem: bindActionCreators(TicketsActions, dispatch).updateTodoList
   }
 }
 
@@ -366,11 +236,6 @@ Card.propTypes = {
   currentProject: PropTypes.object,
   userData: PropTypes.object,
   onCloseClick: PropTypes.func.isRequired,
-  updateDeadline: PropTypes.func.isRequired,
-  updatePriority: PropTypes.func.isRequired,
-  updateStatus: PropTypes.func.isRequired,
-  updateComments: PropTypes.func.isRequired,
-  updateTodoList: PropTypes.func.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Card);

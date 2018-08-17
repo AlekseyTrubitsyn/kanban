@@ -9,12 +9,7 @@ import {
   SAVE_TICKETS,
   CREATE_NEW_ITEM,
   OPEN_ITEM_CARD,
-  CLOSE_ITEM_CARD,
-  UPDATE_DEADLINE,
-  UPDATE_STATUS,
-  UPDATE_PRIORITY,
-  UPDATE_TODO_LIST,
-  UPDATE_COMMENTS
+  CLOSE_ITEM_CARD
 } from '../constants/ActionTypes';
 
 const initialState = {
@@ -146,58 +141,6 @@ export default function tickets(state = initialState, action) {
           values: action.payload.done || []
         }
       }
-
-    case UPDATE_DEADLINE:
-      return {
-        ...state,
-        itemToModify: {
-          ...state.itemToModify,
-          deadline: action.payload
-        }
-      }
-
-    case UPDATE_STATUS:
-      return {
-        ...state,
-        itemToModify: {
-          ...state.itemToModify,
-          statusName: action.payload
-        }
-      }
-
-    case UPDATE_PRIORITY:
-      return {
-        ...state,
-        itemToModify: {
-          ...state.itemToModify,
-          priority: action.payload
-        }
-      }
-
-    case UPDATE_TODO_LIST:
-      const subtasks = action.payload;
-
-      return {
-        ...state,
-        itemToModify: {
-          ...state.itemToModify,
-          subtasks,
-          subtasksCount: subtasks.length
-        }
-      }
-
-    case UPDATE_COMMENTS:
-      const comments = action.payload;
-
-      return {
-        ...state,
-        itemToModify: {
-          ...state.itemToModify,
-          comments,
-          commentsCount: comments.length
-        }
-      }
-
     default:
       return state;
   }
