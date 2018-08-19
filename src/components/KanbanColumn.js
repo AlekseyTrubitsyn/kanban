@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
+import PerfectScrollbar from '@opuscapita/react-perfect-scrollbar';
 
 import _isEmpty from 'lodash/isEmpty';
 
@@ -22,26 +23,28 @@ const KanbanColumn = (props) => {
             }
           >
             <h4 className="kanban-board__column-title">{data.name}</h4>
-            {!_isEmpty(data.values) && data.values.map((item, index) => (
-              <Draggable
-                key={item.id}
-                draggableId={item.id}
-                index={index}
-              >
-                {(provided, snapshot) => (
-                  <KanbanItem
-                    onClick={() => onItemClick(item.id)}
-                    rf={provided.innerRef}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                    style={provided.draggableProps.style}
-                    item={item}
-                    highlighted={item.assignee && item.assignee.id === selectedAssigneeId}
-                    onAvatarOver={(id) => onAssigneeSelect(id)}
-                  />
-                )}
-              </Draggable>
-            ))}
+            <PerfectScrollbar>
+              {!_isEmpty(data.values) && data.values.map((item, index) => (
+                <Draggable
+                  key={item.id}
+                  draggableId={item.id}
+                  index={index}
+                >
+                  {(provided, snapshot) => (
+                    <KanbanItem
+                      onClick={() => onItemClick(item.id)}
+                      rf={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                      style={provided.draggableProps.style}
+                      item={item}
+                      highlighted={item.assignee && item.assignee.id === selectedAssigneeId}
+                      onAvatarOver={(id) => onAssigneeSelect(id)}
+                    />
+                  )}
+                </Draggable>
+              ))}
+            </PerfectScrollbar>
             {provided.placeholder}
           </div>
         )}

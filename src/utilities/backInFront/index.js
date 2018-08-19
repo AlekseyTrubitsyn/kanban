@@ -214,7 +214,6 @@ export const _post = (url, data) => {
       return setTickets(data || []);
 
     case 'Ticket':
-      console.log('data', data);
       return setTicket(data || {});
 
     default:

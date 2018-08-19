@@ -117,6 +117,23 @@ textarea {
   background: rgba(0, 0, 0, 0.7);
   animation: fadeIn 0.5s; }
 
+.ps__thumb-y,
+.ps__thumb-y:hover {
+  background-color: #f5efed !important; }
+
+.ps__rail-y:hover > .ps__thumb-y,
+.ps__rail-y:focus > .ps__thumb-y {
+  width: 6px !important;
+  background: white !important; }
+
+.oc-scrollbar-container .ps__rail-y {
+  opacity: 1 !important; }
+
+.ps__rail-y:hover,
+.ps__rail-x:focus,
+.ps__rail-y:focus {
+  background-color: transparent !important; }
+
 @keyframes fadeIn {
   from {
     opacity: 0; }
@@ -128,6 +145,21 @@ textarea {
     opacity: 0.5; }
   to {
     opacity: 1; } }
+
+@media (max-width: 1365px) {
+  #app::before {
+    content: 'Mobile version is not available now. Please try again later';
+    display: block;
+    background: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border-radius: 5px;
+    font-weight: 700; }
+  .App {
+    display: none; } }
 
 .spinner-container {
   position: fixed;
@@ -294,10 +326,16 @@ textarea {
   width: auto;
   margin-bottom: 0; }
 
+.kanban-board__container {
+  overflow: hidden; }
+
 .kanban-board {
   padding: 30px;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr); }
+  display: flex;
+  height: 100%; }
+  @media (max-width: 1600px) {
+    .kanban-board {
+      padding: 10px; } }
   .kanban-board.highlight .kanban-board-item:not(.highlighted) {
     opacity: 0.2; }
   .kanban-board .kanban-board__dummy-item {
@@ -330,8 +368,9 @@ textarea {
     color: #4d5061; }
   .kanban-board .kanban-board__droppable {
     padding-top: 1px;
-    flex-grow: 1;
-    min-height: 300px; }
+    display: flex;
+    flex-direction: column;
+    height: 100%; }
   .kanban-board .kanban-board__droppable--over {
     background-color: rgba(102, 169, 215, 0.9); }
   .kanban-board .kanban-board-item {
@@ -396,7 +435,8 @@ textarea {
   .kanban-board .kanban-board-item__assignee-username {
     margin-left: auto;
     margin-right: 10px;
-    font-weight: 700; }
+    font-weight: 700;
+    font-size: 14px; }
   .kanban-board .kanban-board-item__title {
     margin-bottom: 10px;
     font-weight: 700;
@@ -407,12 +447,11 @@ textarea {
     line-height: 1.5;
     margin-bottom: 15px; }
   .kanban-board .kanban-board-item__deadline {
-    padding: 0 10px;
+    display: inline-block;
+    padding: 5px 20px;
     font-size: 10px;
     line-height: 2;
-    margin: 10px 30px;
-    margin-top: 0;
-    padding: 3.33333px;
+    margin-bottom: 10px;
     position: relative;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
@@ -426,6 +465,9 @@ textarea {
       height: 1px;
       width: 30%;
       background-color: rgba(77, 80, 97, 0.2); }
+    @media (max-width: 1600px) {
+      .kanban-board .kanban-board-item__deadline span:last-of-type {
+        display: block; } }
   .kanban-board .kanban-board-item__deadline--expired {
     background: #dc484b;
     color: #fffaff; }

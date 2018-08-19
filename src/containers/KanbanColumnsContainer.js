@@ -39,7 +39,6 @@ class KanbanBoardContainer extends Component {
   }
 
   onOpenCardClick(columnName, itemId) {
-    //TODO check why 'discuss' is set as default
     this.props.openItemCard({
       itemId,
       columnName
@@ -77,7 +76,7 @@ class KanbanBoardContainer extends Component {
     );
 
     return (
-      <div>
+      <div className="kanban-board__container">
         <div className={"kanban-board" + (selectedAssigneeId !== -1 ? " highlight" : "")}>
           <DragDropContext onDragEnd={this.onDragEnd}>
             <KanbanColumn

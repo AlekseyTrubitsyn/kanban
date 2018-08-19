@@ -18,10 +18,16 @@ $item-title-color: $mid-grey;
 
 $border-radius: 5px;
 
+.kanban-board__container { overflow: hidden; }
+
 .kanban-board {
   padding: $padding * 3;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  display: flex;
+  height: 100%;
+
+  @media(max-width: 1600px) {
+    padding: $padding;
+  }
 
   &.highlight {
     .kanban-board-item:not(.highlighted) {
@@ -75,8 +81,9 @@ $border-radius: 5px;
 
   .kanban-board__droppable {
     padding-top: 1px;
-    flex-grow: 1;
-    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
   }
 
   .kanban-board__droppable--over {
@@ -166,6 +173,7 @@ $border-radius: 5px;
     margin-left: auto;
     margin-right: 10px;
     font-weight: 700;
+    font-size: 14px;
   }
 
   .kanban-board-item__title {
@@ -182,12 +190,11 @@ $border-radius: 5px;
   }
 
   .kanban-board-item__deadline {
-    padding: 0 $padding;
+    display: inline-block;
+    padding: 5px 20px;
     font-size: 10px;
     line-height: 2;
-    margin: $padding $padding * 3;
-    margin-top: 0;
-    padding: $padding / 3;
+    margin-bottom: $padding;
     position: relative;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
@@ -203,7 +210,12 @@ $border-radius: 5px;
       width: 30%;
       background-color: rgba($i-grey, .2);
     }
+
+    @media (max-width: 1600px) {
+      & span:last-of-type { display: block; }
+    }
   }
+
 
   .kanban-board-item__deadline--expired {
     background: lighten($item-title-bg--expired, 5%);

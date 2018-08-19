@@ -44,7 +44,7 @@ const KanbanItem = (props) => {
     >
       <div className={headerCN}>
         <span>
-          {projectKey + ' #' + id}
+          {'#' + id}
         </span>
         {!_isEmpty(assignee) && (
           <Fragment>
@@ -71,7 +71,7 @@ const KanbanItem = (props) => {
           <Fragment>
             <span>deadline: </span>
             <span>{moment(deadline).format('LL')} </span>
-            <span>({moment(deadline).fromNow()})</span>
+            <span>({moment(deadline).fromNow().split(' ').join('\u00A0')})</span>
           </Fragment>
           :
           <Fragment>
