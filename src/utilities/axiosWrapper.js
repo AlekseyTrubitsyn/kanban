@@ -13,7 +13,7 @@ export const axiosWrapper = ({ method, url, data }) => {
     let response = method === 'post' ? _post(url, data) : _get(url, data);
 
     if (response) {
-      resolve(response);
+      setTimeout(() => resolve(response), 700);
     } else {
       reject('An error occured. Please try again later');
     }

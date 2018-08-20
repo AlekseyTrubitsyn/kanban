@@ -1,10 +1,12 @@
 .kanban-board__container {
-  overflow: hidden; }
+  overflow: hidden;
+  height: 100%; }
 
 .kanban-board {
   padding: 30px;
-  display: flex;
-  height: 100%; }
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); }
   @media (max-width: 1600px) {
     .kanban-board {
       padding: 10px; } }
@@ -12,7 +14,7 @@
     opacity: 0.2; }
   .kanban-board .kanban-board__dummy-item {
     height: 200px;
-    animation: halfFadeIn 1.5s infinite ease-in;
+    animation: halfFadeIn 0.7s infinite ease-in;
     background: #f5efed; }
     .kanban-board .kanban-board__dummy-item:first-of-type {
       margin-top: 20px; }
@@ -24,7 +26,8 @@
     padding: 0;
     border-radius: 5px;
     transition: 0.3s all;
-    overflow: hidden; }
+    overflow: hidden;
+    flex-grow: 1; }
     .kanban-board .kanban-board__column:hover {
       background: rgba(77, 80, 97, 0.5);
       box-shadow: 2px 2px 7px rgba(48, 50, 61, 0.7); }

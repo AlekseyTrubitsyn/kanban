@@ -22,6 +22,14 @@ class KanbanBoardContainer extends Component {
     this.onOpenCardClick = this.onOpenCardClick.bind(this);
   }
 
+  static getDerivedStateFromProps(nextProps) {
+    if (nextProps.isFetching) {
+      return null;
+    }
+
+    return {};
+  }
+
   onDragEnd(result) {
     const { source, destination, draggableId } = result;
 
@@ -127,8 +135,10 @@ class KanbanBoardContainer extends Component {
 }
 
 function mapStateToProps(state) {
+  const isFetching = state.tickets.isFetching || state.projects.isFetching;
+
   return {
-    isFetching: state.tickets.isFetching,
+    isFetching,
     discuss: state.tickets.discuss,
     toDo: state.tickets.toDo,
     inProgress: state.tickets.inProgress,

@@ -96,7 +96,9 @@ export const requestTickets = () => {
 
 export const getTickets = (projectId = 1) => {
   return (dispatch) => {
-    dispatch(requestTickets);
+    dispatch({
+      type: REQUEST_TICKETS
+    });
 
     return axiosWrapper({ url: '/Tickets' })
             .then(response => {

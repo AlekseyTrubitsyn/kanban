@@ -17,17 +17,13 @@ class KanbanBoard extends Component {
 
     const {getProjects, getTickets} = props;
 
-    new Promise (resolve => {
-      getProjects();
-      resolve();
-    })
-    .then(() => getTickets());
+    getProjects();
+    getTickets();
   }
 
   render() {
-    const { isFetching, showCardModal, showSideMenu } = this.props;
+    const { showCardModal, showSideMenu } = this.props;
 
-    if (isFetching) return <Loader />
     return (
       <Fragment>
         {showCardModal && <Card/>}
@@ -40,12 +36,10 @@ class KanbanBoard extends Component {
 }
 
 function mapStateToProps(state) {
-  const isFetching = state.projects.isFetching || state.tickets.isFetching;
 
   return {
     showCardModal: state.tickets.showCardModal,
-    showSideMenu: state.sideMenu.show,
-    isFetching
+    showSideMenu: state.sideMenu.show
   }
 }
 

@@ -18,12 +18,16 @@ $item-title-color: $mid-grey;
 
 $border-radius: 5px;
 
-.kanban-board__container { overflow: hidden; }
+.kanban-board__container {
+  overflow: hidden;
+  height: 100%;
+}
 
 .kanban-board {
   padding: $padding * 3;
-  display: flex;
   height: 100%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
 
   @media(max-width: 1600px) {
     padding: $padding;
@@ -37,7 +41,7 @@ $border-radius: 5px;
 
   .kanban-board__dummy-item {
     height: 200px;
-    animation: halfFadeIn 1.5s infinite ease-in;
+    animation: halfFadeIn 0.7s infinite ease-in;
     background: $item-bg;
 
     &:first-of-type {
@@ -54,6 +58,7 @@ $border-radius: 5px;
     border-radius: $border-radius;
     transition: 0.3s all;
     overflow: hidden;
+    flex-grow: 1;
 
     &:hover {
       background: rgba($column-bg--hover, 0.5);
