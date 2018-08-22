@@ -5,6 +5,7 @@ import { loadFromLS, saveToLS } from '../localStorage';
 
 import projects from './defaultData/projects.json';
 import users from './defaultData/users.json';
+import usersData from './defaultData/usersData.json';
 import tickets from './defaultData/tickets.json';
 
 /**
@@ -12,10 +13,6 @@ import tickets from './defaultData/tickets.json';
 ** 'Back in front': server emulation.
 **
 **/
-let nextProjectId = 3;
-let nextUserId = 5;
-let nextTicketId = 7;
-
 const _projects = loadFromLS('projects') || projects;
 const _users = loadFromLS('users') || users;
 
@@ -158,6 +155,32 @@ const setTicket = (data) => {
 }
 
 /**
+ * User login handler
+ *
+ * @param   {object} data to check
+ *
+ * @returns {object} that contains session key and user settings
+ *                   if data is correct, or error message if is not
+ */
+const loginUser = ({login, password}) => {
+  const user = usersData.find(item => item.userName === login && item.password === password);
+  const u = _isEmpty(user) ? -1 : user.id;
+
+  if (u !== -1) {
+    return {
+      sessionKey: '_' + Math.random().toString(36).substr(2, 9),
+      sessionTimeout: +(new Date()) + 2 * 3600 * 1000,
+      userData: _users.find(item => item.id === u)
+    }
+  } else {
+    return {
+      errorKey: 1,
+      errorText: 'Wrong login or password'
+    }
+  }
+}
+
+/**
 ** --- export ---
 **/
 
@@ -173,10 +196,10 @@ export const _get = (url) => {
 
   switch (model) {
     case 'Projects':
-     return getProjects();
+      return getProjects();
 
     case 'Users':
-     return getUsers();
+      return getUsers();
 
     case 'DefaultTickets':
       return getDefaultTickets();
@@ -193,7 +216,7 @@ export const _get = (url) => {
 }
 
 /**
- * Main setter
+ * Post actions
  *
  * @param   {string} url of the fake API that contains model name
  * @param   {array} data array of objects to save
@@ -206,6 +229,9 @@ export const _post = (url, data) => {
   switch (model) {
     case 'Projects':
       return setProjects(data || []);
+
+    case 'User':
+      return loginUser(data || {});
 
     case 'Users':
       return setUsers(data || []);

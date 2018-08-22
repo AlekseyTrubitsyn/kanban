@@ -33,10 +33,7 @@ class LoginRegisterForm extends Component {
     this.props.hideTooltip();
   }
 
-  handleSubmit() {
-    const login = this.refs.login;
-    const password = this.refs.password;
-
+  handleSubmit(login, password) {
     this.showMessage = false;
     this.props.hideTooltip();
     this.props.login(login, password);
@@ -88,14 +85,12 @@ class LoginRegisterForm extends Component {
                   handleSubmit={this.handleSubmit}
                   handleError={this.handleError}
                   loginValue="admin"
-                  passwordValue="123"
+                  passwordValue="1234"
                 />
               : <RegisterTab
                   onInputClick={this.handleClick}
                   handleSubmit={this.handleSubmit}
                   handleError={this.handleError}
-                  loginValue="admin"
-                  passwordValue="123"
                 />
             }
           </div>

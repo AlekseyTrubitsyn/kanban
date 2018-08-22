@@ -14,6 +14,8 @@ import Tooltip from './containers/Tooltip';
 
 library.add(fab, faSignOutAlt, faStar, faTimes, faTimesCircle, faInfoCircle, faChevronCircleLeft, faChevronRight, faChevronLeft, faBars, faPlus, faCheck, faPen, faExpand);
 
+//TODO use session ID from cookies to skip login
+
 const App = (props) => {
   const { showLoginForm, showMessage } = props;
 

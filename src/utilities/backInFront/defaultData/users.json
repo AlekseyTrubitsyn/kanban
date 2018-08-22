@@ -1,5 +1,14 @@
 [
   {
+    "id": 0,
+    "userName": "admin",
+    "firstName": "admin",
+    "secondName": "",
+    "gender": "Male",
+    "avatar": "img/default-man.png",
+    "email": "",
+    "role": "admin"
+  }, {
     "id": 1,
     "userName": "Lorem",
     "firstName": "Lorem",

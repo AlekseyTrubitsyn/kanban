@@ -48,7 +48,7 @@ class LoginTab extends Component {
     const submitAvailable = loginField.value && passwordField.value;
 
     if (submitAvailable) {
-      this.props.handleSubmit();
+      this.props.handleSubmit(loginField.value, passwordField.value);
 
     } else {
       let elem;

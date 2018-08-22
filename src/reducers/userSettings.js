@@ -1,21 +1,24 @@
 import {
-  REQUEST_USER_DATA,
+  REQUEST_USER_LOGIN,
+  RECEIVE_USER_LOGIN_ERROR,
   RECEIVE_USER_DATA,
-  RESET_USER
+  RESET_USER_LOGIN
 } from '../constants/ActionTypes';
 
 const initialState = {
   isFetching: false,
-  userData: null
+  userData: null,
+  errors: []
 }
 
 export default function tickets(state = initialState, action) {
   switch (action.type) {
-    case REQUEST_USER_DATA:
+    case REQUEST_USER_LOGIN:
       return {
         ...state,
         isFetching: true,
-        userData: null
+        userData: null,
+        errors: null
       }
     case RECEIVE_USER_DATA:
       return  {
@@ -23,12 +26,21 @@ export default function tickets(state = initialState, action) {
         isFetching: false,
         userData: action.payload
       }
-    case RESET_USER:
+
+    case RESET_USER_LOGIN:
       return {
         ...state,
         isFetching: false,
         userData: null
       }
+
+    case RECEIVE_USER_LOGIN_ERROR:
+      return {
+        ...state,
+        isFetching: false,
+        errors: action.payload
+      }
+
     default:
       return state;
   }
