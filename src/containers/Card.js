@@ -37,7 +37,8 @@ class Card extends Component {
       { key: 'toDo', name: 'To do' },
       { key: 'inProgress', name: 'In progress' },
       { key: 'testing', name: 'Testing'},
-      { key: 'done', name: 'Done'}
+      { key: 'done', name: 'Done'},
+      { key: 'archive', name: 'Archive'}
     ];
 
     this.defaultStatus = statusName;
@@ -49,6 +50,7 @@ class Card extends Component {
     this.updateDeadline = this.updateDeadline.bind(this);
 
     this.handleAssignClick = this.handleAssignClick.bind(this);
+    this.handleSendToArchiveClick = this.handleSendToArchiveClick.bind(this);
     this.handleSaveClick = this.handleSaveClick.bind(this);
   }
 
@@ -87,6 +89,12 @@ class Card extends Component {
       assignee: this.props.userData,
       assigneeId: this.props.userData.id
     });
+  }
+
+  handleSendToArchiveClick() {
+    this.setState({
+      statusName: 'archive'
+    })
   }
 
   handleSaveClick() {
@@ -162,6 +170,10 @@ class Card extends Component {
                   className="btn btn-inline btn-secondary"
                   onClick={this.handleAssignClick}
                 >Assign to me</button>
+                <button
+                  className="btn btn-inline btn-secondary"
+                  onClick={this.handleSendToArchiveClick}
+                >Move to archive</button>
               </div>
             </div>
             <div className="card-info card-info--large card__subtasks">

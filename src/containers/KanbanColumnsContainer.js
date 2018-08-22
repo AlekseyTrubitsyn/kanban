@@ -65,20 +65,23 @@ class KanbanBoardContainer extends Component {
       inProgress,
       testing,
       done,
+      archive,
       isFetching
     } = this.props;
 
     const { selectedAssigneeId } = this.state;
 
     if (isFetching) return (
-      <div className="kanban-board">
-        {Array.from(new Array(5)).map((item, index) =>
-          <div className="kanban-board__column kanban-board__column--loading" key={index}>
-            {Array.from(new Array(3)).map((subitem, subindex) => (
-              <div className="kanban-board__dummy-item kanban-board-item" key={subindex}></div>
-            ))}
-          </div>
-        )}
+      <div className="kanban-board__container kanban-board__container--loading">
+        <div className="kanban-board">
+          {Array.from(new Array(5)).map((item, index) =>
+            <div className="kanban-board__column kanban-board__column--loading" key={index}>
+              {Array.from(new Array(3)).map((subitem, subindex) => (
+                <div className="kanban-board__dummy-item kanban-board-item" key={subindex}></div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     );
 
@@ -126,6 +129,14 @@ class KanbanBoardContainer extends Component {
               onAssigneeSelect={(id) => this.onAssigneeSelect(id)}
               onItemClick={(id) => this.onOpenCardClick('done', id)}
             />
+            <KanbanColumn
+              droppableId="archive"
+              key="archive"
+              data={archive}
+              selectedAssigneeId={selectedAssigneeId}
+              onAssigneeSelect={(id) => this.onAssigneeSelect(id)}
+              onItemClick={(id) => this.onOpenCardClick('archive', id)}
+            />
           </DragDropContext>
         </div>
       </div>
@@ -143,6 +154,7 @@ function mapStateToProps(state) {
     inProgress: state.tickets.inProgress,
     testing: state.tickets.testing,
     done: state.tickets.done,
+    archive: state.tickets.archive
   }
 }
 

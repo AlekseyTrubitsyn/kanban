@@ -37,6 +37,10 @@ const initialState = {
     name: 'Done',
     values: []
   },
+  archive: {
+    name: 'Archive',
+    values: []
+  },
   newItem: {
     "id": -1,
     "title": "",
@@ -156,6 +160,10 @@ export default function tickets(state = initialState, action) {
         done: {
           ...state.done,
           values: action.payload.done || []
+        },
+        archive: {
+          ...state.archive,
+          values: action.payload.archive || []
         }
       }
     default:
