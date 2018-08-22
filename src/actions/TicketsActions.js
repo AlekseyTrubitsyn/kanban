@@ -16,7 +16,7 @@ import { axiosWrapper } from '../utilities/axiosWrapper';
 export const createNewItem = (userData) => {
   return {
     type: CREATE_NEW_ITEM,
-    userData 
+    userData
   }
 }
 

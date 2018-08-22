@@ -34,7 +34,7 @@ const CardInfoBlock = (props) => {
           />
         </p>
       }
-      {assignee
+      {!_isEmpty(assignee)
         ? (
           <div className="card-info">
             <span>Assignee:</span>

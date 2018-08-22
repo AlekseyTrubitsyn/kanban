@@ -65,7 +65,14 @@ export default function tickets(state = initialState, action) {
       return { ...state, showCardModal: true, itemToModify }
 
     case CREATE_NEW_ITEM:
-      return {...state, showCardModal: true, itemToModify: _cloneDeep(state.newItem) }
+      return {
+        ...state,
+        showCardModal: true,
+        itemToModify: {
+          ..._cloneDeep(state.newItem),
+          reporter: action.userData
+        }
+      }
 
     case CLOSE_ITEM_CARD:
       return {...state, showCardModal: false, itemToModify: undefined }

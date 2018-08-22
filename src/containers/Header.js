@@ -22,8 +22,8 @@ const Header = (props) => {
         </button>
         <button
           className="btn btn-primary"
-          onClick={createNewItem}
-          >
+          onClick={() => createNewItem(userData)}
+        >
           <FontAwesomeIcon icon="plus" />
         </button>
         {/* <input className="header__search" type="text" placeholder="Search"/> */}

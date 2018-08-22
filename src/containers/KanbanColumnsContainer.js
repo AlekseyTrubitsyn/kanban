@@ -30,6 +30,8 @@ class KanbanBoardContainer extends Component {
   onDragEnd(result) {
     const { source, destination, draggableId } = result;
 
+    if (!destination) return;
+
     this.props.moveTicket({
       source: {
         name: source.droppableId,

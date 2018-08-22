@@ -46,8 +46,10 @@ class Card extends Component {
     this.updateStatus = this.updateStatus.bind(this);
     this.updateComments = this.updateComments.bind(this);
     this.updateSubtasks = this.updateSubtasks.bind(this);
-    this.handleSaveClick = this.handleSaveClick.bind(this);
     this.updateDeadline = this.updateDeadline.bind(this);
+
+    this.handleAssignClick = this.handleAssignClick.bind(this);
+    this.handleSaveClick = this.handleSaveClick.bind(this);
   }
 
   updatePriority(priority) {
@@ -77,6 +79,13 @@ class Card extends Component {
   updateDeadline(date) {
     this.setState({
       deadline: date.utc().format()
+    });
+  }
+
+  handleAssignClick() {
+    this.setState({
+      assignee: this.props.userData,
+      assigneeId: this.props.userData.id
     });
   }
 
@@ -149,8 +158,10 @@ class Card extends Component {
                 </select>
               </div>
               <div className="card-info">
-                <button className="btn btn-inline btn-secondary">Assign to me</button>
-                <button className="btn btn-inline btn-secondary">Move to archive</button>
+                <button
+                  className="btn btn-inline btn-secondary"
+                  onClick={this.handleAssignClick}
+                >Assign to me</button>
               </div>
             </div>
             <div className="card-info card-info--large card__subtasks">
@@ -199,7 +210,11 @@ Card.defaultProps = {
     title: '',
     text: '',
     creationDate: new Date(),
-    priority: 1
+    priority: 1,
+    assignee: {
+      userName: '',
+      avatar: ''
+    }
   }
 }
 
@@ -213,8 +228,8 @@ Card.propTypes = {
       avatar: PropTypes.string
     }),
     assignee: PropTypes.shape({
-      userName: PropTypes.string.isRequired,
-      avatar: PropTypes.string.isRequired
+      userName: PropTypes.string,
+      avatar: PropTypes.string
     }),
     project: PropTypes.shape({
       name: PropTypes.string,
