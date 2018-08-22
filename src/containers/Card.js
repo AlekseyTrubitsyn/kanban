@@ -1,13 +1,9 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
 
 import moment from 'moment';
-import DatePicker from 'react-datepicker';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-import _isEmpty from 'lodash/isEmpty';
 
 import * as TicketsActions from '../actions/TicketsActions';
 
@@ -105,7 +101,7 @@ class Card extends Component {
     const { item, onCloseClick } = this.props;
     const { id, title, text, creationDate, project, reporter } = item;
 
-    const { deadline, statusName, priority, assignee, subtasks, comments } = this.state;
+    const { statusName, priority, assignee, subtasks, comments } = this.state;
 
     return (
       <ModalContainer

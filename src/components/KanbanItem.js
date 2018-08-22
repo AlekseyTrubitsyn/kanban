@@ -7,8 +7,7 @@ import _isEmpty from 'lodash/isEmpty';
 
 const KanbanItem = (props) => {
   const { item, rf, highlighted, onAvatarOver, ...deafultProps } = props;
-  const { id, title, text, project, reporter, assignee, deadline, creationDate, priority} = item;
-  const projectKey = project.key || "";
+  const { id, title, text, reporter, assignee, deadline, creationDate, priority} = item;
 
   // const assigneeAvatar = assignee ? `${process.env.PUBLIC_URL}/${assignee.avatar}` : '';
   const assigneeAvatar = assignee ? assignee.avatar : '';

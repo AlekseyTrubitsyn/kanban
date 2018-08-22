@@ -14,7 +14,12 @@ const initialState = {
 export default function projects(state = initialState, action) {
   switch (action.type) {
     case REQUEST_PROJECTS:
-      return {...state, isFetching: true, projects: []}
+      return {
+        ...state,
+        isFetching: true,
+        projects: [],
+        errors: null
+      }
 
     case RECEIVE_PROJECTS:
       return {
@@ -24,6 +29,12 @@ export default function projects(state = initialState, action) {
         currentProject: action.payload.filter(o => o.id === state.currentProjectId)[0]
       }
 
+    case RECEIVE_PROJECTS_ERROR:
+      return {
+        ...state,
+        isFetching: false,
+        errors: action.payload || ''
+      }
     default:
       return state;
   }

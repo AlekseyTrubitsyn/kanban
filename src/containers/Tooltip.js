@@ -52,6 +52,13 @@ function getPositionStyles(elem, position) {
   }
 }
 
+Tooltip.propTypes = {
+  elem: PropTypes.object,
+  message: PropTypes.string,
+  type: PropTypes.string,
+  position: PropTypes.string
+}
+
 Tooltip.defaultProps = {
   message: '',
   type: 'info',

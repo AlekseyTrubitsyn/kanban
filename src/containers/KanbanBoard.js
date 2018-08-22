@@ -6,7 +6,6 @@ import KanbanColumnsContainer from './KanbanColumnsContainer';
 import Header from './Header';
 import SideMenu from './SideMenu';
 import Card from './Card';
-import Loader from '../components/Loader';
 
 import * as TicketsActions from '../actions/TicketsActions';
 import * as ProjectsActions from '../actions/ProjectsActions';
@@ -22,7 +21,7 @@ class KanbanBoard extends Component {
   }
 
   render() {
-    const { showCardModal, showSideMenu } = this.props;
+    const { showCardModal } = this.props;
 
     return (
       <Fragment>

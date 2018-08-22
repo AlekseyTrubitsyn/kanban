@@ -4,11 +4,8 @@ import { connect } from 'react-redux';
 import { DragDropContext } from 'react-beautiful-dnd';
 
 import * as TicketsActions from '../actions/TicketsActions';
-import * as ProjectsActions from '../actions/ProjectsActions';
 
-import Loader from '../components/Loader';
 import KanbanColumn from '../components/KanbanColumn';
-import StorageButtons from '../components/StorageButtons';
 
 class KanbanBoardContainer extends Component {
   constructor(props) {
