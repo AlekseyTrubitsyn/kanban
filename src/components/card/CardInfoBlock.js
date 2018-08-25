@@ -24,7 +24,7 @@ const CardInfoBlock = (props) => {
         <p className="card-info">
           <span>Reporter:</span>
           <span> {reporter.firstName} {reporter.secondName}</span>
-          <span> ({reporter.userName})</span>
+          <span> ({reporter.username})</span>
           <img
             className="card__avatar"
             height="20"
@@ -39,7 +39,7 @@ const CardInfoBlock = (props) => {
           <div className="card-info">
             <span>Assignee:</span>
             <span> {assignee.firstName} {assignee.secondName}</span>
-            <span> ({assignee.userName})</span>
+            <span> ({assignee.username})</span>
             <img
               className="card__avatar"
               height="20"

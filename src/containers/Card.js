@@ -224,7 +224,7 @@ Card.defaultProps = {
     creationDate: new Date(),
     priority: 1,
     assignee: {
-      userName: '',
+      username: '',
       avatar: ''
     }
   }
@@ -236,11 +236,11 @@ Card.propTypes = {
     title: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
     reporter: PropTypes.shape({
-      userName: PropTypes.string,
+      username: PropTypes.string,
       avatar: PropTypes.string
     }),
     assignee: PropTypes.shape({
-      userName: PropTypes.string,
+      username: PropTypes.string,
       avatar: PropTypes.string
     }),
     project: PropTypes.shape({

@@ -1,7 +1,7 @@
 [
   {
     "id": 0,
-    "userName": "admin",
+    "username": "admin",
     "firstName": "admin",
     "secondName": "",
     "gender": "Male",
@@ -10,7 +10,7 @@
     "role": "admin"
   }, {
     "id": 1,
-    "userName": "Lorem",
+    "username": "Lorem",
     "firstName": "Lorem",
     "secondName": "Ipsun",
     "gender": "Male",
@@ -19,7 +19,7 @@
     "role": "front-end developer"
   }, {
     "id": 2,
-    "userName": "blaster",
+    "username": "blaster",
     "firstName": "Ramona",
     "secondName": "Pierce",
     "gender": "Female",
@@ -28,7 +28,7 @@
     "role": "front-end developer"
   }, {
     "id": 3,
-    "userName": "Supertester",
+    "username": "Supertester",
     "firstName": "Nelson",
     "secondName": "May",
     "gender": "Male",
@@ -37,7 +37,7 @@
     "role": "tester"
   }, {
     "id": 4,
-    "userName": "smokey_ln",
+    "username": "smokey_ln",
     "firstName": "Mario",
     "secondName": "Warren",
     "gender": "Male",

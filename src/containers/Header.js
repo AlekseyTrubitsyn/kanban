@@ -9,7 +9,7 @@ import * as TicketsActions from '../actions/TicketsActions';
 
 const Header = (props) => {
   const { userData, logout, showSideMenu, createNewItem } = props;
-  const userName = userData.firstName + ' ' + userData.secondName.slice(0, 1);
+  const username = userData.firstName + ' ' + userData.secondName.slice(0, 1);
 
   return (
     <div className="header">
@@ -30,7 +30,7 @@ const Header = (props) => {
       </div>
       <div className="header-logo">Base board</div>
       <div className="header-right">
-        <span className="header__user-name">{userName}</span>
+        <span className="header__user-name">{username}</span>
         <button className="btn btn-primary header__logout" onClick={logout}>
           <FontAwesomeIcon icon="sign-out-alt" />
         </button>

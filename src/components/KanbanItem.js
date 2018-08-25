@@ -48,7 +48,7 @@ const KanbanItem = (props) => {
         {!_isEmpty(assignee) && (
           <Fragment>
             <span className="kanban-board-item__assignee-username">
-              {assignee && assignee.userName}
+              {assignee && assignee.username}
             </span>
             <div
               className="kanban-board-item__assignee-avatar"
@@ -57,7 +57,7 @@ const KanbanItem = (props) => {
             >
               <img
                 src={assigneeAvatar}
-                alt={assignee && assignee.userName}
+                alt={assignee && assignee.username}
                 width="30"
                 height="auto"
               />
@@ -92,7 +92,7 @@ const KanbanItem = (props) => {
         </div>
         <span>Created </span>
         <span> {moment(creationDate).fromNow()}</span>
-        <span> by {reporter.userName}</span>
+        <span> by {reporter.username}</span>
       </div>
       <button className="kanban-board-item__edit-button">
         <FontAwesomeIcon icon="info-circle"/>
@@ -110,11 +110,11 @@ KanbanItem.propTypes = {
       key: PropTypes.string.isRequired
     }).isRequired,
     reporter: PropTypes.shape({
-      userName: PropTypes.string.isRequired,
+      username: PropTypes.string.isRequired,
       avatar: PropTypes.string.isRequired
     }).isRequired,
     assignee: PropTypes.shape({
-      userName: PropTypes.string,
+      username: PropTypes.string,
       avatar: PropTypes.string
     }),
     deadline: PropTypes.oneOfType([
