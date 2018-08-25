@@ -2,47 +2,22 @@
   {
     "id": 0,
     "username": "admin",
-    "firstName": "admin",
-    "secondName": "",
-    "gender": "Male",
-    "avatar": "img/default-man.png",
-    "email": "",
-    "role": "admin"
+    "password": "1234"
   }, {
     "id": 1,
     "username": "Lorem",
-    "firstName": "Lorem",
-    "secondName": "Ipsun",
-    "gender": "Male",
-    "avatar": "img/default-man.png",
-    "email": "",
-    "role": "front-end developer"
+    "password": "******"
   }, {
     "id": 2,
     "username": "blaster",
-    "firstName": "Ramona",
-    "secondName": "Pierce",
-    "gender": "Female",
-    "avatar": "img/default-woman.png",
-    "email": "",
-    "role": "front-end developer"
+    "password": "qwerty"
   }, {
     "id": 3,
     "username": "Supertester",
-    "firstName": "Nelson",
-    "secondName": "May",
-    "gender": "Male",
-    "avatar": "img/default-man.png",
-    "email": "",
-    "role": "tester"
+    "password": "QWERTY"
   }, {
     "id": 4,
     "username": "smokey_ln",
-    "firstName": "Mario",
-    "secondName": "Warren",
-    "gender": "Male",
-    "avatar": "img/default-man.png",
-    "email": "",
-    "role": "team lead"
+    "password": "a1"
   }
 ]

@@ -23,12 +23,12 @@ import tickets from './defaultData/tickets.json';
  * @returns {array} array of tickets with actual information about project and users
  */
 const mapTicketsFromJSON = (arr, projectId) => {
-  const _users = getUsers();
+  const _usersData = getUsersData();
   const _projects = getProjects();
 
   let resultArr = arr.map(item => {
-    item.reporter = _users.filter(subitem => subitem.id === item.reporterId)[0] || {};
-    item.assignee = _users.filter(subitem => subitem.id === item.assigneeId)[0] || {};
+    item.reporter = _usersData.filter(subitem => subitem.id === item.reporterId)[0] || {};
+    item.assignee = _usersData.filter(subitem => subitem.id === item.assigneeId)[0] || {};
 
     item.project = _projects.filter(subitem => subitem.id === projectId)[0] || {};
 
@@ -46,7 +46,7 @@ const mapTicketsFromJSON = (arr, projectId) => {
 const getProjects = () => loadFromLS('projects') || projects;
 
 /**
- * Users getter
+ * Users login/password getter
  *
  * @returns {array} array of users
  */
@@ -181,12 +181,12 @@ const setTicket = (data) => {
  * @returns {object} that contains session key and user settings
  */
 const getUserSessionData = (userId, userData) => {
-  const _users = getUsers();
+  const _usersData = getUsersData();
 
   return {
     sessionKey: '_' + Math.random().toString(36).substr(2, 9),
     sessionTimeout: +(new Date()) + 2 * 3600 * 1000,
-    userData: userData || _users.find(item => item.id === userId)
+    userData: userData || _usersData.find(item => item.id === userId)
   }
 }
 
@@ -199,9 +199,9 @@ const getUserSessionData = (userId, userData) => {
  *                   if data is correct, or error message if is not
  */
 const loginUser = ({login, password}) => {
-  const _usersData = getUsersData();
+  const _users = getUsers();
 
-  const user = _usersData.find(item => item.username === login && item.password === password);
+  const user = _users.find(item => item.username === login && item.password === password);
   const u = _isEmpty(user) ? -1 : user.id;
 
   if (u !== -1) {
@@ -239,8 +239,8 @@ const createNewUser = (username, password) => {
     "role": "user"
   };
 
-  let setUsersDone = setUsers([..._users, newUser]);
-  let setUsersDataDone = setUsersData([..._usersData, { id, username, password }]);
+  let setUsersDone = setUsers([..._users, { id, username, password }]);
+  let setUsersDataDone = setUsersData([..._usersData, newUser]);
 
   if (setUsersDone && setUsersDataDone) {
     return id;
@@ -259,9 +259,9 @@ const createNewUser = (username, password) => {
  *                   if an error has occurred or user name is reserved
  */
 const registerUser = ({login, password}) => {
-  const _usersData = getUsersData();
+  const _users = getUsers();
 
-  const user = _usersData.find(item => item.username === login);
+  const user = _users.find(item => item.username === login);
   const u = _isEmpty(user) ? -1 : user.id;
 
   if (u !== -1) {
