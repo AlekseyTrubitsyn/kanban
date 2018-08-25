@@ -19,10 +19,11 @@ class LoginRegisterForm extends Component {
       isLoginState: true
     }
 
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleTabClick = this.handleTabClick.bind(this);
     this.handleError = this.handleError.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
+    this.handleRegSubmit = this.handleRegSubmit.bind(this);
   }
 
   handleTabClick(isLoginState) {
@@ -33,10 +34,16 @@ class LoginRegisterForm extends Component {
     this.props.hideTooltip();
   }
 
-  handleSubmit(login, password) {
+  handleLoginSubmit(login, password) {
     this.showMessage = false;
     this.props.hideTooltip();
     this.props.login(login, password);
+  }
+
+  handleRegSubmit(login, password) {
+    this.showMessage = false;
+    this.props.hideTooltip();
+    this.props.register(login, password);
   }
 
   handleError(elem, message) {
@@ -82,14 +89,14 @@ class LoginRegisterForm extends Component {
             {isLoginState
               ? <LoginTab
                   onInputClick={this.handleClick}
-                  handleSubmit={this.handleSubmit}
+                  handleSubmit={this.handleLoginSubmit}
                   handleError={this.handleError}
                   loginValue="admin"
                   passwordValue="1234"
                 />
               : <RegisterTab
                   onInputClick={this.handleClick}
-                  handleSubmit={this.handleSubmit}
+                  handleSubmit={this.handleRegSubmit}
                   handleError={this.handleError}
                 />
             }
@@ -110,6 +117,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     login: bindActionCreators(UserSettingsActions, dispatch).login,
+    register: bindActionCreators(UserSettingsActions, dispatch).register,
     showTooltip: bindActionCreators(TooltipActions, dispatch).showTooltip,
     hideTooltip: bindActionCreators(TooltipActions, dispatch).hideTooltip,
   }

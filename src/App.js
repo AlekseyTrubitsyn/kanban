@@ -6,13 +6,14 @@ import './assets/styles_css/App.css';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
-import { faSignOutAlt, faStar, faTimes, faTimesCircle, faInfoCircle, faChevronCircleLeft, faChevronRight, faChevronLeft, faBars, faPlus, faCheck, faPen, faExpand } from '@fortawesome/free-solid-svg-icons';
+import { faSignOutAlt, faStar, faTimes, faTimesCircle, faInfoCircle, faChevronCircleLeft, faChevronRight, faChevronLeft, faBars, faPlus, faCheck, faPen, faExpand, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
+import { faSquare } from  '@fortawesome/free-regular-svg-icons';
 
 import LoginRegisterForm from './containers/LoginRegisterForm';
 import KanbanBoard from './containers/KanbanBoard';
 import Tooltip from './containers/Tooltip';
 
-library.add(fab, faSignOutAlt, faStar, faTimes, faTimesCircle, faInfoCircle, faChevronCircleLeft, faChevronRight, faChevronLeft, faBars, faPlus, faCheck, faPen, faExpand);
+library.add(fab, faSignOutAlt, faStar, faTimes, faTimesCircle, faInfoCircle, faChevronCircleLeft, faChevronRight, faChevronLeft, faBars, faPlus, faCheck, faSquare, faPen, faExpand, faExclamationCircle);
 
 //TODO use session ID from cookies to skip login
 

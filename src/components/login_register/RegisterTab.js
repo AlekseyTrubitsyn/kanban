@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class RegisterTab extends Component {
   constructor(props) {
@@ -8,8 +9,7 @@ class RegisterTab extends Component {
       hideLoginLabel: false,
       hidePasswordLabel: false,
       hideSecondPasswordLabel: false,
-      hideEmailLabel: false,
-      hidePhoneLabel: false
+      agreed: false
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,12 +27,6 @@ class RegisterTab extends Component {
 
       case "secondPasswordField":
         return "hideSecondPasswordLabel";
-
-      case "emailField":
-        return "hideEmailLabel";
-
-      case "phoneField":
-        return "hidePhoneLabel";
 
       default:
         return null;
@@ -63,49 +57,61 @@ class RegisterTab extends Component {
     })
   }
 
+  handleUserAgreed(agreed) {
+    this.setState({
+      agreed
+    });
+  }
+
   handleSubmit() {
     const {
       loginField,
       passwordField,
       secondPasswordField,
-      emailField,
-      phoneField
+      termsAgreementCheckbox
     } = this.refs;
+
+    const { agreed } = this.state;
 
     const submitAvailable = loginField.value
                             && passwordField.value
                             && secondPasswordField.value
-                            && emailField.value
-                            && phoneField.value;
+                            && agreed
+                            && passwordField.value === secondPasswordField.value;
 
     if (submitAvailable) {
-      this.props.handleSubmit();
+      this.props.handleSubmit(loginField.value, passwordField.value);
+
     } else {
       let elem;
       let message;
 
       if (!loginField.value) {
         elem = loginField;
-        message = 'Login';
+        message = 'Login should not be empty';
+
       } else if (!passwordField.value) {
         elem = passwordField;
-        message = 'Password';
+        message = 'Password should not be empty';
+
       } else if (!secondPasswordField.value) {
         elem = secondPasswordField;
-        message = 'Second password';
-      } else if (!emailField.value) {
-        elem = emailField;
-        message = 'Email';
-      } else if (!phoneField.value) {
-        elem = phoneField;
-        message = 'Phone';
+        message = 'Second password should not be empty';
+
+      } else if (passwordField.value !== secondPasswordField.value) {
+        elem = secondPasswordField;
+        message = 'Password does not match the confirm password';
+
+      } else {
+        elem = termsAgreementCheckbox;
+        message = 'Agree, please :)';
       }
 
       this.setState({
         showMessage: true
       });
 
-      this.props.handleError(elem, message + ' field should not be empty');
+      this.props.handleError(elem, message);
     }
   }
 
@@ -115,17 +121,13 @@ class RegisterTab extends Component {
       hideLoginLabel,
       hidePasswordLabel,
       hideSecondPasswordLabel,
-      hideEmailLabel,
-      hidePhoneLabel
+      agreed
      } = this.state;
 
     const loginSpanClass = "input-label" + (hideLoginLabel ? " input-label--up" : "");
     const passwordSpanClass =  "input-label" + (hidePasswordLabel ? " input-label--up" : "")
     const repeatPasswordSpanClass =  "input-label" + (hideSecondPasswordLabel ? " input-label--up" : "");
-    const emailSpanClass =  "input-label" + (hideEmailLabel ? " input-label--up" : "")
-    const phoneSpanClass =  "input-label" + (hidePhoneLabel ? " input-label--up" : "")
 
-    //TODO fields validation, set flag to phone field
     return (
       <div className="register-tab" id="register-tab">
         <label className="input-container">
@@ -161,29 +163,21 @@ class RegisterTab extends Component {
           />
           <span className={repeatPasswordSpanClass}>...and again</span>
         </label>
-        <label className="input-container">
+        <p className="form-text-label">
+          <span className="form-text-label__aside">
+            <FontAwesomeIcon icon="exclamation-circle"/>
+          </span>
+          <span>It's just a frontend demo without server, data is not collecting anywhere but your browser's storage... So type anything!</span></p>
+        <label className="checkbox-container" ref="termsAgreementCheckbox">
+          <span className="checkbox-container__aside">
+            <FontAwesomeIcon icon={agreed ? "check" : ["far", "square"]}/>
+          </span>
+          <span> Agree</span>
           <input
-            id="emailField"
-            ref="emailField"
-            type="text"
-            onClick={onInputClick}
-            onFocus={this.handleInputFocus}
-            onBlur={this.handleInputBlur}
-          />
-          <span className={emailSpanClass}>E-mail</span>
+            type="checkbox"
+            value={agreed}
+            onClick={(e) => this.handleUserAgreed(e.target.checked)}/>
         </label>
-        <label className="input-container">
-          <input
-            id="phoneField"
-            ref="phoneField"
-            type="text"
-            onClick={onInputClick}
-            onFocus={this.handleInputFocus}
-            onBlur={this.handleInputBlur}
-          />
-          <span className={phoneSpanClass}>Phone</span>
-        </label>
-        <p>It's just a frontend demo without server, data is not collecting anywhere, so type anything.</p>
         <button
           className="btn btn-primary login-form__submit"
           onClick={this.handleSubmit}

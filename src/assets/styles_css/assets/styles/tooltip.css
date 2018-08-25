@@ -8,7 +8,8 @@
   line-height: 1.5;
   border-radius: 5px;
   z-index: 150;
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3); }
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  animation: 0.5s fadeLeft; }
   .tooltip .tooltip__text {
     overflow: hidden;
     word-wrap: break-word; }
@@ -35,3 +36,12 @@
     top: -6px;
     left: 50%;
     transform: translateX(-50%) rotate(45deg); }
+
+@keyframes fadeLeft {
+  from {
+    transform: translate(20%, -50%);
+    opacity: 0.3; }
+  40% {
+    transform: translate(-2%, -50%); }
+  50% {
+    transform: translate(2%, -50%); } }

@@ -226,13 +226,43 @@ textarea {
 
 .login-form {
   position: absolute;
-  width: 300px;
+  width: 320px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background: rgba(245, 239, 237, 0.6);
   border-radius: 5px;
   padding: 0 20px 20px; }
+  .login-form .checkbox-container {
+    display: flex;
+    background: rgba(245, 239, 237, 0.8);
+    margin-top: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    line-height: 2.5em;
+    overflow: hidden; }
+    .login-form .checkbox-container .checkbox-container__aside {
+      padding: 0 15px;
+      background: #f5efed;
+      color: #064789;
+      display: inline-block;
+      margin-right: 10px;
+      font-size: 1.5em;
+      width: 50px; }
+  .login-form .form-text-label {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    padding-right: 20px;
+    background: #ffd866;
+    margin-top: 20px;
+    border-radius: 5px;
+    color: #30323d;
+    line-height: 1.5; }
+    .login-form .form-text-label .form-text-label__aside {
+      margin-right: 15px;
+      color: #d8315b;
+      font-size: 2em; }
 
 .login-form__tabs {
   display: flex;
@@ -286,7 +316,7 @@ textarea {
     color: #4d5061;
     transition: 0.3s all ease-out; }
   .input-container .input-label--up {
-    color: #0860ba;
+    color: #064789;
     top: 0;
     font-size: 0.8em; }
 
@@ -836,7 +866,8 @@ textarea {
   line-height: 1.5;
   border-radius: 5px;
   z-index: 150;
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3); }
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  animation: 0.5s fadeLeft; }
   .tooltip .tooltip__text {
     overflow: hidden;
     word-wrap: break-word; }
@@ -863,6 +894,15 @@ textarea {
     top: -6px;
     left: 50%;
     transform: translateX(-50%) rotate(45deg); }
+
+@keyframes fadeLeft {
+  from {
+    transform: translate(20%, -50%);
+    opacity: 0.3; }
+  40% {
+    transform: translate(-2%, -50%); }
+  50% {
+    transform: translate(2%, -50%); } }
 
 * {
   box-sizing: border-box; }
