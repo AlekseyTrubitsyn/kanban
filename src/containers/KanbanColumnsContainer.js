@@ -3,6 +3,8 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
 import { DragDropContext } from 'react-beautiful-dnd';
 
+import _isEmpty from 'lodash/isEmpty';
+
 import * as TicketsActions from '../actions/TicketsActions';
 
 import KanbanColumn from '../components/KanbanColumn';
@@ -12,7 +14,8 @@ class KanbanBoardContainer extends Component {
     super(props);
 
     this.state = {
-      selectedAssigneeId: -1
+      selectedAssigneeId: -1,
+      assigneeFilter: 'all'
     }
 
     this.onDragEnd = this.onDragEnd.bind(this);
@@ -58,16 +61,42 @@ class KanbanBoardContainer extends Component {
     })
   }
 
+  static filterColumn(f, userId, o) {
+    const filterUser = (item) => item.assigneeId === userId;
+    const filterFree = (item) => _isEmpty(item.assignee);
+    const filterDeadline = (item) => item.deadline && new Date(item.deadline) < new Date();
+
+    const filter = (o) => {
+      switch (f) {
+        case 'my':
+          return { ...o, values: o.values.filter(filterUser) };
+        case 'free':
+          return { ...o, values: o.values.filter(filterFree) };
+        case 'deadline':
+          return { ...o, values: o.values.filter(filterDeadline) };
+        default:
+          return o;
+      }
+    }
+
+    return filter(o);
+  }
+
   render() {
     const {
-      discuss,
-      toDo,
-      inProgress,
-      testing,
-      done,
-      archive,
-      isFetching
-    } = this.props;
+      isFetching,
+      userId,
+      assigneeFilter
+     } = this.props;
+
+    const filter = KanbanBoardContainer.filterColumn.bind(null, assigneeFilter, userId);
+
+    const discuss = filter(this.props.discuss);
+    const toDo = filter(this.props.toDo);
+    const inProgress = filter(this.props.inProgress);
+    const testing = filter(this.props.testing);
+    const done = filter(this.props.done);
+    const archive = filter(this.props.archive);
 
     const { selectedAssigneeId } = this.state;
 
@@ -154,7 +183,9 @@ function mapStateToProps(state) {
     inProgress: state.tickets.inProgress,
     testing: state.tickets.testing,
     done: state.tickets.done,
-    archive: state.tickets.archive
+    archive: state.tickets.archive,
+    assigneeFilter: state.tickets.assigneeFilter,
+    userId: state.userSettings.userData.id
   }
 }
 

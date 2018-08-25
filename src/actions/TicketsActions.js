@@ -8,7 +8,8 @@ import {
   CREATE_NEW_ITEM,
   OPEN_ITEM_CARD,
   CLOSE_ITEM_CARD,
-  REQUEST_TICKET_SAVE
+  REQUEST_TICKET_SAVE,
+  CHANGE_ASSIGNEE_FILTER
 } from '../constants/ActionTypes';
 
 import { axiosWrapper } from '../utilities/axiosWrapper';
@@ -135,4 +136,11 @@ export const resetTickets = () => {
               });
             });
     }
+}
+
+export const changeAssigneeFilter = (filter) => {
+  return {
+    type: CHANGE_ASSIGNEE_FILTER,
+    filter
+  }
 }

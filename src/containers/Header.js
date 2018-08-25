@@ -8,10 +8,24 @@ import * as SideMenuActions from '../actions/SideMenuActions';
 import * as TicketsActions from '../actions/TicketsActions';
 
 const Header = (props) => {
-  const { userData, logout, showSideMenu, createNewItem } = props;
-  const username = userData.firstName 
+  const {
+    userData,
+    logout,
+    filters,
+    filter,
+    showSideMenu,
+    createNewItem,
+    changeAssigneeFilter
+  } = props;
+
+  const username = userData.firstName
                     ? (userData.firstName + ' ' + userData.secondName.slice(0, 1))
                     : userData.username;
+
+  const filterId = filters.indexOf(filter);
+  const filtersContainerClass = "header__filters header__filters--" + (filterId === -1 ? 0 : filterId);
+  const filtersClass = "header-filters__item";
+  const filtersClassSelected = "header-filters__item header-filters__item--selected";
 
   return (
     <div className="header">
@@ -28,7 +42,17 @@ const Header = (props) => {
         >
           <FontAwesomeIcon icon="plus" />
         </button>
-        {/* <input className="header__search" type="text" placeholder="Search"/> */}
+        <div
+          className={filtersContainerClass}
+          onClick={(e) => changeAssigneeFilter(e.target.value)}
+        >
+          {filters.map(item => (
+            <label className={filter === item ? filtersClassSelected : filtersClass}>
+              <input type="radio" name="assigneeFilter" value={item}/>
+              <span>{item}</span>
+            </label>
+          ))}
+        </div>
       </div>
       <div className="header-logo">Base board</div>
       <div className="header-right">
@@ -43,7 +67,9 @@ const Header = (props) => {
 
 function mapStateToProps(state) {
   return {
-    userData: state.userSettings.userData
+    userData: state.userSettings.userData,
+    filters: state.tickets.assigneeFilters,
+    filter: state.tickets.assigneeFilter
   }
 }
 
@@ -51,6 +77,7 @@ function mapDispatchToProps(dispatch) {
   return {
     logout: bindActionCreators(UserSettingsActions, dispatch).logout,
     showSideMenu: bindActionCreators(SideMenuActions, dispatch).showSideMenu,
+    changeAssigneeFilter: bindActionCreators(TicketsActions, dispatch).changeAssigneeFilter,
     createNewItem: bindActionCreators(TicketsActions, dispatch).createNewItem
   }
 }
