@@ -32,7 +32,8 @@
     margin-top: 20px;
     border-radius: 5px;
     color: #30323d;
-    line-height: 1.5; }
+    line-height: 1.5;
+    font-size: 12px; }
     .login-form .form-text-label .form-text-label__aside {
       margin-right: 15px;
       color: #d8315b;

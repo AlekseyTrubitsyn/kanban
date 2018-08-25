@@ -9,7 +9,9 @@ import * as TicketsActions from '../actions/TicketsActions';
 
 const Header = (props) => {
   const { userData, logout, showSideMenu, createNewItem } = props;
-  const username = userData.firstName + ' ' + userData.secondName.slice(0, 1);
+  const username = userData.firstName 
+                    ? (userData.firstName + ' ' + userData.secondName.slice(0, 1))
+                    : userData.username;
 
   return (
     <div className="header">

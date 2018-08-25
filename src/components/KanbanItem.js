@@ -81,10 +81,10 @@ const KanbanItem = (props) => {
         }
       </div>
       <p className="kanban-board-item__title">
-        {title}
+        {title.length > 35 ? title.slice(0, 32) + '...' : title}
       </p>
       <p className="kanban-board-item__text">
-        {text}
+        {text.length > 35 ? text.slice(0, 32) + '...' : text}
       </p>
       <div className="kanban-board-item__footer">
         <div className="kanban-board-item__priority-stars">

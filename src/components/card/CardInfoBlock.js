@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import _isEmpty from 'lodash/isEmpty';
 import moment from 'moment';
 
@@ -37,16 +37,23 @@ const CardInfoBlock = (props) => {
       {!_isEmpty(assignee)
         ? (
           <div className="card-info">
-            <span>Assignee:</span>
-            <span> {assignee.firstName} {assignee.secondName}</span>
-            <span> ({assignee.username})</span>
-            <img
-              className="card__avatar"
-              height="20"
-              width="auto"
-              src={assignee.avatar}
-              alt="assignee"
-            />
+            <span>Assignee: </span>
+            {assignee.firstName && assignee.secondName
+              ? <Fragment>
+                  <span>{assignee.firstName} {assignee.secondName}</span>
+                  <span> ({assignee.username})</span>
+                </Fragment>
+              : <span>{assignee.username}</span>
+            }
+            {assignee.avatar && (
+              <img
+                className="card__avatar"
+                height="20"
+                width="auto"
+                src={assignee.avatar}
+                alt="assignee"
+              />
+            )}
           </div>)
         : (
           <div className="card-info">No assignee</div>

@@ -36,15 +36,7 @@
       }
     ],
     "subtasksCount": 3,
-    "comments": [
-      {
-        "author": "anon",
-        "created": "2018-08-12T19:44:36.918Z",
-        "edited": "2018-08-12T19:44:51.215Z",
-        "text": "\"Mist enveloped the ship three hours out from port.\" - whaat?"
-      }
-    ],
-    "commentsCount": 1
+    "comments": []
   }, {
     "id": 3,
     "title": "Example 3",
@@ -83,7 +75,15 @@
     "statusName": "inProgress",
     "priority": 1,
     "subtasks": [],
-    "comments": []
+    "comments": [
+      {
+        "author": "anon",
+        "created": "2018-08-12T19:44:36.918Z",
+        "edited": "2018-08-12T19:44:51.215Z",
+        "text": "\"Mist enveloped the ship three hours out from port.\" - whaat?"
+      }
+    ],
+    "commentsCount": 1
   }, {
     "id": 6,
     "title": "Example 6",
