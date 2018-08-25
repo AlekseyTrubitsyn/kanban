@@ -46,14 +46,16 @@ const KanbanItem = (props) => {
           {'#' + id}
         </span>
         {!_isEmpty(assignee) && (
-          <Fragment>
+          <div
+            className="kanban-board-item__assignee"
+            onMouseOver={() => onAvatarOver((assignee && assignee.id) || -1)}
+            onMouseLeave={() => onAvatarOver(-1)}
+          >
             <span className="kanban-board-item__assignee-username">
               {assignee && assignee.username}
             </span>
             <div
               className="kanban-board-item__assignee-avatar"
-              onMouseOver={() => onAvatarOver((assignee && assignee.id) || -1)}
-              onMouseLeave={() => onAvatarOver(-1)}
             >
               <img
                 src={assigneeAvatar}
@@ -62,7 +64,7 @@ const KanbanItem = (props) => {
                 height="auto"
               />
             </div>
-          </Fragment>
+          </div>
         )}
       </div>
       <div className={deadlineCN}>

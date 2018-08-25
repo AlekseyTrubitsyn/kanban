@@ -172,15 +172,33 @@ $border-radius: 5px;
     }
   }
 
+  .kanban-board-item__assignee {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 10px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+
+    &:hover {
+      background: rgba($i-white, .3);
+      border: 1px solid $i-white;
+    }
+  }
+
   .kanban-board-item__assignee-avatar {
-    width: 31px;
-    height: 31px;
+    width: 30px;
+    height: 30px;
     background: white;
     border-radius: 50%;
     overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    right: -1px;
   }
 
   .kanban-board-item__assignee-username {
