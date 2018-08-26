@@ -209,7 +209,7 @@ const loginUser = ({login, password}) => {
   } else {
     return {
       errorKey: 1,
-      errorText: 'Wrong login or password'
+      errorText: 'Wrong login or password. Try \'admin\' + \'1234\''
     }
   }
 }

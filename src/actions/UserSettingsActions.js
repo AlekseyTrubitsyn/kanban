@@ -7,6 +7,7 @@ import {
   RECEIVE_USER_REGISTRATION_ERROR
 } from '../constants/ActionTypes';
 
+import { toastError, toastInfo } from '../utilities/toastify';
 import { axiosWrapper } from '../utilities/axiosWrapper';
 import { setCookie } from '../utilities/cookies';
 
@@ -30,10 +31,14 @@ export const register = (login, password) => {
             })
             .then(response => {
               if (response.errorKey) {
+                const message = response.errorText || 'Register error';
+
                 dispatch({
                   type: RECEIVE_USER_REGISTRATION_ERROR,
-                  payload: response.errorText || 'Register error'
+                  payload: message
                 });
+
+                toastError(message);
 
                 return;
               }
@@ -51,10 +56,14 @@ export const register = (login, password) => {
               });
             })
             .catch(e => {
+              const message = e || 'Register error';
+
               dispatch({
                 type: RECEIVE_USER_REGISTRATION_ERROR,
-                payload: e
+                payload: message
               });
+
+              toastError(message);
             });
   }
 }
@@ -77,10 +86,14 @@ export const login = (login, password) => {
             })
             .then(response => {
               if (response.errorKey) {
+                const message = response.errorText || 'Login error';
+
                 dispatch({
                   type: RECEIVE_USER_LOGIN_ERROR,
-                  payload: response.errorText || 'Login error'
+                  payload: message
                 });
+
+                toastError(message);
 
                 return;
               }
@@ -98,10 +111,14 @@ export const login = (login, password) => {
               });
             })
             .catch(e => {
+              const message = e || 'Login error';
+
               dispatch({
                 type: RECEIVE_USER_LOGIN_ERROR,
                 payload: e
               });
+
+              toastError(message);
             });
   }
 }
@@ -110,6 +127,8 @@ export const logout = () => {
   setCookie('login_session', sessionKey, {
     expires: -1
   });
+
+  toastInfo('Logout succeed');
 
   return {
     type: RESET_USER_LOGIN

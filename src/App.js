@@ -1,8 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import 'react-toastify/dist/ReactToastify.min.css'
 import './assets/styles_css/normalize.css';
 import './assets/styles_css/App.css';
+
+import { ToastContainer } from 'react-toastify';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
@@ -22,6 +25,17 @@ const App = (props) => {
 
   return (
     <div className="App">
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnVisibilityChange
+        draggable
+        pauseOnHover
+      />
       {showLoginForm
         ? <LoginRegisterForm />
         : <KanbanBoard />

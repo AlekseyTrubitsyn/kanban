@@ -13,6 +13,7 @@ import {
 } from '../constants/ActionTypes';
 
 import { axiosWrapper } from '../utilities/axiosWrapper';
+import { toastError, toastInfo } from '../utilities/toastify';
 
 export const createNewItem = (userData) => {
   return {
@@ -46,6 +47,8 @@ export const saveItem = (payload) => {
               data: payload
             })
             .then(response => {
+              toastInfo('Saved');
+
               dispatch(getTickets());
             })
             .catch(e => {
