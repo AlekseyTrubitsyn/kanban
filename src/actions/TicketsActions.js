@@ -56,6 +56,8 @@ export const saveItem = (payload) => {
                 type: RECEIVE_TICKETS_ERROR,
                 payload: e
               });
+
+              toastError(e);
             });
   }
 }
@@ -89,6 +91,8 @@ export const setTickets = (payload) => {
                 type: RECEIVE_TICKETS_ERROR,
                 payload: e
               });
+
+              toastError(e);
             });
   }
 }
@@ -117,16 +121,20 @@ export const getTickets = (projectId = 1) => {
                 type: RECEIVE_TICKETS_ERROR,
                 payload: e
               });
+
+              toastError(e);
             });
   }
 }
 
 export const resetTickets = () => {
+  console.log('resetTickets');
   return (dispatch) => {
     dispatch(requestTickets);
 
     return axiosWrapper({ url: '/DefaultTickets' })
             .then(response => {
+              console.log(response);
               dispatch({
                 type: RESET_TICKETS,
                 payload: response
@@ -137,6 +145,8 @@ export const resetTickets = () => {
                 type: RECEIVE_TICKETS_ERROR,
                 payload: e
               });
+
+              toastError(e);
             });
     }
 }

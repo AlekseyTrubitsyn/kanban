@@ -47,7 +47,7 @@ const Header = (props) => {
           onClick={(e) => changeAssigneeFilter(e.target.value)}
         >
           {filters.map(item => (
-            <label className={filter === item ? filtersClassSelected : filtersClass}>
+            <label key={item} className={filter === item ? filtersClassSelected : filtersClass}>
               <input type="radio" name="assigneeFilter" value={item}/>
               <span>{item}</span>
             </label>

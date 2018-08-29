@@ -246,7 +246,7 @@ const createNewUser = (username, password) => {
     return id;
   } else {
     return -1;
-  };
+  }
 }
 
 /**
