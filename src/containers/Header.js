@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -81,4 +82,19 @@ function mapDispatchToProps(dispatch) {
     createNewItem: bindActionCreators(TicketsActions, dispatch).createNewItem
   }
 }
+
+Header.propTypes = {
+  userData: PropTypes.shape({
+    username: PropTypes.string.isRequired,
+    firstName: PropTypes.string,
+    secondName: PropTypes.string
+  }),
+  filters: PropTypes.array.isRequired,
+  filter: PropTypes.string,
+  logout: PropTypes.func.isRequired,
+  showSideMenu: PropTypes.func.isRequired,
+  createNewItem: PropTypes.func.isRequired,
+  changeAssigneeFilter: PropTypes.func.isRequired
+}
+
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

@@ -1,8 +1,9 @@
 import React, {Component, Fragment} from 'react';
+import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
 
-import KanbanColumnsContainer from './KanbanColumnsContainer';
+import KanbanBoardContainer from './KanbanBoardContainer';
 import Header from './Header';
 import SideMenu from './SideMenu';
 import Card from './Card';
@@ -28,17 +29,15 @@ class KanbanBoard extends Component {
         {showCardModal && <Card/>}
         <SideMenu />
         <Header />
-        <KanbanColumnsContainer />
+        <KanbanBoardContainer />
       </Fragment>
     )
   }
 }
 
 function mapStateToProps(state) {
-
   return {
-    showCardModal: state.tickets.showCardModal,
-    showSideMenu: state.sideMenu.show
+    showCardModal: state.tickets.showCardModal
   }
 }
 
@@ -47,6 +46,12 @@ function mapDispatchToProps(dispatch) {
     getProjects: bindActionCreators(ProjectsActions, dispatch).getProjects,
     getTickets: bindActionCreators(TicketsActions, dispatch).getTickets,
   }
+}
+
+KanbanBoard.propTypes = {
+  showCardModal: PropTypes.bool,
+  getProjects: PropTypes.func.isRequired,
+  getTickets: PropTypes.func.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(KanbanBoard);

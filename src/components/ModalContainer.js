@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const ModalContainer = ({children, onCloseClick}) => (
@@ -15,5 +16,10 @@ const ModalContainer = ({children, onCloseClick}) => (
     <div className="overlay" onClick={onCloseClick}/>
   </Fragment>
 );
+
+ModalContainer.propTypes = {
+  children: PropTypes.object.isRequired,
+  onCloseClick: PropTypes.func.isRequired
+}
 
 export default ModalContainer;

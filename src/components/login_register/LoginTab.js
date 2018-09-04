@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class LoginTab extends Component {
   constructor(props) {
@@ -110,6 +111,14 @@ class LoginTab extends Component {
       </div>
     )
   }
+}
+
+LoginTab.propTypes = {
+  loginValue: PropTypes.string.isRequired,
+  passwordValue: PropTypes.string.isRequired,
+  onInputClick: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  handleError: PropTypes.func.isRequired
 }
 
 export default LoginTab;

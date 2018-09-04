@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
 
@@ -122,4 +123,13 @@ const mapDispatchToProps = (dispatch) => {
     hideTooltip: bindActionCreators(TooltipActions, dispatch).hideTooltip,
   }
 }
+
+LoginRegisterForm.propTypes = {
+  isFetching: PropTypes.bool.isRequired,
+  login: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
+  showTooltip: PropTypes.func.isRequired,
+  hideTooltip: PropTypes.func.isRequired
+}
+
 export default connect(mapStateToProps, mapDispatchToProps)(LoginRegisterForm);

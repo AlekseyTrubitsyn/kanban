@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class CommentsCreate extends Component {
@@ -50,6 +51,11 @@ class CommentsCreate extends Component {
       </div>
     )
   }
+}
+
+CommentsCreate.propTypes = {
+  placeholder: PropTypes.string,
+  onCreate: PropTypes.func.isRequired
 }
 
 export default CommentsCreate;

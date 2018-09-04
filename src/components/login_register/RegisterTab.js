@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class RegisterTab extends Component {
@@ -185,6 +186,12 @@ class RegisterTab extends Component {
       </div>
     )
   }
+}
+
+RegisterTab.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  handleError: PropTypes.func.isRequired,
+  onInputClick: PropTypes.func.isRequired  
 }
 
 export default RegisterTab;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const StorageButtons = ({ onSaveClick, onLoadClick, onResetClick }) => (
   <div style={{'position': 'absolute'}}>
@@ -13,5 +14,11 @@ const StorageButtons = ({ onSaveClick, onLoadClick, onResetClick }) => (
       onClick={onResetClick}>Reset</button>
   </div>
 );
+
+StorageButtons.propTypes = {
+  onSaveClick: PropTypes.func.isRequired,
+  onLoadClick: PropTypes.func.isRequired,
+  onResetClick: PropTypes.func.isRequired
+}
 
 export default StorageButtons;

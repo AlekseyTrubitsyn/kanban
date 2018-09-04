@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const PrioritySelector = ({ value, onChange }) => {
@@ -17,6 +18,11 @@ const PrioritySelector = ({ value, onChange }) => {
       )}
     </div>
   )
+}
+
+PrioritySelector.propTypes = {
+  value: PropTypes.number.isRequired,
+  onChange: PropTypes.func.isRequired
 }
 
 export default PrioritySelector;

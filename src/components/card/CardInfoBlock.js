@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import _isEmpty from 'lodash/isEmpty';
 import moment from 'moment';
 
@@ -63,5 +64,27 @@ const CardInfoBlock = (props) => {
     </div>
   );
 };
+
+CardInfoBlock.propTypes = {
+  id: PropTypes.number,
+  project: PropTypes.shape({
+    name: PropTypes.string,
+    key: PropTypes.string
+  }),
+  reporter: PropTypes.shape({
+    username: PropTypes.string.isRequired,
+    secondName: PropTypes.string,
+    firstName: PropTypes.string
+  }),
+  creationDate: PropTypes.oneOfType([
+    PropTypes.instanceOf(Date),
+    PropTypes.instanceOf(moment),
+    PropTypes.string
+  ]),
+  assignee: PropTypes.shape({
+    username: PropTypes.string,
+    avatar: PropTypes.string
+  }),
+}
 
 export default CardInfoBlock;

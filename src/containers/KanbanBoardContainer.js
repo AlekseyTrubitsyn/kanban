@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
 import { DragDropContext } from 'react-beautiful-dnd';
@@ -194,6 +195,38 @@ function mapDispatchToProps(dispatch) {
     moveTicket: bindActionCreators(TicketsActions, dispatch).moveTicket,
     openItemCard: bindActionCreators(TicketsActions, dispatch).openItemCard,
   }
+}
+
+KanbanBoardContainer.propTypes = {
+  isFetching: PropTypes.bool.isRequired,
+  discuss: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    values: PropTypes.array
+  }).isRequired,
+  toDo: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    values: PropTypes.array
+  }).isRequired,
+  inProgress: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    values: PropTypes.array
+  }).isRequired,
+  testing: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    values: PropTypes.array
+  }).isRequired,
+  done: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    values: PropTypes.array
+  }).isRequired,
+  archive: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    values: PropTypes.array
+  }).isRequired,
+  assigneeFilter: PropTypes.string.isRequired,
+  userId: PropTypes.number.isRequired,
+  moveTicket: PropTypes.func.isRequired,
+  openItemCard: PropTypes.func.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(KanbanBoardContainer);

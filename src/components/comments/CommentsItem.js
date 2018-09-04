@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import PropTypes from 'prop-types';
 import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -57,6 +58,20 @@ const CommentsItem = (props) => {
       }
     </div>
   );
+}
+
+CommentsItem.propTypes = {
+  item: PropTypes.shape({
+    text: PropTypes.string,
+    edited: PropTypes.object,
+    created: PropTypes.object,
+    author: PropTypes.string
+  }).isRequired,
+  focused: PropTypes.bool,
+  onTextClick: PropTypes.func.isRequired,
+  onItemBlured: PropTypes.func.isRequired,
+  onTextChange: PropTypes.func.isRequired,
+  onDeleteClick: PropTypes.func.isRequired
 }
 
 export default CommentsItem;
