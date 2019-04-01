@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import 'react-toastify/dist/ReactToastify.min.css'
-import 'normalize.css';
 import './App.css';
 
 import { ToastContainer } from 'react-toastify';
