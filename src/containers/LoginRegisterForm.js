@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
 
 import * as UserSettingsActions from '../actions/UserSettingsActions';
-import * as TooltipActions from '../actions/TooltipActions';
+import * as TooltipsActions from '../actions/TooltipsActions';
 
 import Loader from '../components/Loader';
 import LoginTab from '../components/login_register/LoginTab';
@@ -17,54 +17,44 @@ class LoginRegisterForm extends Component {
     super(props);
 
     this.state = {
-      isLoginState: true
+      isLoginTab: true
     }
 
     this.handleTabClick = this.handleTabClick.bind(this);
-    this.handleError = this.handleError.bind(this);
-    this.handleClick = this.handleClick.bind(this);
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
     this.handleRegSubmit = this.handleRegSubmit.bind(this);
+    this.hideTooltips = this.hideTooltips.bind(this);
   }
 
-  handleTabClick(isLoginState) {
+  handleTabClick(isLoginTab) {
     this.setState({
-      isLoginState
+      isLoginTab
     });
 
-    this.props.hideTooltip();
+    this.props.hideTooltips();
   }
 
-  handleLoginSubmit(login, password) {
-    this.showMessage = false;
-    this.props.hideTooltip();
-    this.props.login(login, password);
+  handleLoginSubmit(data) {
+    this.props.login(data.login, data.password);
   }
 
-  handleRegSubmit(login, password) {
-    this.showMessage = false;
-    this.props.hideTooltip();
-    this.props.register(login, password);
+  handleRegSubmit(data) {
+    this.props.register(data.login, data.password);
   }
 
-  handleError(elem, message) {
-    this.showMessage = true;
-    this.props.showTooltip({elem, message})
-  }
+  hideTooltips = () => {
+    if (!this.props.tooltipsCount) return;
 
-  handleClick() {
-    if (this.showMessage) {
-      this.showMessage = false;
-      this.props.hideTooltip();
-    }
+    this.props.hideTooltips();
   }
 
   render() {
-    const { isFetching } = this.props;
-    const { isLoginState } = this.state;
-
-    const loginButtonClass = "login-form__tab" + (isLoginState ? " login-form__tab--selected" : "");
-    const registerButtonClass = "login-form__tab" + (!isLoginState ? " login-form__tab--selected" : "");
+    const { 
+      isFetching,
+      showTooltips
+    } = this.props;
+    
+    const { isLoginTab } = this.state;
 
     if (isFetching) return <Loader />;
 
@@ -78,29 +68,30 @@ class LoginRegisterForm extends Component {
         <div className="login-form">
           <div className="login-form__tabs">
             <button
-              className={loginButtonClass}
+              className={`login-form__tab ${isLoginTab ? 'login-form__tab--selected' : ''}`.trim()}
               onClick={() => this.handleTabClick(true)}
             >Login</button>
             <button
-              className={registerButtonClass}
+              className={`login-form__tab ${isLoginTab ? '' : 'login-form__tab--selected'}`.trim()}
               onClick={() => this.handleTabClick(false)}
             >Register</button>
           </div>
           <div className="login-register-container" id="loginRegisterContainer" ref="loginRegisterContainer">
-            {isLoginState
-              ? <LoginTab
-                  onInputClick={this.handleClick}
-                  handleSubmit={this.handleLoginSubmit}
-                  handleError={this.handleError}
-                  loginValue="admin"
-                  passwordValue="1234"
-                />
-              : <RegisterTab
-                  onInputClick={this.handleClick}
-                  handleSubmit={this.handleRegSubmit}
-                  handleError={this.handleError}
-                />
-            }
+            {isLoginTab ? (
+              <LoginTab
+                showTooltips={showTooltips}
+                hideTooltips={this.hideTooltips}
+                onSubmit={this.handleLoginSubmit}
+                defaultLogin="admin"
+                defaultPassword="1234"
+              />
+            ) : (
+              <RegisterTab
+                showTooltips={showTooltips}
+                hideTooltips={this.hideTooltips}
+                onSubmit={this.handleRegSubmit}
+              />
+            )}
           </div>
         </div>
       </Fragment>
@@ -111,16 +102,20 @@ class LoginRegisterForm extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    isFetching: state.userSettings.isFetching
+    isFetching: state.userSettings.isFetching,
+    tooltipsCount: state.tooltips.count
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
+  const bindedUserSettingsActions = bindActionCreators(UserSettingsActions, dispatch);
+  const bindedTooltipActions = bindActionCreators(TooltipsActions, dispatch);
+
   return {
-    login: bindActionCreators(UserSettingsActions, dispatch).login,
-    register: bindActionCreators(UserSettingsActions, dispatch).register,
-    showTooltip: bindActionCreators(TooltipActions, dispatch).showTooltip,
-    hideTooltip: bindActionCreators(TooltipActions, dispatch).hideTooltip,
+    login: bindedUserSettingsActions.login,
+    register: bindedUserSettingsActions.register,
+    showTooltips: bindedTooltipActions.showTooltips,
+    hideTooltips: bindedTooltipActions.hideTooltips,
   }
 }
 
@@ -128,8 +123,9 @@ LoginRegisterForm.propTypes = {
   isFetching: PropTypes.bool.isRequired,
   login: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
-  showTooltip: PropTypes.func.isRequired,
-  hideTooltip: PropTypes.func.isRequired
+  showTooltips: PropTypes.func.isRequired,
+  hideTooltips: PropTypes.func.isRequired,
+  tooltipsCount: PropTypes.number
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginRegisterForm);

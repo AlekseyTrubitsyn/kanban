@@ -5,120 +5,191 @@ class LoginTab extends Component {
   constructor(props) {
     super(props);
 
-    const { passwordValue,  loginValue } = props;
-
     this.state = {
-      hideLoginLabel: !!loginValue,
-      hidePasswordLabel: !!passwordValue,
-      submitAvailable: false,
-      showMessage: false,
-      message: '',
-      elem: null
+      liftLoginLabel: !!props.defaultLogin.length,
+      liftPasswordLabel: !!props.defaultPassword.length
     }
 
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.invalidFieldsIds = [];
+    this.loginFieldRef = React.createRef();
+    this.passwordFieldRef = React.createRef();
+
+    this.fields = {
+      loginField: {
+        ref: this.loginFieldRef,
+        errorMessage: 'Login field should not be empty',
+        check: () => !!this.loginFieldRef.current.value.length,
+        getValueToSubmit: () => ({
+          login: this.loginFieldRef.current.value || '',
+        })
+      },
+      passwordField: {
+        ref: this.passwordFieldRef,
+        errorMessage: 'Password must be at least 4 symbol',
+        check: () => this.passwordFieldRef.current.value.length > 3,
+        getValueToSubmit: () => ({
+          password: this.passwordFieldRef.current.value || '',
+        })
+      }
+    }
+
+    this.getInvalidFields = this.getInvalidFields.bind(this);
+    this.updateTooltips = this.updateTooltips.bind(this);
+
     this.handleInputFocus = this.handleInputFocus.bind(this);
     this.handleInputBlur = this.handleInputBlur.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleInputFocus(e) {
-    const k = e.target.id === 'loginField' ? 'hideLoginLabel' : 'hidePasswordLabel';
+  static getLabelKey(inputId) {
+    switch (inputId) {
+      case 'loginField':
+        return 'liftLoginLabel'
+      
+      case 'passwordField':
+        return 'liftPasswordLabel';
 
-    if (this.state.showMessage) {
-      this.props.onInputClick();
+      default:
+        return null;
+    }
+  }
+
+  getInvalidFields() {
+    let invalidFieldsIds = Object.keys(this.fields).filter(fieldId => {
+      let field = this.fields[fieldId];
+
+      return field.ref.current && !field.check();
+    });
+
+    this.invalidFieldsIds = invalidFieldsIds.reduce((result, item) => ({...result, [item]: true }), {});
+
+    return invalidFieldsIds.map(fieldId => this.fields[fieldId]);
+  }
+
+  updateTooltips(invalidFields = []) {
+    if (!invalidFields.length) {
+      this.props.hideTooltips();
+
+      return;
     }
 
-    this.setState({
-      [k]: true,
-      showMessage: false
-    })
+    let tooltips = invalidFields.map(item => ({
+      element: item.ref.current,
+      message: item.errorMessage
+    }));
+
+    this.props.showTooltips(tooltips);
   }
 
-  handleInputBlur(e) {
-    const valueIsEmpty =  !e.target.value;
+  handleInputFocus(inputId) {
+    const key = LoginTab.getLabelKey(inputId);
 
-    const k = e.target.id === 'loginField' ? 'hideLoginLabel' : 'hidePasswordLabel';
+    if (!key) return;
 
     this.setState({
-      [k]: !valueIsEmpty
-    })
+      [key]: true
+    });
+  }
+
+  handleInputBlur(inputId, value) {
+    const key = LoginTab.getLabelKey(inputId);
+
+    this.setState({
+      [key]: !!value.length
+    });
+  }
+
+  handleInputChange(id, value) {
+    if (!(value.length && this.invalidFieldsIds[id])) return;
+    
+    let invalidFields = this.getInvalidFields();
+
+    this.updateTooltips(invalidFields);
   }
 
   handleSubmit() {
-    const { loginField, passwordField } = this.refs;
-    const submitAvailable = loginField.value && passwordField.value;
+    let invalidFields = this.getInvalidFields();
 
-    if (submitAvailable) {
-      this.props.handleSubmit(loginField.value, passwordField.value);
+    this.updateTooltips(invalidFields);
 
-    } else {
-      let elem;
-      let message;
+    if (invalidFields.length) return;
 
-      if (!loginField.value) {
-        elem = loginField;
-        message = 'Login';
-      } else {
-        elem = passwordField;
-        message = 'Password';
-      }
+    let valuesToSubmit = Object.keys(this.fields).reduce((result, fieldId) => {
+      let field = this.fields[fieldId];
 
-      this.setState({
-        showMessage: true
-      });
+      if (!field.hasOwnProperty('getValueToSubmit')) return result;
 
-      this.props.handleError(elem, message + ' field should not be empty');
-    }
+      return Object.assign(result, field.getValueToSubmit())
+    }, {});
+
+    this.props.onSubmit(valuesToSubmit);
   }
 
   render() {
-    const { onInputClick, loginValue, passwordValue } = this.props;
-    const { hideLoginLabel, hidePasswordLabel } = this.state;
+    const { 
+      liftLoginLabel, 
+      liftPasswordLabel
+    } = this.state;
 
-    const loginSpanClass = "input-label" + (hideLoginLabel ? " input-label--up" : "");
-    const passwordSpanClass =  "input-label" + (hidePasswordLabel ? " input-label--up" : "")
+    const {
+      defaultLogin,
+      defaultPassword
+    } = this.props;
 
     return (
       <div className="login-tab" id="login-tab">
         <label className="input-container">
           <input
             id="loginField"
-            ref="loginField"
             type="text"
-            defaultValue={loginValue}
-            onClick={onInputClick}
-            onFocus={this.handleInputFocus}
-            onBlur={this.handleInputBlur}
+            ref={this.loginFieldRef}            
+            defaultValue={defaultLogin}
+            onChange={(e) => this.handleInputChange('loginField', e.target.value)}
+            onFocus={() => this.handleInputFocus('loginField')}
+            onBlur={(e) => this.handleInputBlur('loginField', e.target.value)}
           />
-          <span className={loginSpanClass}>Login (any)</span>
+          <span className={`input-label noselect ${liftLoginLabel ? 'input-label--up' : ''}`.trim()}>
+            {'Login'}
+          </span>
         </label>
         <label className="input-container">
           <input
             id="passwordField"
-            ref="passwordField"
             type="password"
-            defaultValue={passwordValue}
-            onClick={onInputClick}
-            onFocus={this.handleInputFocus}
-            onBlur={this.handleInputBlur}
+            ref={this.passwordFieldRef}
+            defaultValue={defaultPassword}
+            onChange={(e) => this.handleInputChange('passwordField', e.target.value)}
+            onFocus={() => this.handleInputFocus('passwordField')}
+            onBlur={(e) => this.handleInputBlur('passwordField', e.target.value)}
           />
-          <span className={passwordSpanClass}>Password (any)</span>
+          <span className={`input-label noselect ${liftPasswordLabel ? 'input-label--up' : ''}`.trim()}>
+            {'Password'}
+          </span>
         </label>
         <button
           className="btn btn-primary login-form__submit"
           onClick={this.handleSubmit}
-        >Let's start!</button>
+        >
+          {'Let\'s start!'}
+        </button>
       </div>
     )
   }
 }
 
 LoginTab.propTypes = {
-  loginValue: PropTypes.string.isRequired,
-  passwordValue: PropTypes.string.isRequired,
-  onInputClick: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
-  handleError: PropTypes.func.isRequired
+  defaultLogin: PropTypes.string,
+  defaultPassword: PropTypes.string, 
+  onSubmit: PropTypes.func.isRequired,
+  showTooltips: PropTypes.func.isRequired,
+  hideTooltips: PropTypes.func.isRequired,
+}
+
+LoginTab.defaultProps = {
+  defaultLogin: '',
+  defaultPassword: ''
 }
 
 export default LoginTab;

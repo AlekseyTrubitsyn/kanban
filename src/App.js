@@ -13,14 +13,14 @@ import { faSquare } from  '@fortawesome/free-regular-svg-icons';
 
 import LoginRegisterForm from './containers/LoginRegisterForm';
 import KanbanBoard from './containers/KanbanBoard';
-import Tooltip from './containers/Tooltip';
+import Tooltips from './containers/tooltips';
 
 library.add(fab, faSignOutAlt, faStar, faTimes, faTimesCircle, faInfoCircle, faChevronCircleLeft, faChevronRight, faChevronLeft, faBars, faPlus, faCheck, faSquare, faPen, faExpand, faExclamationCircle);
 
 //TODO use session ID from cookies to skip login
 
 const App = (props) => {
-  const { showLoginForm, showMessage } = props;
+  const { showLoginForm } = props;
 
   return (
     <div className="App">
@@ -39,15 +39,14 @@ const App = (props) => {
         ? <LoginRegisterForm />
         : <KanbanBoard />
       }
-      {showMessage && <Tooltip />}
+      <Tooltips/>
     </div>
   );
 }
 
 const mapStateToProps = (state) => {
   return {
-    showLoginForm: !state.userSettings.userData,
-    showMessage: state.tooltip.showMessage
+    showLoginForm: !state.userSettings.userData
   }
 }
 

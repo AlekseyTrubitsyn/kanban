@@ -1,23 +1,30 @@
-@import "./colors";
+@import "../../assets/styles/colors.scss";
 
 .tooltip {
   $side: 12px;
+  $zIndex: 150;
 
   position: fixed;
   background: $mid-cerulean;
   color: white;
   padding: 10px 15px;
   min-width: 50px;
-  max-width: 150px;
+  max-width: 300px;
   line-height: 1.5;
   border-radius: 5px;
-  z-index: 150;
-  box-shadow: 5px 5px 15px rgba(#000, .3);
+  z-index: $zIndex;
+  box-shadow: 5px 5px 15px rgba(#000, .7);
   animation: 0.5s fadeLeft;
 
   .tooltip__text {
     overflow: hidden;
     word-wrap: break-word;
+  }
+
+  @for $i from 1 through 10 {
+    &:nth-of-type(#{$i}) {
+      z-index: $zIndex - $i;
+    }
   }
 
   &::before {
