@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import * as UserSettingsActions from '../actions/UserSettingsActions';
 import * as TooltipsActions from '../actions/TooltipsActions';
 
-import Loader from '../components/Loader';
+import Loader from '../components/loader';
 import LoginRegisterForm from '../components/login-register-form';
 
 const propTypes = {

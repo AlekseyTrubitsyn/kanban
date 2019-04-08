@@ -1,0 +1,39 @@
+.loader {
+  position: fixed;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.4);
+  animation: fadeIn 0.7s;
+
+  .loader__rect {
+    background-color: white;
+    height: 60px;
+    width: 6px;
+    display: inline-block;
+    margin: 1px;
+
+    animation: sk-stretchdelay 1.2s infinite ease-in-out;
+
+    @for $i from 1 through 5 {
+      &:nth-of-type(#{$i}) {
+        animation-delay: (-1 + 0.1 * $i) * 1s;
+      }
+    }
+  }
+
+  @keyframes sk-stretchdelay {
+    0%,
+    40%,
+    100% {
+      transform: scaleY(0.4);
+    }
+    20% {
+      transform: scaleY(1);
+    }
+  }
+}
