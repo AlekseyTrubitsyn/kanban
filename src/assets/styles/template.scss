@@ -42,6 +42,8 @@ input[type="radio"] {
 input[type="text"],
 input[type="password"],
 textarea {
+  font-size: 14px;
+  line-height: 18px;
   width: 100%;
   padding: $padding $padding * 2;
   background: rgba($i-white, .7);
@@ -57,6 +59,20 @@ textarea {
 
   &:invalid {
     border-color: $cherry;
+  }
+}
+
+input[type="checkbox"].checkbox {
+  ~ .checkbox-icon {
+    color: $dark-cerulean;
+  }
+
+  &:checked ~ .checkbox-icon--unchecked {
+    display: none;
+  }
+
+  &:not(:checked) ~ .checkbox-icon--checked {
+    display: none;
   }
 }
 

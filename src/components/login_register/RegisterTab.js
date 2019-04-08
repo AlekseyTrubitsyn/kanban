@@ -230,10 +230,15 @@ class RegisterTab extends Component {
           onChange={this.handleSecondPasswordChange}
         />
         <p className="form-text-label">
-          <span className="form-text-label__aside">
+          <span className="form-text-label__icon">
             <FontAwesomeIcon icon="exclamation-circle" />
           </span>
-          <span>It's just a frontend demo without server, data is not collecting anywhere but your browser's storage... So type anything!</span></p>
+          <span className="form-text-label__text">
+            {'It\'s just a frontend demo without server, data is '}
+            {'not collecting anywhere but your browser\'s storage... '}
+            {'So, type anything!'}
+          </span>
+        </p>
         <label
           className="register-tab__checkbox-container checkbox-container"
           ref={this.termsAgreementRef}
@@ -245,6 +250,15 @@ class RegisterTab extends Component {
             type="checkbox"
             onChange={(e) => this.handleAgreedChange({ id: "termsAgreementCheckbox", value: e.target.checked })}
           />
+          <span className="checkbox-container__icon checkbox-icon checkbox-icon--checked">
+            <FontAwesomeIcon icon="check" />
+          </span>
+          <span className="checkbox-container__icon checkbox-icon checkbox-icon--unchecked">
+            <FontAwesomeIcon icon={["far", "square"]} />
+          </span>
+          <span className="checkbox-container__text">
+            {'Agree'}
+          </span>
         </label>
         <button
           className="btn btn-primary login-form__submit"

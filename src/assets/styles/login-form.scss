@@ -12,23 +12,7 @@ $padding: 10px;
   padding: 0 $padding * 2 $padding * 2;
 
   .checkbox-container {
-    display: flex;
-    background: rgba($i-white, 0.8);
     margin-top: 5px;
-    border-radius: 5px;
-    cursor: pointer;
-    line-height: 2.5em;
-    overflow: hidden;
-
-    .checkbox-container__aside {
-      padding: 0 15px;
-      background: $i-white;
-      color: $dark-cerulean;
-      display: inline-block;
-      margin-right: 10px;
-      font-size: 1.5em;
-      width: 50px;
-    }
   }
 
   .form-text-label {
@@ -43,7 +27,7 @@ $padding: 10px;
     line-height: 1.5;
     font-size: 12px;
 
-    .form-text-label__aside {
+    .form-text-label__icon {
       margin-right: 15px;
       color: $cherry;
       font-size: 2em;
@@ -97,6 +81,24 @@ $padding: 10px;
     margin: 0 20px;
     animation: 10s rotate infinite;
     animation-timing-function: linear;
+  }
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  background: rgba($i-white, 0.8);
+  border-radius: 5px;
+  cursor: pointer;
+  overflow: hidden;
+  padding: 10px 20px;
+  font-size: 14px;
+  line-height: 18px;
+
+  .checkbox-container__icon {
+    margin-right: 10px;
+    width: 14px;
+    height: 18px;
   }
 }
 
