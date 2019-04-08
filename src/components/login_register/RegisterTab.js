@@ -8,12 +8,17 @@ class RegisterTab extends Component {
   constructor(props) {
     super(props);
 
-    //TODO stateless component
     this.state = {
-      agreed: false
+      submitData: {},
+      invalidFieldsIds: {
+        loginField: true,
+        passwordField: true,
+        secondPasswordField: true,
+        termsAgreementCheckbox: true,
+      },
+      tooltipsEnabled: false,
+      fieldsVerified: false
     }
-
-    this.invalidFieldsIds = [];
 
     this.loginFieldRef = React.createRef();
     this.passwordFieldRef = React.createRef();
@@ -24,109 +29,178 @@ class RegisterTab extends Component {
     this.fields = {
       loginField: {
         ref: this.loginFieldRef,
-        errorMessage: 'Login field should not be empty',
-        modifier: value => value.replace(/[^a-zA-Z0-9]/gi, ''),
-        check: () => !!this.loginFieldRef.current.value.length,
-        getValueToSubmit: () => ({ 
-          login: this.loginFieldRef.current.value || '',
-        })
+        modify: value => value.replace(/[^a-zA-Z0-9]/gi, ''),
+        verify: value => !!value.length,
+        tooltipData: {
+          ref: this.loginFieldRef,
+          message: 'Login field should not be empty',
+        }
       },
       passwordField: {
         ref: this.passwordFieldRef,
-        errorMessage: 'Password must be at least 4 symbol',
-        check: () => this.passwordFieldRef.current.value.length > 3,
-        getValueToSubmit: () => ({
-          login: this.passwordFieldRef.current.value || '',
-        })
+        verify: value => value.length > 3,
+        tooltipData: {
+          ref: this.passwordFieldRef,
+          message: 'Password must be at least 4 symbol',
+        }
       },
       secondPasswordField: {
         ref: this.secondPasswordFieldRef,
-        errorMessage: 'Passwords must match',
-        check: () => this.secondPasswordFieldRef.current.value.length > 3
-          && this.passwordFieldRef.current.value === this.secondPasswordFieldRef.current.value
+        verify: (value, password) => value.length > 3 && value === password,
+        tooltipData: {
+          ref: this.secondPasswordFieldRef,
+          message: 'Passwords must match',
+        }
       },
       termsAgreementCheckbox: {
-        ref: this.termsAgreementRef,
-        element: this.termsAgreementRef.current,
-        errorMessage: 'Agree, please :)',
-        check: () => this.termsAgreementCheckboxRef.current.checked
+        ref: this.termsAgreementCheckboxRef,
+        verify: value => !!value,
+        tooltipData: {
+          ref: this.termsAgreementRef,
+          message: 'Agree, please :)',
+        }
       }
     }
 
-    this.getInvalidFields = this.getInvalidFields.bind(this);
     this.updateTooltips = this.updateTooltips.bind(this);
-    
-    this.handleInputChange = this.handleInputChange.bind(this);    
+
+    this.handleLoginChange = this.handleLoginChange.bind(this);
+    this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.handleSecondPasswordChange = this.handleSecondPasswordChange.bind(this);
+    this.handleAgreedChange = this.handleAgreedChange.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  getInvalidFields() {
-    let invalidFieldsIds = Object.keys(this.fields).filter(fieldId => {
-      let field = this.fields[fieldId];
+  updateTooltips(invalidFieldsIds) {
+    let tooltipsData = Object.keys(invalidFieldsIds)
+      .filter(fieldId => !!invalidFieldsIds[fieldId])
+      .map(fieldId => {
+        const {
+          ref,
+          message
+        } = this.fields[fieldId].tooltipData;
 
-      return (field.element || field.ref.current) && !field.check();
-    });
+        return ({
+          element: ref.current,
+          message
+        });
+      });
 
-    this.invalidFieldsIds = invalidFieldsIds.reduce((result, item) => ({ ...result, [item]: true }), {});
-
-    return invalidFieldsIds.map(fieldId => this.fields[fieldId]);
-  }
-
-  updateTooltips(invalidFields = []) {
-    if (!invalidFields.length) {
+    if (!tooltipsData.length) {
       this.props.hideTooltips();
 
       return;
     }
 
-    let tooltips = invalidFields.map(item => ({
-      element: item.ref.current,
-      message: item.errorMessage
-    }));
-
-    this.props.showTooltips(tooltips);
+    this.props.showTooltips(tooltipsData);
   }
 
-  handleInputChange(id, value) {
-    if (!(value || value.length) || !this.invalidFieldsIds[id]) return;
-
-    let invalidFields = this.getInvalidFields();
-
-    this.updateTooltips(invalidFields);
+  handleLoginChange({ id, value }) {
+    this.handleInputChange({
+      id,
+      name: 'login',
+      submitted: true,
+      verified: this.fields[id].verify(value),
+      value
+    });
   }
 
-  handleUserAgreed(agreed) {
-    const invalidFields = this.getInvalidFields();
-    this.updateTooltips(invalidFields);
+  handlePasswordChange({ id, value }) {
+    this.handleInputChange({
+      id,
+      name: 'password',
+      submitted: true,
+      verified: this.fields[id].verify(value),
+      value
+    });
+  }
+
+  handleSecondPasswordChange({ id, value }) {
+    const { password } = this.state;
+
+    this.handleInputChange({
+      id,
+      name: 'secondPassword',
+      verified: this.fields[id].verify(value, password),
+      value
+    });
+  }
+
+  handleAgreedChange({ id, value }) {
+    this.handleInputChange({
+      id,
+      name: 'termsAgreement',
+      verified: this.fields[id].verify(value),
+      value
+    });
+  }
+
+  handleInputChange(data) {
+    const {
+      id,
+      name,
+      submitted,
+      value,
+      verified
+    } = data;
+
+    const {
+      submitData,
+      fieldsVerified,
+      invalidFieldsIds,
+      tooltipsEnabled
+    } = this.state;
+
+    const newInvalidFieldsIds = {
+      ...invalidFieldsIds,
+      [id]: !verified
+    };
+
+    const getInvalidFiedlsCount = () => Object.keys(newInvalidFieldsIds)
+      .filter(fieldId => !!newInvalidFieldsIds[fieldId])
+      .length;
+
+    const updatedFieldsVerified = (verified && fieldsVerified) || getInvalidFiedlsCount() === 0;
+
+    const newSubmitData = submitted
+      ? { ...submitData, [name]: value }
+      : submitData;
 
     this.setState({
-      agreed
-    });    
+      [name]: value,
+      submitData: newSubmitData,
+      invalidFieldsIds: newInvalidFieldsIds,
+      fieldsVerified: updatedFieldsVerified
+    });
+
+    if (tooltipsEnabled && verified && invalidFieldsIds[id]) {
+      this.updateTooltips(newInvalidFieldsIds);
+    }
   }
 
   handleSubmit() {
-    let invalidFields = this.getInvalidFields();
+    const {
+      submitData,
+      fieldsVerified,
+      invalidFieldsIds
+    } = this.state;
 
-    this.updateTooltips(invalidFields);
+    if (fieldsVerified) {
+      this.props.onSubmit(submitData);
 
-    if (invalidFields.length) return;
-    
-    let valuesToSubmit = Object.keys(this.fields).reduce((result, fieldId) => {
-      let field = this.fields[fieldId];
+      return;
+    }
 
-      if (!field.hasOwnProperty('getValueToSubmit')) return result;
-      
-      return Object.assign(result, field.getValueToSubmit())
-    }, {});
-    
-    this.props.onSubmit(valuesToSubmit);
+    this.setState({
+      tooltipsEnabled: true,
+    });
+
+    this.updateTooltips(invalidFieldsIds);
   }
 
   render() {
-    const {
-      agreed
-    } = this.state;
-
     return (
       <div className="register-tab" id="register-tab">
         <LabeledInput
@@ -134,46 +208,39 @@ class RegisterTab extends Component {
           type="text"
           placeholder="Login"
           inputRef={this.loginFieldRef}
-          modifier={this.fields.loginField.modifier}
-          onChange={this.handleInputChange}
-          onFocus={this.handleInputFocus}
-          onBlur={this.handleInputBlur}
+          modify={this.fields.loginField.modify}
+          onChange={this.handleLoginChange}
         />
         <LabeledInput
           id="passwordField"
           type="password"
           placeholder="Password"
           inputRef={this.passwordFieldRef}
-          onChange={this.handleInputChange}
-          onFocus={this.handleInputFocus}
-          onBlur={this.handleInputBlur}
+          onChange={this.handlePasswordChange}
         />
         <LabeledInput
           id="secondPasswordField"
           type="password"
           placeholder="...and again"
           inputRef={this.secondPasswordFieldRef}
-          onChange={this.handleInputChange}
-          onFocus={this.handleInputFocus}
-          onBlur={this.handleInputBlur}
+          onChange={this.handleSecondPasswordChange}
         />
         <p className="form-text-label">
           <span className="form-text-label__aside">
             <FontAwesomeIcon icon="exclamation-circle" />
           </span>
           <span>It's just a frontend demo without server, data is not collecting anywhere but your browser's storage... So type anything!</span></p>
-        <label className="checkbox-container" ref={this.termsAgreementRef}>
-          <span className="checkbox-container__aside">
-            <FontAwesomeIcon icon={agreed ? "check" : ["far", "square"]} />
-          </span>
-          <span>
-            {'Agree'}
-          </span>
+        <label
+          className="register-tab__checkbox-container checkbox-container"
+          ref={this.termsAgreementRef}
+        >
           <input
+            className="checkbox-container__checkbox checkbox"
             id="termsAgreementCheckbox"
             ref={this.termsAgreementCheckboxRef}
             type="checkbox"
-            onChange={(e) => this.handleUserAgreed(e.target.checked)} />
+            onChange={(e) => this.handleAgreedChange({ id: "termsAgreementCheckbox", value: e.target.checked })}
+          />
         </label>
         <button
           className="btn btn-primary login-form__submit"

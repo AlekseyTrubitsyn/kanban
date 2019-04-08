@@ -52,7 +52,7 @@ class LabeledInput extends Component {
     });
 
     if (onChange) {
-      onChange(id, value);
+      onChange({ id, value });
     }
   }
 

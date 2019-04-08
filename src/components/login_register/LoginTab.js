@@ -7,90 +7,170 @@ class LoginTab extends Component {
   constructor(props) {
     super(props);
 
-    //TODO stateless component
+    const {
+      defaultLogin,
+      defaultPassword
+    } = props;
 
-    this.invalidFieldsIds = [];
     this.loginFieldRef = React.createRef();
     this.passwordFieldRef = React.createRef();
 
     this.fields = {
       loginField: {
         ref: this.loginFieldRef,
-        errorMessage: 'Login field should not be empty',
-        modifier: value => value.replace(/[^a-zA-Z0-9]/gi, ''),
-        check: () => !!this.loginFieldRef.current.value.length,
-        getValueToSubmit: () => ({
-          login: this.loginFieldRef.current.value || '',
-        })
+        modify: value => value.replace(/[^a-zA-Z0-9]/gi, ''),
+        verify: value => !!value.length,
+        tooltipData: {
+          ref: this.loginFieldRef,
+          message: 'Login field should not be empty',
+        }
       },
       passwordField: {
         ref: this.passwordFieldRef,
-        errorMessage: 'Password must be at least 4 symbol',
-        check: () => this.passwordFieldRef.current.value.length > 3,
-        getValueToSubmit: () => ({
-          password: this.passwordFieldRef.current.value || '',
-        })
+        verify: value => value.length > 3,
+        tooltipData: {
+          ref: this.passwordFieldRef,
+          message: 'Password must be at least 4 symbol',
+        }
       }
+    };
+
+    const defaultLoginVerified = this.fields.loginField.verify(defaultLogin);
+    const defaultPasswordVerified = this.fields.loginField.verify(defaultPassword);
+
+    const invalidFieldsIds = {
+      loginField: !defaultLoginVerified,
+      passwordField: !defaultPasswordVerified
+    };
+
+    const fieldsVerified = defaultLoginVerified && defaultPasswordVerified;
+
+    this.state = {
+      login: defaultLogin,
+      password: defaultPassword,
+      submitData: {
+        login: defaultLogin,
+        password: defaultPassword
+      },
+      invalidFieldsIds,
+      fieldsVerified,
+      tooltipsEnabled: false,
     }
 
-    this.getInvalidFields = this.getInvalidFields.bind(this);
     this.updateTooltips = this.updateTooltips.bind(this);
 
+    this.handleLoginChange = this.handleLoginChange.bind(this);
+    this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  getInvalidFields() {
-    let invalidFieldsIds = Object.keys(this.fields).filter(fieldId => {
-      let field = this.fields[fieldId];
+  updateTooltips(invalidFieldsIds) {
+    let tooltipsData = Object.keys(invalidFieldsIds)
+      .filter(fieldId => !!invalidFieldsIds[fieldId])
+      .map(fieldId => {
+        const {
+          ref,
+          message
+        } = this.fields[fieldId].tooltipData;
 
-      return field.ref.current && !field.check();
-    });
+        return ({
+          element: ref.current,
+          message
+        });
+      });
 
-    this.invalidFieldsIds = invalidFieldsIds.reduce((result, item) => ({...result, [item]: true }), {});
-
-    return invalidFieldsIds.map(fieldId => this.fields[fieldId]);
-  }
-
-  updateTooltips(invalidFields = []) {
-    if (!invalidFields.length) {
+    if (!tooltipsData.length) {
       this.props.hideTooltips();
 
       return;
     }
 
-    let tooltips = invalidFields.map(item => ({
-      element: item.ref.current,
-      message: item.errorMessage
-    }));
-
-    this.props.showTooltips(tooltips);
+    this.props.showTooltips(tooltipsData);
   }
 
-  handleInputChange(id, value) {
-    if (!(value.length && this.invalidFieldsIds[id])) return;
-    
-    let invalidFields = this.getInvalidFields();
+  handleLoginChange({ id, value }) {    
+    this.handleInputChange({
+      id,
+      name: 'login',
+      submitted: true,
+      verified: this.fields[id].verify(value),
+      value
+    });
+  }
 
-    this.updateTooltips(invalidFields);
+  handlePasswordChange({ id, value }) {
+    this.handleInputChange({
+      id,
+      name: 'password',
+      submitted: true,
+      verified: this.fields[id].verify(value),
+      value
+    });
+  }
+
+  handleInputChange(data) {
+    const {
+      id,
+      name,
+      submitted,
+      value,
+      verified
+    } = data;
+
+    const {
+      submitData,
+      fieldsVerified,
+      invalidFieldsIds,
+      tooltipsEnabled
+    } = this.state;
+
+    const newInvalidFieldsIds = {
+      ...invalidFieldsIds,
+      [id]: !verified
+    };
+
+    const getInvalidFiedlsCount = () => Object.keys(newInvalidFieldsIds)
+      .filter(fieldId => !!newInvalidFieldsIds[fieldId])
+      .length;
+
+    const updatedFieldsVerified = (verified && fieldsVerified) || getInvalidFiedlsCount() === 0;    
+
+    const newSubmitData = submitted
+      ? { ...submitData, [name]: value }
+      : submitData;
+
+    this.setState({
+      [name]: value,
+      submitData: newSubmitData,
+      invalidFieldsIds: newInvalidFieldsIds,
+      fieldsVerified: updatedFieldsVerified
+    });
+
+    if (tooltipsEnabled && verified && invalidFieldsIds[id]) {
+      this.updateTooltips(newInvalidFieldsIds);
+    }
   }
 
   handleSubmit() {
-    let invalidFields = this.getInvalidFields();
+    const {
+      submitData,
+      fieldsVerified,
+      invalidFieldsIds
+    } = this.state;
 
-    this.updateTooltips(invalidFields);
+    if (fieldsVerified) {
+      this.props.onSubmit(submitData);
 
-    if (invalidFields.length) return;
+      return;
+    }
 
-    let valuesToSubmit = Object.keys(this.fields).reduce((result, fieldId) => {
-      let field = this.fields[fieldId];
+    this.setState({
+      tooltipsEnabled: true,
+    });
 
-      if (!field.hasOwnProperty('getValueToSubmit')) return result;
-
-      return Object.assign(result, field.getValueToSubmit())
-    }, {});
-
-    this.props.onSubmit(valuesToSubmit);
+    this.updateTooltips(invalidFieldsIds);
   }
 
   render() {
@@ -107,10 +187,8 @@ class LoginTab extends Component {
           placeholder="Login"
           inputRef={this.loginFieldRef}
           defaultValue={defaultLogin}
-          modifier={this.fields.loginField.modifier}
-          onChange={this.handleInputChange}
-          onFocus={this.handleInputFocus}
-          onBlur={this.handleInputBlur}
+          modify={this.fields.loginField.modify}
+          onChange={this.handleLoginChange}
         />
         <LabeledInput
           id="passwordField"
@@ -118,9 +196,7 @@ class LoginTab extends Component {
           placeholder="Password"
           inputRef={this.passwordFieldRef}
           defaultValue={defaultPassword}
-          onChange={this.handleInputChange}
-          onFocus={this.handleInputFocus}
-          onBlur={this.handleInputBlur}
+          onChange={this.handlePasswordChange}
         />
         <button
           className="btn btn-primary login-form__submit"
