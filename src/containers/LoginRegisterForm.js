@@ -30,8 +30,6 @@ class LoginRegisterForm extends Component {
     this.setState({
       isLoginTab
     });
-
-    this.props.hideTooltips();
   }
 
   handleLoginSubmit(data) {

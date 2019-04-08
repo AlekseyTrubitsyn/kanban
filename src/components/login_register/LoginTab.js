@@ -66,6 +66,10 @@ class LoginTab extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentWillUnmount() {
+    this.props.hideTooltips();
+  }
+
   updateTooltips(invalidFieldsIds) {
     let tooltipsData = Object.keys(invalidFieldsIds)
       .filter(fieldId => !!invalidFieldsIds[fieldId])
