@@ -1,0 +1,21 @@
+@import "../../assets/styles/colors.scss";
+
+.labeled-input {
+  display: block;
+  padding-top: 15px;
+  position: relative;
+}
+
+.labeled-input__label {
+  position: absolute;
+  top: 25px;
+  left: 20px;
+  color: $i-grey;
+  transition: 0.3s all ease-out;
+}
+
+.labeled-input__label--lifted {
+  color: $dark-cerulean;
+  top: 0;
+  font-size: 0.8em;
+}

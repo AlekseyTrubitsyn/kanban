@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import LabeledInput from '../labeled-input';
+ 
 class LoginTab extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      liftLoginLabel: !!props.defaultLogin.length,
-      liftPasswordLabel: !!props.defaultPassword.length
-    }
+    //TODO stateless component
 
     this.invalidFieldsIds = [];
     this.loginFieldRef = React.createRef();
@@ -18,6 +17,7 @@ class LoginTab extends Component {
       loginField: {
         ref: this.loginFieldRef,
         errorMessage: 'Login field should not be empty',
+        modifier: value => value.replace(/[^a-zA-Z0-9]/gi, ''),
         check: () => !!this.loginFieldRef.current.value.length,
         getValueToSubmit: () => ({
           login: this.loginFieldRef.current.value || '',
@@ -36,24 +36,8 @@ class LoginTab extends Component {
     this.getInvalidFields = this.getInvalidFields.bind(this);
     this.updateTooltips = this.updateTooltips.bind(this);
 
-    this.handleInputFocus = this.handleInputFocus.bind(this);
-    this.handleInputBlur = this.handleInputBlur.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
-
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  static getLabelKey(inputId) {
-    switch (inputId) {
-      case 'loginField':
-        return 'liftLoginLabel'
-      
-      case 'passwordField':
-        return 'liftPasswordLabel';
-
-      default:
-        return null;
-    }
   }
 
   getInvalidFields() {
@@ -83,24 +67,6 @@ class LoginTab extends Component {
     this.props.showTooltips(tooltips);
   }
 
-  handleInputFocus(inputId) {
-    const key = LoginTab.getLabelKey(inputId);
-
-    if (!key) return;
-
-    this.setState({
-      [key]: true
-    });
-  }
-
-  handleInputBlur(inputId, value) {
-    const key = LoginTab.getLabelKey(inputId);
-
-    this.setState({
-      [key]: !!value.length
-    });
-  }
-
   handleInputChange(id, value) {
     if (!(value.length && this.invalidFieldsIds[id])) return;
     
@@ -128,11 +94,6 @@ class LoginTab extends Component {
   }
 
   render() {
-    const { 
-      liftLoginLabel, 
-      liftPasswordLabel
-    } = this.state;
-
     const {
       defaultLogin,
       defaultPassword
@@ -140,34 +101,27 @@ class LoginTab extends Component {
 
     return (
       <div className="login-tab" id="login-tab">
-        <label className="input-container">
-          <input
-            id="loginField"
-            type="text"
-            ref={this.loginFieldRef}            
-            defaultValue={defaultLogin}
-            onChange={(e) => this.handleInputChange('loginField', e.target.value)}
-            onFocus={() => this.handleInputFocus('loginField')}
-            onBlur={(e) => this.handleInputBlur('loginField', e.target.value)}
-          />
-          <span className={`input-label noselect ${liftLoginLabel ? 'input-label--up' : ''}`.trim()}>
-            {'Login'}
-          </span>
-        </label>
-        <label className="input-container">
-          <input
-            id="passwordField"
-            type="password"
-            ref={this.passwordFieldRef}
-            defaultValue={defaultPassword}
-            onChange={(e) => this.handleInputChange('passwordField', e.target.value)}
-            onFocus={() => this.handleInputFocus('passwordField')}
-            onBlur={(e) => this.handleInputBlur('passwordField', e.target.value)}
-          />
-          <span className={`input-label noselect ${liftPasswordLabel ? 'input-label--up' : ''}`.trim()}>
-            {'Password'}
-          </span>
-        </label>
+        <LabeledInput
+          id="loginField"
+          type="text"
+          placeholder="Login"
+          inputRef={this.loginFieldRef}
+          defaultValue={defaultLogin}
+          modifier={this.fields.loginField.modifier}
+          onChange={this.handleInputChange}
+          onFocus={this.handleInputFocus}
+          onBlur={this.handleInputBlur}
+        />
+        <LabeledInput
+          id="passwordField"
+          type="password"
+          placeholder="Password"
+          inputRef={this.passwordFieldRef}
+          defaultValue={defaultPassword}
+          onChange={this.handleInputChange}
+          onFocus={this.handleInputFocus}
+          onBlur={this.handleInputBlur}
+        />
         <button
           className="btn btn-primary login-form__submit"
           onClick={this.handleSubmit}

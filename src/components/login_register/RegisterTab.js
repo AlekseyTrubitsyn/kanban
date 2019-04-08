@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import LabeledInput from '../labeled-input';
+
 class RegisterTab extends Component {
   constructor(props) {
     super(props);
 
+    //TODO stateless component
     this.state = {
-      liftLoginLabel: false,
-      liftPasswordLabel: false,
-      liftSecondPasswordLabel: false,
       agreed: false
     }
 
@@ -25,6 +25,7 @@ class RegisterTab extends Component {
       loginField: {
         ref: this.loginFieldRef,
         errorMessage: 'Login field should not be empty',
+        modifier: value => value.replace(/[^a-zA-Z0-9]/gi, ''),
         check: () => !!this.loginFieldRef.current.value.length,
         getValueToSubmit: () => ({ 
           login: this.loginFieldRef.current.value || '',
@@ -54,28 +55,9 @@ class RegisterTab extends Component {
 
     this.getInvalidFields = this.getInvalidFields.bind(this);
     this.updateTooltips = this.updateTooltips.bind(this);
-
-    this.handleInputFocus = this.handleInputFocus.bind(this);
-    this.handleInputBlur = this.handleInputBlur.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
-
+    
+    this.handleInputChange = this.handleInputChange.bind(this);    
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  static getLabelKey(inputId) {
-    switch (inputId) {
-      case 'loginField':
-        return 'liftLoginLabel';
-
-      case 'passwordField':
-        return 'liftPasswordLabel';
-
-      case 'secondPasswordField':
-        return 'liftSecondPasswordLabel';
-
-      default:
-        return null;
-    }
   }
 
   getInvalidFields() {
@@ -103,27 +85,6 @@ class RegisterTab extends Component {
     }));
 
     this.props.showTooltips(tooltips);
-  }
-
-  handleInputFocus(inputId) {
-    const key = RegisterTab.getLabelKey(inputId);
-
-    if (!key) return;
-
-    this.setState({
-      [key]: true
-    })
-  }
-
-  handleInputBlur(inputId, value) {
-    const valueIsEmpty = !value.length;
-    const key = RegisterTab.getLabelKey(inputId);
-
-    if (!key) return;
-
-    this.setState({
-      [key]: !valueIsEmpty
-    })
   }
 
   handleInputChange(id, value) {
@@ -163,53 +124,39 @@ class RegisterTab extends Component {
 
   render() {
     const {
-      liftLoginLabel,
-      liftPasswordLabel,
-      liftSecondPasswordLabel,
       agreed
     } = this.state;
 
     return (
       <div className="register-tab" id="register-tab">
-        <label className="input-container">
-          <input
-            id="loginField"
-            type="text"
-            ref={this.loginFieldRef}            
-            onChange={(e) => this.handleInputChange('loginField', e.target.value)}
-            onFocus={() => this.handleInputFocus('loginField')}
-            onBlur={(e) => this.handleInputBlur('loginField', e.target.value)}
-          />
-          <span className={`input-label noselect ${(liftLoginLabel ? 'input-label--up' : '')}`.trim()}>
-            {'Login'}
-          </span>
-        </label>
-        <label className="input-container">
-          <input
-            id="passwordField"
-            type="password"
-            ref={this.passwordFieldRef}            
-            onChange={(e) => this.handleInputChange('passwordField', e.target.value)}
-            onFocus={() => this.handleInputFocus('passwordField')}
-            onBlur={(e) => this.handleInputBlur('passwordField', e.target.value)}
-          />
-          <span className={`input-label noselect ${(liftPasswordLabel ? 'input-label--up' : '')}`.trim()}>
-            {'Password'}
-          </span>
-        </label>
-        <label className="input-container">
-          <input
-            id="secondPasswordField"
-            type="password"
-            ref={this.secondPasswordFieldRef}
-            onChange={(e) => this.handleInputChange('secondPasswordField', e.target.value)}
-            onFocus={() => this.handleInputFocus('secondPasswordField')}
-            onBlur={(e) => this.handleInputBlur('secondPasswordField', e.target.value)}
-          />
-          <span className={`input-label ${(liftSecondPasswordLabel ? 'input-label--up' : '')}`.trim()}>
-            {'...and again'}
-          </span>
-        </label>
+        <LabeledInput
+          id="loginField"
+          type="text"
+          placeholder="Login"
+          inputRef={this.loginFieldRef}
+          modifier={this.fields.loginField.modifier}
+          onChange={this.handleInputChange}
+          onFocus={this.handleInputFocus}
+          onBlur={this.handleInputBlur}
+        />
+        <LabeledInput
+          id="passwordField"
+          type="password"
+          placeholder="Password"
+          inputRef={this.passwordFieldRef}
+          onChange={this.handleInputChange}
+          onFocus={this.handleInputFocus}
+          onBlur={this.handleInputBlur}
+        />
+        <LabeledInput
+          id="secondPasswordField"
+          type="password"
+          placeholder="...and again"
+          inputRef={this.secondPasswordFieldRef}
+          onChange={this.handleInputChange}
+          onFocus={this.handleInputFocus}
+          onBlur={this.handleInputBlur}
+        />
         <p className="form-text-label">
           <span className="form-text-label__aside">
             <FontAwesomeIcon icon="exclamation-circle" />
