@@ -11,7 +11,7 @@ import { fab } from '@fortawesome/free-brands-svg-icons';
 import { faSignOutAlt, faStar, faTimes, faTimesCircle, faInfoCircle, faChevronCircleLeft, faChevronRight, faChevronLeft, faBars, faPlus, faCheck, faPen, faExpand, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { faSquare } from  '@fortawesome/free-regular-svg-icons';
 
-import LoginRegisterForm from './containers/LoginRegisterForm';
+import LoginRegisterFormContainer from './containers/LoginRegisterFormContainer';
 import KanbanBoard from './containers/KanbanBoard';
 import Tooltips from './containers/tooltips';
 
@@ -36,7 +36,7 @@ const App = (props) => {
         pauseOnHover
       />
       {showLoginForm
-        ? <LoginRegisterForm />
+        ? <LoginRegisterFormContainer />
         : <KanbanBoard />
       }
       <Tooltips/>

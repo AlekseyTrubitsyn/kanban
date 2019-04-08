@@ -67,7 +67,7 @@ class LoginTab extends Component {
   }
 
   componentWillUnmount() {
-    this.props.hideTooltips();
+    this.props.onHideTooltips();
   }
 
   updateTooltips(invalidFieldsIds) {
@@ -86,12 +86,12 @@ class LoginTab extends Component {
       });
 
     if (!tooltipsData.length) {
-      this.props.hideTooltips();
+      this.props.onHideTooltips();
 
       return;
     }
 
-    this.props.showTooltips(tooltipsData);
+    this.props.onShowTooltips(tooltipsData);
   }
 
   handleLoginChange({ id, value }) {    
@@ -217,8 +217,8 @@ LoginTab.propTypes = {
   defaultLogin: PropTypes.string,
   defaultPassword: PropTypes.string, 
   onSubmit: PropTypes.func.isRequired,
-  showTooltips: PropTypes.func.isRequired,
-  hideTooltips: PropTypes.func.isRequired,
+  onShowTooltips: PropTypes.func.isRequired,
+  onHideTooltips: PropTypes.func.isRequired,
 }
 
 LoginTab.defaultProps = {

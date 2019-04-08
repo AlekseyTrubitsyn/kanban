@@ -1,7 +1,7 @@
-@import './colors.scss';
+@import '../../assets/styles/colors.scss';
 $padding: 10px;
 
-.login-form {
+.login-register-form {
   position: absolute;
   width: 320px;
   top: 50%;
@@ -35,7 +35,7 @@ $padding: 10px;
   }
 }
 
-.login-form__tabs {
+.login-register-form__tabs {
   display: flex;
   margin-bottom: $padding * 2;
   margin-top: -15px;
@@ -44,7 +44,7 @@ $padding: 10px;
   box-shadow: 2px 2px 3px rgba($i-grey, .6);
 }
 
-.login-form__tab {
+.login-register-form-tabs__button {
   flex-grow: 1;
   margin: 0;
   outline: none;
@@ -54,7 +54,7 @@ $padding: 10px;
   font-weight: 400;
   transition: all 0.2s;
 
-  &:hover:not(.login-form__tab--selected) {
+  &:hover:not(.login-register-form-tabs__button--selected) {
     background: lighten($mid-cerulean, 5%);
     color: white;
   }
@@ -65,23 +65,8 @@ $padding: 10px;
   }
 }
 
-.login-form__submit {
+.login-register-form__submit {
   margin-bottom: 0;
-}
-
-.login-form__icons {
-  font-size: 3em;
-  position: absolute;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: $i-white;
-
-  svg {
-    margin: 0 20px;
-    animation: 10s rotate infinite;
-    animation-timing-function: linear;
-  }
 }
 
 .checkbox-container {
@@ -99,11 +84,5 @@ $padding: 10px;
     margin-right: 10px;
     width: 14px;
     height: 18px;
-  }
-}
-
-@keyframes rotate {
-  to {
-    transform: rotate(360deg);
   }
 }
