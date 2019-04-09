@@ -151,20 +151,7 @@ export const resetTickets = () => {
     }
 }
 
-export const changeFilter = (data) => {
-  //temp
-  let filter;
-  let filterId;
-
-  if (typeof data === 'string') {
-    filter = data;
-    filterId = 0;
-  } else {
-    filter = data.filter;
-    filterId = data.filterId;
-  }
-  ////
-
+export const changeFilter = ({ filter, filterId }) => {
   return {
     type: CHANGE_FILTER,
     filter,

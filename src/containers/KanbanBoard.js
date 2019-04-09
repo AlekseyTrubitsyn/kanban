@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
 
 import KanbanBoardContainer from './KanbanBoardContainer';
-import Header from './Header';
+import HeaderContainer from './header-container';
 import SideMenu from './SideMenu';
 import Card from './Card';
 
@@ -28,7 +28,7 @@ class KanbanBoard extends Component {
       <Fragment>
         {showCardModal && <Card/>}
         <SideMenu />
-        <Header />
+        <HeaderContainer />
         <KanbanBoardContainer />
       </Fragment>
     )
