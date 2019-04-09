@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 const propTypes = {
+  parentClassName: PropTypes.string,
   id: PropTypes.string.isRequired,
   inputRef: PropTypes.shape({ current: PropTypes.instanceOf(Element) }).isRequired,
   placeholder: PropTypes.string.isRequired,
@@ -14,6 +15,7 @@ const propTypes = {
 };
 
 const defaultProps = {
+  parentClassName: '',
   type: 'text',
   defaultValue: '',
   modifier: null,
@@ -90,6 +92,8 @@ class LabeledInput extends Component {
 
   render() {
     const {
+      parentClassName,
+      id,
       inputRef,
       type,
       placeholder
@@ -101,11 +105,12 @@ class LabeledInput extends Component {
     } = this.state;
 
     return (
-      <label className="labeled-input">
+      <label className={`${parentClassName} labeled-input`.trim()}>
         <span className={`labeled-input__label noselect ${lift ? 'labeled-input__label--lifted' : ''}`.trim()}>
           {placeholder}
         </span>
         <input
+          id={id}
           className="labeled-input__input-field"
           type={type}
           ref={inputRef}
