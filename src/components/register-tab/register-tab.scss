@@ -1,0 +1,16 @@
+.register-tab {
+  .register-tab__input,
+  .register-tab__text,
+  .register-tab__checkbox-container {
+    margin-bottom: 10px;
+  }
+
+  .register-tab__text {
+    margin-top: 25px;
+  }
+
+  .register-tab__submit {
+    margin-right: auto;
+    margin-left: auto;
+  }
+}

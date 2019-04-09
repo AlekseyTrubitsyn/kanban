@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import LoginTab from '../login-tab';
-import RegisterTab from '../login_register/RegisterTab';
+import RegisterTab from '../register-tab';
 
 const propTypes = {
   defaultLogin: PropTypes.string,

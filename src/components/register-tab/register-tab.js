@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import LabeledInput from '../labeled-input';
+import LabeledCheckbox from '../labeled-checkbox';
+import TextLabel from '../text-label';
 
 class RegisterTab extends Component {
   constructor(props) {
@@ -206,8 +207,9 @@ class RegisterTab extends Component {
 
   render() {
     return (
-      <div className="register-tab" id="register-tab">
+      <div className="register-tab">
         <LabeledInput
+          parentClassName="register-tab__input"
           id="loginField"
           type="text"
           placeholder="Login"
@@ -216,6 +218,7 @@ class RegisterTab extends Component {
           onChange={this.handleLoginChange}
         />
         <LabeledInput
+          parentClassName="register-tab__input"
           id="passwordField"
           type="password"
           placeholder="Password"
@@ -223,45 +226,31 @@ class RegisterTab extends Component {
           onChange={this.handlePasswordChange}
         />
         <LabeledInput
+          parentClassName="register-tab__input"
           id="secondPasswordField"
           type="password"
           placeholder="...and again"
           inputRef={this.secondPasswordFieldRef}
           onChange={this.handleSecondPasswordChange}
         />
-        <p className="form-text-label">
-          <span className="form-text-label__icon">
-            <FontAwesomeIcon icon="exclamation-circle" />
-          </span>
-          <span className="form-text-label__text">
-            {'It\'s just a frontend demo without server, data is '}
-            {'not collecting anywhere but your browser\'s storage... '}
-            {'So, type anything!'}
-          </span>
-        </p>
-        <label
-          className="register-tab__checkbox-container checkbox-container"
-          ref={this.termsAgreementRef}
-        >
-          <input
-            className="checkbox-container__checkbox checkbox"
-            id="termsAgreementCheckbox"
-            ref={this.termsAgreementCheckboxRef}
-            type="checkbox"
-            onChange={(e) => this.handleAgreedChange({ id: "termsAgreementCheckbox", value: e.target.checked })}
-          />
-          <span className="checkbox-container__icon checkbox-icon checkbox-icon--checked">
-            <FontAwesomeIcon icon="check" />
-          </span>
-          <span className="checkbox-container__icon checkbox-icon checkbox-icon--unchecked">
-            <FontAwesomeIcon icon={["far", "square"]} />
-          </span>
-          <span className="checkbox-container__text">
-            {'Agree'}
-          </span>
-        </label>
+        <TextLabel
+          parentClassName="register-tab__text"
+          text={
+            'It\'s just a frontend demo without server, data is ' +
+            'not collecting anywhere but your browser\'s storage... ' +
+            'So, type anything!'
+          }
+        />        
+        <LabeledCheckbox
+          parentClassName="register-tab__checkbox-container"
+          id="termsAgreementCheckbox"
+          containerRef={this.termsAgreementRef}
+          inputRef={this.termsAgreementCheckboxRef}
+          onChange={this.handleAgreedChange}
+          labelText="Agree"
+        />        
         <button
-          className="btn btn-primary login-form__submit"
+          className="btn btn-primary register-tab__submit"
           onClick={this.handleSubmit}
         >
           {'Let\'s start!'}
