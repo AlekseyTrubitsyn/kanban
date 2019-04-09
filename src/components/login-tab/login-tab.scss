@@ -1,0 +1,14 @@
+.login-tab {
+  .login-tab__input {
+    margin-bottom: 10px;
+
+    &:last-of-type {
+      margin-bottom: 20px;
+    }
+  }
+
+  .login-tab__submit {
+    margin-right: auto;
+    margin-left: auto;
+  }
+}

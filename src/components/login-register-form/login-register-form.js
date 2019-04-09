@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import LoginTab from '../login_register/LoginTab';
+import LoginTab from '../login-tab';
 import RegisterTab from '../login_register/RegisterTab';
 
 const propTypes = {

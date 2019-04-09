@@ -2,7 +2,20 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import LabeledInput from '../labeled-input';
- 
+
+const propTypes = {
+  defaultLogin: PropTypes.string,
+  defaultPassword: PropTypes.string,
+  onSubmit: PropTypes.func.isRequired,
+  onShowTooltips: PropTypes.func.isRequired,
+  onHideTooltips: PropTypes.func.isRequired,
+};
+
+const defaultProps = {
+  defaultLogin: '',
+  defaultPassword: ''
+};
+
 class LoginTab extends Component {
   constructor(props) {
     super(props);
@@ -184,8 +197,9 @@ class LoginTab extends Component {
     } = this.props;
 
     return (
-      <div className="login-tab" id="login-tab">
+      <div className="login-tab">
         <LabeledInput
+          parentClassName="login-tab__input"
           id="loginField"
           type="text"
           placeholder="Login"
@@ -195,6 +209,7 @@ class LoginTab extends Component {
           onChange={this.handleLoginChange}
         />
         <LabeledInput
+          parentClassName="login-tab__input"
           id="passwordField"
           type="password"
           placeholder="Password"
@@ -203,7 +218,7 @@ class LoginTab extends Component {
           onChange={this.handlePasswordChange}
         />
         <button
-          className="btn btn-primary login-form__submit"
+          className="btn btn-primary login-tab__submit"
           onClick={this.handleSubmit}
         >
           {'Let\'s start!'}
@@ -213,17 +228,7 @@ class LoginTab extends Component {
   }
 }
 
-LoginTab.propTypes = {
-  defaultLogin: PropTypes.string,
-  defaultPassword: PropTypes.string, 
-  onSubmit: PropTypes.func.isRequired,
-  onShowTooltips: PropTypes.func.isRequired,
-  onHideTooltips: PropTypes.func.isRequired,
-}
-
-LoginTab.defaultProps = {
-  defaultLogin: '',
-  defaultPassword: ''
-}
+LoginTab.propTypes = propTypes;
+LoginTab.defaultProps = defaultProps;
 
 export default LoginTab;
