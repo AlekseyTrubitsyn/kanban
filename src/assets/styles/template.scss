@@ -50,8 +50,11 @@ textarea {
   border: none;
   border-radius: 5px;
   display: block;
-  margin: 0 0 $padding;
   transition: background-color 0.3s;
+
+  &:hover {
+    background: $i-white;
+  }
 
   &:focus {
     background: white;
@@ -88,7 +91,6 @@ input[type="checkbox"].checkbox {
   padding: 10px 20px;
   border-radius: 7px;
   box-shadow: 2px 2px 5px rgba($gun-grey, .4);
-  margin: 20px auto;
 }
 
 .btn.disabled {
