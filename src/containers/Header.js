@@ -16,7 +16,7 @@ const Header = (props) => {
     filter,
     showSideMenu,
     createNewItem,
-    changeAssigneeFilter
+    changeFilter
   } = props;
 
   const username = userData.firstName
@@ -45,11 +45,11 @@ const Header = (props) => {
         </button>
         <div
           className={filtersContainerClass}
-          onClick={(e) => changeAssigneeFilter(e.target.value)}
+          onClick={(e) => changeFilter(e.target.value)}
         >
           {filters.map(item => (
             <label key={item} className={filter === item ? filtersClassSelected : filtersClass}>
-              <input type="radio" name="assigneeFilter" value={item}/>
+              <input type="radio" name="filter" value={item}/>
               <span>{item}</span>
             </label>
           ))}
@@ -69,8 +69,8 @@ const Header = (props) => {
 function mapStateToProps(state) {
   return {
     userData: state.userSettings.userData,
-    filters: state.tickets.assigneeFilters,
-    filter: state.tickets.assigneeFilter
+    filters: state.tickets.filters,
+    filter: state.tickets.filter
   }
 }
 
@@ -78,7 +78,7 @@ function mapDispatchToProps(dispatch) {
   return {
     logout: bindActionCreators(UserSettingsActions, dispatch).logout,
     showSideMenu: bindActionCreators(SideMenuActions, dispatch).showSideMenu,
-    changeAssigneeFilter: bindActionCreators(TicketsActions, dispatch).changeAssigneeFilter,
+    changeFilter: bindActionCreators(TicketsActions, dispatch).changeFilter,
     createNewItem: bindActionCreators(TicketsActions, dispatch).createNewItem
   }
 }
@@ -94,7 +94,7 @@ Header.propTypes = {
   logout: PropTypes.func.isRequired,
   showSideMenu: PropTypes.func.isRequired,
   createNewItem: PropTypes.func.isRequired,
-  changeAssigneeFilter: PropTypes.func.isRequired
+  changeFilter: PropTypes.func.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

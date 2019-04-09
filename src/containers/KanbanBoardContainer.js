@@ -16,7 +16,7 @@ class KanbanBoardContainer extends Component {
 
     this.state = {
       selectedAssigneeId: -1,
-      assigneeFilter: 'all'
+      filter: 'all'
     }
 
     this.onDragEnd = this.onDragEnd.bind(this);
@@ -87,17 +87,17 @@ class KanbanBoardContainer extends Component {
     const {
       isFetching,
       userId,
-      assigneeFilter
+      filter
      } = this.props;
 
-    const filter = KanbanBoardContainer.filterColumn.bind(null, assigneeFilter, userId);
+    const filterColumn = KanbanBoardContainer.filterColumn.bind(null, filter, userId);
 
-    const discuss = filter(this.props.discuss);
-    const toDo = filter(this.props.toDo);
-    const inProgress = filter(this.props.inProgress);
-    const testing = filter(this.props.testing);
-    const done = filter(this.props.done);
-    const archive = filter(this.props.archive);
+    const discuss = filterColumn(this.props.discuss);
+    const toDo = filterColumn(this.props.toDo);
+    const inProgress = filterColumn(this.props.inProgress);
+    const testing = filterColumn(this.props.testing);
+    const done = filterColumn(this.props.done);
+    const archive = filterColumn(this.props.archive);
 
     const { selectedAssigneeId } = this.state;
 
@@ -185,7 +185,7 @@ function mapStateToProps(state) {
     testing: state.tickets.testing,
     done: state.tickets.done,
     archive: state.tickets.archive,
-    assigneeFilter: state.tickets.assigneeFilter,
+    filter: state.tickets.filter,
     userId: state.userSettings.userData.id
   }
 }
@@ -223,7 +223,7 @@ KanbanBoardContainer.propTypes = {
     name: PropTypes.string.isRequired,
     values: PropTypes.array
   }).isRequired,
-  assigneeFilter: PropTypes.string.isRequired,
+  filter: PropTypes.string.isRequired,
   userId: PropTypes.number.isRequired,
   moveTicket: PropTypes.func.isRequired,
   openItemCard: PropTypes.func.isRequired

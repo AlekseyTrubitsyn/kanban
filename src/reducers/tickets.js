@@ -11,14 +11,15 @@ import {
   OPEN_ITEM_CARD,
   CLOSE_ITEM_CARD,
   REQUEST_TICKET_SAVE,
-  CHANGE_ASSIGNEE_FILTER
+  CHANGE_FILTER
 } from '../constants/ActionTypes';
 
 const initialState = {
   showCardModal: false,
   isFetching: false,
-  assigneeFilter: 'all',
-  assigneeFilters: ['all', 'free', 'my', 'deadline'],
+  filter: 'all',
+  filterId: 0,
+  filters: ['all', 'free', 'my', 'deadline'],
   discuss: {
     name: 'Discuss',
     values: []
@@ -168,12 +169,15 @@ export default function tickets(state = initialState, action) {
           values: action.payload.archive || []
         }
       }
-    case CHANGE_ASSIGNEE_FILTER:
+
+    case CHANGE_FILTER:
       return {
         ...state,
-        assigneeFilter: action.filter
+        filter: action.filter,
+        filterId: action.filterId
       }
-    default:
+
+      default:
       return state;
   }
 }
