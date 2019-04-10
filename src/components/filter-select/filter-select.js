@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const propTypes = {
+const propTypes = {
   filters: PropTypes.arrayOf(PropTypes.string).isRequired,
   filterId: PropTypes.number.isRequired,
   onSelect: PropTypes.func.isRequired
@@ -36,7 +36,7 @@ const FilterSelect = (props) => {
               type="radio"
               name="filter"
               value={filter}
-              checked={checked}
+              defaultChecked={checked}
             />
             <span className="filter-select__fitler-name">
               {filter}

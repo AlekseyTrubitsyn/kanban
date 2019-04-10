@@ -1,3 +1,3 @@
-export { default, propTypes as filterSelectPropTypes } from './filter-select';
+export { default } from './filter-select';
 
 require('./filter-select.scss');

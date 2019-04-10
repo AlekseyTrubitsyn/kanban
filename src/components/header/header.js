@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import FilterSelect, { filterSelectPropTypes } from '../filter-select';
+import FilterSelect from '../filter-select';
 
 const propTypes = {
-  ...filterSelectPropTypes,
+  filters: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  filterId: PropTypes.number.isRequired,
   user: PropTypes.string.isRequired,
   onShowSideMenu: PropTypes.func.isRequired,
   onCreateNewItem: PropTypes.func.isRequired,
