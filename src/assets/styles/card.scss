@@ -92,7 +92,7 @@ $borderInputFocus: lighten($celestial-blue, 10%);
 
   input, textarea {
     width: 100%;
-    margin: 0 0 20px;
+    //margin: 0 0 20px;
     border: 1px solid transparent;
     background: rgba($i-white, .9);
 
@@ -105,7 +105,7 @@ $borderInputFocus: lighten($celestial-blue, 10%);
 
   textarea {
     flex: 1;
-    resize: none;
+    //resize: none;
   }
 
   .card__subtasks {

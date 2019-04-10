@@ -10,7 +10,23 @@
     "creationDate": "2018-07-27T12:00:00.555Z",
     "statusName": "discuss",
     "priority": 2,
-    "subtasks": [],
+    "subtasks": [
+      {
+        "id": 0,
+        "text": "Task 1",
+        "done": true
+      },
+      {
+        "id": 1,
+        "text": "Task 2",
+        "done": true
+      },
+      {
+        "id": 2,
+        "text": "Task 3",
+        "done": false
+      }
+    ],
     "comments": []
   }, {
     "id": 2,
@@ -25,14 +41,17 @@
     "priority": 2,
     "subtasks": [
       {
+        "id": 0,
         "text": "Task 1",
-        "checked": true
+        "done": true
       }, {
+        "id": 1,
         "text": "Task 2",
-        "checked": true
+        "done": true
       }, {
+        "id": 2,
         "text": "Task 3",
-        "checked": false
+        "done": false
       }
     ],
     "subtasksCount": 3,

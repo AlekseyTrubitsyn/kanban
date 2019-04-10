@@ -11,10 +11,10 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 import ModalContainer from '../components/ModalContainer';
 import PrioritySelector from '../components/PrioritySelector';
-import Todo from '../components/Todo';
 import Comments from '../components/Comments';
 import CardInfoBlock from '../components/card/CardInfoBlock';
 import CardDeadlinePicker from '../components/card/CardDeadlinePicker';
+import Subtasks from '../components/subtasks';
 
 class Card extends Component {
   constructor(props) {
@@ -73,9 +73,7 @@ class Card extends Component {
   }
 
   updateSubtasks(subtasks) {
-    this.setState({
-      subtasks
-    })
+    this.subtasks = subtasks;
   }
 
   updateDeadline(date) {
@@ -101,6 +99,7 @@ class Card extends Component {
     const item = {
       ...this.props.item,
       ...this.state,
+      subtasks: this.subtasks,
       title: this.refs.title.value,
       text: this.refs.text.value
     };
@@ -178,9 +177,10 @@ class Card extends Component {
             </div>
             <div className="card-info card-info--large card__subtasks">
               <h3 className="card-info__title">Subtasks: </h3>
-              <Todo
-                items={subtasks || []}
-                onItemsUpdate={this.updateSubtasks}
+              <Subtasks
+                parentClassName="card__subtasks"
+                subtasks={subtasks}
+                onChange={this.updateSubtasks}
               />
             </div>
             <div className="card-info card-info--large card__comments">
