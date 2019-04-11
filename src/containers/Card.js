@@ -11,10 +11,10 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 import ModalContainer from '../components/ModalContainer';
 import PrioritySelector from '../components/PrioritySelector';
-import Comments from '../components/Comments';
 import CardInfoBlock from '../components/card/CardInfoBlock';
 import CardDeadlinePicker from '../components/card/CardDeadlinePicker';
 import Subtasks from '../components/subtasks';
+import Comments from '../components/comments';
 
 class Card extends Component {
   constructor(props) {
@@ -67,9 +67,7 @@ class Card extends Component {
   }
 
   updateComments(comments) {
-    this.setState({
-      comments
-    })
+    this.comments = comments;
   }
 
   updateSubtasks(subtasks) {
@@ -99,6 +97,7 @@ class Card extends Component {
     const item = {
       ...this.props.item,
       ...this.state,
+      comments: this.comments,
       subtasks: this.subtasks,
       title: this.refs.title.value,
       text: this.refs.text.value
@@ -114,10 +113,10 @@ class Card extends Component {
   }
 
   render() {
-    const { item, onCloseClick } = this.props;
+    const { item, userData, subtasks, comments, onCloseClick } = this.props;
     const { id, title, text, creationDate, project, reporter } = item;
 
-    const { statusName, priority, assignee, subtasks, comments } = this.state;
+    const { statusName, priority, assignee } = this.state;
 
     return (
       <ModalContainer
@@ -186,8 +185,9 @@ class Card extends Component {
             <div className="card-info card-info--large card__comments">
               <h3 className="card-info__title">Comments: </h3>
               <Comments
-                items={comments || []}
-                onItemsUpdate={this.updateComments}
+                items={comments}
+                username={userData.username}
+                onChange={this.updateComments}
               />
             </div>
           </div>
