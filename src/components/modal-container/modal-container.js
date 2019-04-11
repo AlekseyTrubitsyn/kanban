@@ -2,6 +2,11 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+const propTypes = {
+  children: PropTypes.object.isRequired,
+  onCloseClick: PropTypes.func.isRequired
+}
+
 const ModalContainer = ({children, onCloseClick}) => (
   <Fragment>
     <div className="modal-container">
@@ -17,9 +22,5 @@ const ModalContainer = ({children, onCloseClick}) => (
   </Fragment>
 );
 
-ModalContainer.propTypes = {
-  children: PropTypes.object.isRequired,
-  onCloseClick: PropTypes.func.isRequired
-}
-
+ModalContainer.propTypes = propTypes;
 export default ModalContainer;

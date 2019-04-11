@@ -9,10 +9,11 @@ import * as TicketsActions from '../actions/TicketsActions';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
-import ModalContainer from '../components/ModalContainer';
 import PrioritySelector from '../components/PrioritySelector';
 import CardInfoBlock from '../components/card/CardInfoBlock';
 import CardDeadlinePicker from '../components/card/CardDeadlinePicker';
+
+import ModalContainer from '../components/modal-container';
 import Subtasks from '../components/subtasks';
 import Comments from '../components/comments';
 

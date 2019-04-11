@@ -1,4 +1,5 @@
-@import './colors';
+@import '../../assets/styles/colors.scss';
+
 $zIndex: 100;
 
 .modal-container {
@@ -24,5 +25,9 @@ $zIndex: 100;
     &:hover {
       color: lighten($dark-cerulean, 10%);
     }
+  }
+
+  & + .overlay {
+    z-index: $zIndex - 1;
   }
 }
