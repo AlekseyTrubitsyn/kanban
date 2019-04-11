@@ -36,7 +36,7 @@ const LabeledCheckbox = (props) => {
         id={id}
         ref={inputRef}
         type="checkbox"
-        onChange={(e) => onChange({ id: "termsAgreementCheckbox", value: e.target.checked })}
+        onChange={(e) => onChange({ id, value: e.target.checked })}
       />
       <span className="labeled-checkbox__icon checkbox-icon checkbox-icon--checked">
         <FontAwesomeIcon icon="check" />
