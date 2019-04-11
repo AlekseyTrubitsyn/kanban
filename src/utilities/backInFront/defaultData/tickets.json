@@ -27,7 +27,24 @@
         "done": false
       }
     ],
-    "comments": []
+    "comments": [
+      {
+        "id": 0,
+        "author": "anon",
+        "created": "2019-04-11T19:44:36.918Z",
+        "editor": "admin",
+        "edited": "2019-04-11T19:44:51.215Z",
+        "text": "...terrific..."
+      },
+      {
+        "id": 1,
+        "author": "admin",
+        "created": "2019-04-11T19:44:36.918Z",
+        "editor": "admin",
+        "edited": "2019-04-11T19:44:51.215Z",
+        "text": "...terrific..."
+      }
+    ]
   }, {
     "id": 2,
     "title": "Example 2",
@@ -44,18 +61,36 @@
         "id": 0,
         "text": "Task 1",
         "done": true
-      }, {
+      },
+      {
         "id": 1,
         "text": "Task 2",
         "done": true
-      }, {
+      },
+      {
         "id": 2,
         "text": "Task 3",
         "done": false
       }
     ],
-    "subtasksCount": 3,
-    "comments": []
+    "comments": [
+      {
+        "id": 0,
+        "author": "anon",
+        "created": "2019-04-11T19:44:36.918Z",
+        "editor": "admin",
+        "edited": "2019-04-11T19:44:51.215Z",
+        "text": "...red flare..."
+      },
+      {
+        "id": 1,
+        "author": "admin",
+        "created": "2019-04-11T19:44:36.918Z",
+        "editor": "admin",
+        "edited": "2019-04-11T19:44:51.215Z",
+        "text": "...red flare..."
+      }
+    ]
   }, {
     "id": 3,
     "title": "Example 3",
@@ -67,8 +102,41 @@
     "creationDate": "2018-07-26T12:00:00.555Z",
     "statusName": "toDo",
     "priority": 1,
-    "subtasks": [],
-    "comments": []
+    "subtasks": [
+      {
+        "id": 0,
+        "text": "Task 1",
+        "done": true
+      },
+      {
+        "id": 1,
+        "text": "Task 2",
+        "done": true
+      },
+      {
+        "id": 2,
+        "text": "Task 3",
+        "done": false
+      }
+    ],
+    "comments": [
+      {
+        "id": 0,
+        "author": "anon",
+        "created": "2019-04-11T19:44:36.918Z",
+        "editor": "admin",
+        "edited": "2019-04-11T19:44:51.215Z",
+        "text": "Almost before we..."
+      },
+      {
+        "id": 1,
+        "author": "admin",
+        "created": "2019-04-11T19:44:36.918Z",
+        "editor": "admin",
+        "edited": "2019-04-11T19:44:51.215Z",
+        "text": "Almost before we..."
+      }
+    ]
   }, {
     "id": 4,
     "title": "Example 4",
@@ -81,7 +149,24 @@
     "statusName": "inProgress",
     "priority": 3,
     "subtasks": [],
-    "comments": []
+    "comments": [
+      {
+        "id": 0,
+        "author": "anon",
+        "created": "2019-04-11T19:44:36.918Z",
+        "editor": "admin",
+        "edited": "2019-04-11T19:44:51.215Z",
+        "text": "A shining crescent..."
+      },
+      {
+        "id": 1,
+        "author": "admin",
+        "created": "2019-04-11T19:44:36.918Z",
+        "editor": "admin",
+        "edited": "2019-04-11T19:44:51.215Z",
+        "text": "A shining crescent..."
+      }
+    ]
   }, {
     "id": 5,
     "title": "Example 5",
@@ -98,11 +183,11 @@
       {
         "author": "anon",
         "created": "2018-08-12T19:44:36.918Z",
+        "editor": "admin",
         "edited": "2018-08-12T19:44:51.215Z",
         "text": "\"Mist enveloped the ship three hours out from port.\" - whaat?"
       }
-    ],
-    "commentsCount": 1
+    ]
   }, {
     "id": 6,
     "title": "Example 6",
@@ -115,7 +200,24 @@
     "statusName": "testing",
     "priority": 1,
     "subtasks": [],
-    "comments": []
+    "comments": [
+      {
+        "id": 0,
+        "author": "anon",
+        "created": "2019-04-11T19:44:36.918Z",
+        "editor": "admin",
+        "edited": "2019-04-11T19:44:51.215Z",
+        "text": "She stared through..."
+      },
+      {
+        "id": 1,
+        "author": "admin",
+        "created": "2019-04-11T19:44:36.918Z",
+        "editor": "admin",
+        "edited": "2019-04-11T19:44:51.215Z",
+        "text": "She stared through..."
+      }
+    ]
   }, {
     "id": 7,
     "title": "Example 7",
@@ -128,7 +230,24 @@
     "statusName": "done",
     "priority": 1,
     "subtasks": [],
-    "comments": []
+    "comments": [
+      {
+        "id": 0,
+        "author": "anon",
+        "created": "2019-04-11T19:44:36.918Z",
+        "editor": "admin",
+        "edited": "2019-04-11T19:44:51.215Z",
+        "text": "I repeat. She stared through..."
+      },
+      {
+        "id": 1,
+        "author": "admin",
+        "created": "2019-04-11T19:44:36.918Z",
+        "editor": "admin",
+        "edited": "2019-04-11T19:44:51.215Z",
+        "text": "I repeat. She stared through..."
+      }
+    ]
   }, {
     "id": 8,
     "title": "Example 8",
@@ -140,6 +259,23 @@
     "statusName": "discuss",
     "priority": 1,
     "subtasks": [],
-    "comments": []
+    "comments": [
+      {
+        "id": 0,
+        "author": "anon",
+        "created": "2019-04-11T19:44:36.918Z",
+        "editor": "admin",
+        "edited": "2019-04-11T19:44:51.215Z",
+        "text": "Some ticket..."
+      },
+      {
+        "id": 1,
+        "author": "admin",
+        "created": "2019-04-11T19:44:36.918Z",
+        "editor": "admin",
+        "edited": "2019-04-11T19:44:51.215Z",
+        "text": "Some ticket..."
+      }
+    ]
   }
 ]
