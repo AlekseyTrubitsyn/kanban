@@ -21,15 +21,13 @@ class Card extends Component {
     super(props);
 
     const { item } = props;
-    const { statusName, deadline, priority, assignee, subtasks, comments } = item;
+    const { statusName, deadline, priority, assignee } = item;
 
     this.state = {
       statusName,
       deadline,
       priority,
       assignee,
-      subtasks,
-      comments
     }
 
     this.statusSelectData = [
@@ -113,8 +111,8 @@ class Card extends Component {
   }
 
   render() {
-    const { item, userData, subtasks, comments, onCloseClick } = this.props;
-    const { id, title, text, creationDate, project, reporter } = item;
+    const { item, userData, onCloseClick } = this.props;
+    const { id, title, text, creationDate, project, reporter, subtasks, comments } = item;
 
     const { statusName, priority, assignee } = this.state;
 
@@ -185,7 +183,7 @@ class Card extends Component {
             <div className="card-info card-info--large card__comments">
               <h3 className="card-info__title">Comments: </h3>
               <Comments
-                items={comments}
+                comments={comments}
                 username={userData.username}
                 onChange={this.updateComments}
               />
