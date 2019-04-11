@@ -1,0 +1,13 @@
+.comments__list {
+  margin: 0 0 10px;
+}
+
+.comments-list__item {
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.comments-list-item__comment {
+  flex-grow: 1;
+}
