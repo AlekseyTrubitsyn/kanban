@@ -6,6 +6,7 @@ import {
   CLOSE_TICKET_MODAL,
   CLOSE_MODAL_AFTER_SAVE,
   REQUEST_TICKETS,
+  RECEIVE_SUCCESS,
   RESET_TICKETS,
   RECEIVE_TICKETS,
   CHANGE_FILTER
@@ -199,6 +200,12 @@ export default function tickets(state = initialState, action) {
       return {
         ...state,
         isFetching: true
+      }
+
+    case RECEIVE_SUCCESS:
+      return {
+        ...state,
+        isFetching: false
       }
 
     case RESET_TICKETS:

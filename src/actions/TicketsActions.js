@@ -5,6 +5,7 @@ import {
   OPEN_TICKET_MODAL,
   CLOSE_TICKET_MODAL,
   REQUEST_TICKETS,
+  RECEIVE_SUCCESS,
   RECEIVE_TICKETS_ERROR,
   RESET_TICKETS,
   RECEIVE_TICKETS,
@@ -104,6 +105,10 @@ export const saveTickets = (payload) => {
             })
             .then(() => {
               toastInfo('Saved');
+
+              dispatch({
+                type: RECEIVE_SUCCESS
+              });
             })
             .catch(e => {
               dispatch({
@@ -148,10 +153,14 @@ export const getTickets = (projectId = 1) => {
 
 export const resetTickets = () => {
   return (dispatch) => {
-    dispatch(requestTickets);
+    dispatch({
+      type: REQUEST_TICKETS
+    });
 
     return axiosWrapper({ url: '/DefaultTickets' })
             .then(response => {
+              toastInfo('Reset completed');
+
               dispatch({
                 type: RESET_TICKETS,
                 payload: response
