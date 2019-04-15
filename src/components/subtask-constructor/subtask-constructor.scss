@@ -1,0 +1,26 @@
+@import '../../assets/styles/colors.scss';
+
+.subtask-constructor {
+  display: flex;
+  align-items: center;
+  padding: 1px;
+
+  .subtask-constructor__input {
+    margin: 0;
+  }
+}
+
+.subtask-constructor__input {
+  resize: vertical;
+  min-height: 70px;
+  display: block;
+  border-radius: 5px;
+  border: none;
+  background: $i-white;
+  padding: 10px;
+
+  &:focus {
+    background: $i-white;
+    box-shadow: 0 0 0 1px darken($i-white, 15%);
+  }
+}
