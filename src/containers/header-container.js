@@ -13,7 +13,7 @@ const propTypes = {
   userData: PropTypes.shape({
     username: PropTypes.string.isRequired,
     firstName: PropTypes.string,
-    secondName: PropTypes.string
+    surname: PropTypes.string
   }).isRequired,
   filters: PropTypes.arrayOf(PropTypes.string).isRequired,
   logout: PropTypes.func.isRequired,
@@ -41,11 +41,11 @@ const HeaderContainer = (props) => {
   const {
     username,
     firstName,
-    secondName
+    surname
   } = userData;
 
-  const user = (firstName && secondName)
-    ? `${firstName} ${secondName.slice(0, 1)}`
+  const user = (firstName && surname)
+    ? `${firstName} ${surname.slice(0, 1)}`
     : username;
 
   return (

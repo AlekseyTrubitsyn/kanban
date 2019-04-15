@@ -236,7 +236,7 @@ const createNewUser = (username, password) => {
     "id": id,
     "username": username,
     "firstName": "",
-    "secondName": "",
+    "surname": "",
     "gender": "",
     "avatar": "",
     "email": "",

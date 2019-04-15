@@ -24,7 +24,7 @@ const CardInfoBlock = (props) => {
       {reporter &&
         <p className="card-info">
           <span>Reporter:</span>
-          <span> {reporter.firstName} {reporter.secondName}</span>
+          <span> {reporter.firstName} {reporter.surname}</span>
           <span> ({reporter.username})</span>
           <img
             className="card__avatar"
@@ -39,9 +39,9 @@ const CardInfoBlock = (props) => {
         ? (
           <div className="card-info">
             <span>Assignee: </span>
-            {assignee.firstName && assignee.secondName
+            {assignee.firstName && assignee.surname
               ? <Fragment>
-                  <span>{assignee.firstName} {assignee.secondName}</span>
+                  <span>{assignee.firstName} {assignee.surname}</span>
                   <span> ({assignee.username})</span>
                 </Fragment>
               : <span>{assignee.username}</span>
@@ -73,7 +73,7 @@ CardInfoBlock.propTypes = {
   }),
   reporter: PropTypes.shape({
     username: PropTypes.string.isRequired,
-    secondName: PropTypes.string,
+    surname: PropTypes.string,
     firstName: PropTypes.string
   }),
   creationDate: PropTypes.oneOfType([
