@@ -1,0 +1,105 @@
+@import "../../assets/styles/colors.scss";
+
+.ticket {
+  width: 80vw;
+  height: 80vh;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 300px auto 350px;
+  grid-template-rows: min-content auto 300px;
+  grid-gap: 10px;
+  grid-template-areas:
+    "title title title"
+    "details description aside"
+    "comments comments aside";
+
+  textarea,
+  input {
+    width: 100%;
+  }
+}
+
+.ticket__details,
+.ticket__description,
+.ticket__comments,
+.ticket__aside {
+  overflow: hidden;
+}
+
+.ticket__header {
+  grid-area: title;
+}
+
+.ticket__aside {
+  grid-area: aside;
+  border-left: 1px solid darken($i-white, 10%);
+  padding: 10px;
+}
+
+.ticket__details {
+  grid-area: details;
+  padding: 5px 10px;
+  border-right: 1px solid $i-white;
+}
+
+.ticket__description {
+  grid-area: description;
+}
+
+.ticket__comments {
+  grid-area: comments;
+  padding-right: 20px;
+}
+
+.ticket__subtitle {
+  margin-bottom: 10px;
+  color: $gun-grey;
+}
+
+.ticket-header {
+  padding: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid $i-white;
+}
+
+.ticket-header__project {
+  margin-bottom: 10px;
+}
+
+.ticket-aside__item {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid $i-white;
+
+  &:last-of-type {
+    margin-bottom: 0;
+    border-bottom: none;
+  }
+}
+
+.ticket-header__title {
+  font-size: 20px;
+}
+
+.ticket-aside-item__action-button {
+  margin: 5px;
+}
+
+.ticket-details-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.ticket-details-item__key {
+  margin-right: 10px;
+}
+
+.ticket-details-item__value {
+  text-align: right;
+}
+
+.ticket-description__editable-text {
+  display: block;
+  height: 100%;
+}
