@@ -1,8 +1,10 @@
 /**
 ** It's just a front-end app without server,
-** so it get fake data from the BIF module.
+** so axiosWrapper gets some fake data from
+** the backInFront module.
+**
 ** Originally use axios & RESTful API.
-**/
+*/
 import {
   _get,
   _post
