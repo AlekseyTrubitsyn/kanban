@@ -16,6 +16,7 @@ import PrioritySelect from '../priority-select';
 import TicketStatusSelect from '../ticket-status-select';
 import Subtasks from '../subtasks';
 import Comments from '../comments';
+import DeadlineSelect from '../deadline-select';
 
 export const ticketPropTypes = {
   id: PropTypes.number.isRequired,
@@ -102,6 +103,10 @@ const Ticket = (props) => {
     unsavedTicketData.description = description;
   }
 
+  const updateDeadline = deadline => {
+    unsavedTicketData.deadline = deadline;
+  }
+
   const updatePriority = priority => {
     unsavedTicketData.priority = priority;
   }
@@ -174,6 +179,15 @@ const Ticket = (props) => {
               parentClassName="ticket-aside-item__action"
               status={statusName}
               onChange={updateStatus}
+            />
+          </div>
+          <div className="ticket-aside__item">
+            <h3 className="ticket-aside-item__title ticket__subtitle">
+              {'Change deadline'}
+            </h3>
+            <DeadlineSelect
+              deadline={deadline}
+              onChange={updateDeadline}
             />
           </div>
           <div className="ticket-aside__item">
