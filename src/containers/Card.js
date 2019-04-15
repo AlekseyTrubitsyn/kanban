@@ -9,11 +9,11 @@ import * as TicketsActions from '../actions/TicketsActions';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
-import PrioritySelector from '../components/PrioritySelector';
 import CardInfoBlock from '../components/card/CardInfoBlock';
 import CardDeadlinePicker from '../components/card/CardDeadlinePicker';
 
 import ModalContainer from '../components/modal-container';
+import PrioritySelect from '../components/priority-select';
 import Subtasks from '../components/subtasks';
 import Comments from '../components/comments';
 
@@ -54,9 +54,7 @@ class Card extends Component {
   }
 
   updatePriority(priority) {
-    this.setState({
-      priority
-    })
+    this.priority = priority;
   }
 
   updateStatus(statusName) {
@@ -144,8 +142,8 @@ class Card extends Component {
             <div className="card-info__container">
               <div className="card-info card__priority-selector">
                 <span>Priority: </span>
-                <PrioritySelector
-                  value={priority}
+                <PrioritySelect
+                  priority={priority}
                   onChange={this.updatePriority}
                 />
               </div>

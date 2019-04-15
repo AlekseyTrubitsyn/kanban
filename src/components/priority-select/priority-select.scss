@@ -1,0 +1,29 @@
+@import '../../assets/styles/colors.scss';
+
+.priority-select {
+  display: inline-block;
+
+  .priority-select__label {
+    color: $i-grey;
+    margin-right: 5px;
+    cursor: pointer;
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+
+  .priority-select__label--selected {
+    color: lighten($dark-cerulean, 15%);
+  }
+
+  &:hover {
+    .priority-select__label {
+      color: lighten($dark-cerulean, 30%);
+
+      &:hover ~ .priority-select__label {
+        color: $i-grey;
+      }
+    }
+  }
+}
