@@ -7,7 +7,7 @@ import _isEmpty from 'lodash/isEmpty';
 
 const KanbanItem = (props) => {
   const { item, rf, highlighted, onAvatarOver, ...deafultProps } = props;
-  const { id, title, text, reporter, assignee, deadline, creationDate, priority} = item;
+  const { id, title, description, reporter, assignee, deadline, creationDate, priority} = item;
 
   // const assigneeAvatar = assignee ? `${process.env.PUBLIC_URL}/${assignee.avatar}` : '';
   const assigneeAvatar = assignee ? assignee.avatar : '';
@@ -84,7 +84,7 @@ const KanbanItem = (props) => {
         {title.length > 35 ? title.slice(0, 32) + '...' : title}
       </p>
       <p className="kanban-board-item__text">
-        {text.length > 35 ? text.slice(0, 32) + '...' : text}
+        {description.length > 35 ? description.slice(0, 32) + '...' : description}
       </p>
       <div className="kanban-board-item__footer">
         <div className="kanban-board-item__priority-stars">
@@ -107,7 +107,7 @@ KanbanItem.propTypes = {
   item: PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
-    text: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
     project: PropTypes.shape({
       key: PropTypes.string.isRequired
     }).isRequired,

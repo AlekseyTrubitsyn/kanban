@@ -18,7 +18,7 @@ const propTypes = {
   filters: PropTypes.arrayOf(PropTypes.string).isRequired,
   logout: PropTypes.func.isRequired,
   showSideMenu: PropTypes.func.isRequired,
-  createNewItem: PropTypes.func.isRequired,
+  createNewTicket: PropTypes.func.isRequired,
   changeFilter: PropTypes.func.isRequired,
   filterId: PropTypes.number
 }
@@ -34,7 +34,7 @@ const HeaderContainer = (props) => {
     filterId,
     filters,
     showSideMenu,
-    createNewItem,
+    createNewTicket,
     changeFilter
   } = props;
 
@@ -54,7 +54,7 @@ const HeaderContainer = (props) => {
       filters={filters}
       filterId={filterId}
       onShowSideMenu={showSideMenu}
-      onCreateNewItem={() => createNewItem(userData)}
+      onCreateNewTicket={() => createNewTicket(userData)}
       onLogout={logout}
       onSelectFilter={changeFilter}
     />
@@ -79,14 +79,14 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   const {
     changeFilter,
-    createNewItem
+    createNewTicket
   } = bindActionCreators(TicketsActions, dispatch);
-  
+
   return {
     logout: bindActionCreators(UserSettingsActions, dispatch).logout,
     showSideMenu: bindActionCreators(SideMenuActions, dispatch).showSideMenu,
     changeFilter,
-    createNewItem
+    createNewTicket,
   }
 }
 

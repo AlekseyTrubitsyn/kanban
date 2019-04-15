@@ -1,5 +1,6 @@
 import _groupBy from 'lodash/groupBy';
 import _isEmpty from 'lodash/isEmpty';
+import _cloneDeep from 'lodash/cloneDeep';
 
 import { loadFromLS, saveToLS } from '../localStorage';
 
@@ -91,7 +92,7 @@ const getTickets = (projectId) => {
  * @returns {array} array of tickets
  */
 const getTicketsArray = (projectId) => {
-  let arr = loadFromLS('tickets') || tickets;
+  let arr = loadFromLS('tickets') || _cloneDeep(tickets);
 
   if (!Array.isArray(arr) || !arr.length) return [];
 
@@ -156,20 +157,23 @@ const setTickets = (data) => {
  *
  * @returns {boolean} true if succeed
  */
-const setTicket = (data) => {
-  if (_isEmpty(data)) return false;
+const setTicket = (item) => {
+  if (_isEmpty(item)) return false;
 
   let tickets = getTicketsArray(1);
-  let newItem = {...data.item};
+  let newItem = _cloneDeep(item);
   newItem.creationDate = new Date().toISOString();
 
   if (newItem.id === -1) {
-    newItem.id = tickets.reduce((result, item) => result > item.id ? result : item.id, 0) + 1;
+    newItem.id = Math.max(...tickets.map(item => item.id)) + 1;
 
     return setTickets([...tickets, newItem]);
   }
 
-  return setTickets(tickets.map(item => item.id === newItem.id ? newItem : item ));
+  const index = tickets.findIndex(ticket => ticket.id === newItem.id);
+  tickets.splice(index, 1, newItem);
+
+  return setTickets(tickets);
 }
 
 /**

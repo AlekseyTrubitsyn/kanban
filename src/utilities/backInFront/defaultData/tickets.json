@@ -2,7 +2,7 @@
   {
     "id": 1,
     "title": "Example 1",
-    "text": "I watched the storm, so beautiful yet terrific.",
+    "description": "I watched the storm, so beautiful yet terrific.",
     "reporterId": 2,
     "assigneeId": 1,
     "projectId": 1,
@@ -48,7 +48,7 @@
   }, {
     "id": 2,
     "title": "Example 2",
-    "text": "A red flare silhouetted the jagged edge of a wing",
+    "description": "A red flare silhouetted the jagged edge of a wing",
     "reporterId": 3,
     "assigneeId": 1,
     "projectId": 1,
@@ -94,7 +94,7 @@
   }, {
     "id": 3,
     "title": "Example 3",
-    "text": "Almost before we knew it, we had left the ground.",
+    "description": "Almost before we knew it, we had left the ground.",
     "reporterId": 4,
     "assigneeId": 1,
     "projectId": 1,
@@ -140,14 +140,14 @@
   }, {
     "id": 4,
     "title": "Example 4",
-    "text": "A shining crescent far beneath the flying vessel.",
+    "description": "A shining crescent far beneath the flying vessel.",
     "reporterId": 3,
     "assigneeId": 2,
     "projectId": 1,
     "deadline": "2018-09-02T09:00:00.555Z",
     "creationDate": "2018-07-25T12:00:00.555Z",
     "statusName": "inProgress",
-    "priority": 3,
+    "priority": 2,
     "subtasks": [],
     "comments": [
       {
@@ -170,7 +170,7 @@
   }, {
     "id": 5,
     "title": "Example 5",
-    "text": "Mist enveloped the ship three hours out from port.",
+    "description": "Mist enveloped the ship three hours out from port.",
     "reporterId": 2,
     "assigneeId": 1,
     "projectId": 1,
@@ -191,7 +191,7 @@
   }, {
     "id": 6,
     "title": "Example 6",
-    "text": "She stared through the window at the stars.",
+    "description": "She stared through the window at the stars.",
     "reporterId": 2,
     "assigneeId": 4,
     "projectId": 1,
@@ -221,7 +221,7 @@
   }, {
     "id": 7,
     "title": "Example 7",
-    "text": "I repeat. She stared through the window at the stars.",
+    "description": "I repeat. She stared through the window at the stars.",
     "reporterId": 2,
     "assigneeId": 3,
     "projectId": 1,
@@ -251,7 +251,7 @@
   }, {
     "id": 8,
     "title": "Example 8",
-    "text": "Some ticket without assignee.",
+    "description": "Some ticket without assignee.",
     "reporterId": 2,
     "projectId": 1,
     "deadline": null,

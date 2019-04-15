@@ -1,16 +1,13 @@
-import _isEmpty from 'lodash/isEmpty';
-import _cloneDeep from 'lodash/cloneDeep';
-
 import {
   MOVE_TICKET,
-  RESET_TICKETS,
+  CREATE_TICKET,
+  SAVE_TICKET,
+  OPEN_TICKET_MODAL,
+  CLOSE_TICKET_MODAL,
+  CLOSE_MODAL_AFTER_SAVE,
   REQUEST_TICKETS,
+  RESET_TICKETS,
   RECEIVE_TICKETS,
-  SAVE_TICKETS,
-  CREATE_NEW_ITEM,
-  OPEN_ITEM_CARD,
-  CLOSE_ITEM_CARD,
-  REQUEST_TICKET_SAVE,
   CHANGE_FILTER
 } from '../constants/ActionTypes';
 
@@ -43,100 +40,165 @@ const initialState = {
   archive: {
     name: 'Archive',
     values: []
-  },
-  newItem: {
-    "id": -1,
-    "title": "",
-    "text": "",
-    "reporterId": 1,
-    "assigneeId": null,
-    "projectId": 1,
-    "deadline": null,
-    "creationDate": "",
-    "statusName": "discuss",
-    "priority": 1,
-    "subtasks": [],
-    "comments": []
+  }
+}
+
+class Ticket {
+  constructor() {
+    this.id = -1;
+    this.title = '';
+    this.description = '';
+    this.reporterId = -1;
+    this.assigneeId = null;
+    this.projectId = 1;
+    this.project = {
+      "id": 1,
+      "name": "My first project",
+      "key": "test",
+      "default": true
+    };
+    this.deadline = null;
+    this.creationDate = (new Date()).toISOString();
+    this.statusName = 'discuss';
+    this.priority = 1;
   }
 }
 
 export default function tickets(state = initialState, action) {
-  switch (action.type) {
-    case OPEN_ITEM_CARD:
-      const {itemId, columnName} = action.payload;
-      const values = state[columnName] && state[columnName].values;
-      const itemToModify = values
-                          && !_isEmpty(values)
-                          && values.filter(o => o.id === itemId)[0];
+  const moveTicket = (state, payload) => {
+    const {
+      source,
+      destination
+    } = payload;
 
-      return { ...state, showCardModal: true, itemToModify }
+    const sourceArray = state[source.name].values.slice();
+    const ticket = sourceArray.splice(source.position, 1)[0];
 
-    case CREATE_NEW_ITEM:
-      return {
-        ...state,
-        showCardModal: true,
-        itemToModify: {
-          ..._cloneDeep(state.newItem),
-          reporter: action.userData
-        }
-      }
-
-    case CLOSE_ITEM_CARD:
-      return {...state, showCardModal: false, itemToModify: undefined }
-
-    case MOVE_TICKET:
-      const { source, destination } = action.payload;
-
-      let srcValues = [...state[source.name].values];
-      const item = srcValues.splice(source.position, 1)[0];
-      item.statusName = destination.name;
-
-      if (source.name === destination.name) {
-        srcValues.splice(destination.position, 0, item);
-
-        return {
-          ...state,
-          [source.name]: {
-            ...state[source.name],
-            values: srcValues
-          }
-        }
-      }
-
-      let destValues = [...state[destination.name].values];
-      destValues.splice(destination.position, 0, item);
+    if (source.name === destination.name) {
+      sourceArray.splice(destination.position, 0, ticket);
 
       return {
         ...state,
         [source.name]: {
           ...state[source.name],
-          values: srcValues
-        },
-        [destination.name]: {
-          ...state[destination.name],
-          values: destValues
+          values: sourceArray
         }
       }
+    }
 
-    case REQUEST_TICKET_SAVE:
+    const destinationValues = state[destination.name].values.slice();
+    destinationValues.splice(destination.position, 0, ticket);
+
+    return {
+      ...state,
+      [source.name]: {
+        ...state[source.name],
+        values: sourceArray
+      },
+      [destination.name]: {
+        ...state[destination.name],
+        values: destinationValues
+      }
+    }
+  }
+
+  const createTicket = (state, reporter) => {
+    const newTicket = state.newTicket || new Ticket();
+    newTicket.reporterId = reporter.id;
+    newTicket.reporter = reporter;
+
+    return ({
+      ...state,
+      newTicket,
+      ticketToModify: newTicket,
+      showTicketModal: true
+    })
+  }
+
+  const saveTicket = (state, ticket) => {
+    const {
+      previousStatus = '',
+      statusName
+    } = ticket;
+
+    const move = previousStatus && (statusName !== previousStatus);
+
+    const sourceArray = (move ? state[previousStatus] : state[statusName]).values.slice();
+    const sourcePosition = sourceArray.findIndex(item => item.id === ticket.id);
+    const sourceKey = move ? previousStatus : statusName;
+
+    let destinationColumnData = {};
+
+    if (move) {
+      sourceArray.splice(sourcePosition, 1);
+
+      destinationColumnData = {
+        [statusName]: {
+          ...state[statusName],
+          values: state[statusName].values.slice().concat(ticket)
+        }
+      }
+    } else {
+      sourceArray.splice(sourcePosition, 1, ticket);
+    }
+
+    return {
+      ...state,
+      isFetching: false,
+      [sourceKey]: {
+        ...state[sourceKey],
+        values: sourceArray
+      },
+      ...destinationColumnData,
+      newTicket: null,
+      ticketToModify: ticket
+    };
+  };
+
+  switch (action.type) {
+    case MOVE_TICKET:
+      return moveTicket(state, action.payload);
+
+    case CREATE_TICKET:
+      return createTicket(state, action.userData);
+
+    case SAVE_TICKET:
+      return saveTicket(state, action.payload);
+
+    case OPEN_TICKET_MODAL:
+      return ({
+        ...state,
+        showTicketModal: true,
+        ticketToModify: state[action.columnName].values
+          .find(ticket => ticket.id === action.itemId)
+      })
+
+    case CLOSE_TICKET_MODAL:
+      return ({
+        ...state,
+        showTicketModal: false,
+        ticketToModify: null
+      });
+
+    case CLOSE_MODAL_AFTER_SAVE:
+      return ({
+        ...state,
+        newTicket: null,
+        showTicketModal: false,
+        isFetching: true
+      });
+
+    case CHANGE_FILTER:
       return {
         ...state,
-        isFetching: true,
-        showCardModal: false,
-        itemToModify: undefined
+        filter: action.filter,
+        filterId: action.filterId
       }
 
     case REQUEST_TICKETS:
       return {
         ...state,
         isFetching: true
-      }
-
-    case SAVE_TICKETS:
-      return {
-        ...state,
-        isFetching: false,
-        saveAt: action.payload
       }
 
     case RESET_TICKETS:
@@ -170,14 +232,7 @@ export default function tickets(state = initialState, action) {
         }
       }
 
-    case CHANGE_FILTER:
-      return {
-        ...state,
-        filter: action.filter,
-        filterId: action.filterId
-      }
-
-      default:
+    default:
       return state;
   }
 }

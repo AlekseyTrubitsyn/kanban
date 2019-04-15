@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import KanbanBoardContainer from './KanbanBoardContainer';
 import HeaderContainer from './header-container';
 import SideMenu from './SideMenu';
-import Card from './Card';
+import TicketContainer from './ticket-container';
 
 import * as TicketsActions from '../actions/TicketsActions';
 import * as ProjectsActions from '../actions/ProjectsActions';
@@ -22,11 +22,11 @@ class KanbanBoard extends Component {
   }
 
   render() {
-    const { showCardModal } = this.props;
+    const { showTicketModal } = this.props;
 
     return (
       <Fragment>
-        {showCardModal && <Card/>}
+        {showTicketModal && <TicketContainer/>}
         <SideMenu />
         <HeaderContainer />
         <KanbanBoardContainer />
@@ -37,7 +37,7 @@ class KanbanBoard extends Component {
 
 function mapStateToProps(state) {
   return {
-    showCardModal: state.tickets.showCardModal
+    showTicketModal: state.tickets.showTicketModal
   }
 }
 

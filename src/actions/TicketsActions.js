@@ -1,64 +1,86 @@
 import {
   MOVE_TICKET,
+  CREATE_TICKET,
+  SAVE_TICKET,
+  OPEN_TICKET_MODAL,
+  CLOSE_TICKET_MODAL,
+  REQUEST_TICKETS,
+  RECEIVE_TICKETS_ERROR,
   RESET_TICKETS,
   RECEIVE_TICKETS,
-  RECEIVE_TICKETS_ERROR,
-  REQUEST_TICKETS,
-  SAVE_TICKETS,
-  CREATE_NEW_ITEM,
-  OPEN_ITEM_CARD,
-  CLOSE_ITEM_CARD,
-  REQUEST_TICKET_SAVE,
   CHANGE_FILTER
 } from '../constants/ActionTypes';
 
 import { axiosWrapper } from '../utilities/axiosWrapper';
 import { toastError, toastInfo } from '../utilities/toastify';
 
-export const createNewItem = (userData) => {
+export const createNewTicket = (userData) => {
   return {
-    type: CREATE_NEW_ITEM,
+    type: CREATE_TICKET,
     userData
   }
 }
 
-export const openItemCard = (payload) => {
+export const openTicketModal = ({ itemId, columnName }) => {
   return {
-    type: OPEN_ITEM_CARD,
-    payload
+    type: OPEN_TICKET_MODAL,
+    itemId,
+    columnName
   }
 }
 
-export const closeItemCard = () => {
+export const closeTicketModal = () => {
   return {
-    type: CLOSE_ITEM_CARD
+    type: CLOSE_TICKET_MODAL
   }
 }
 
-export const saveItem = (payload) => {
+export const saveTicket = payload => {
   return (dispatch) => {
-    dispatch({
-      type: REQUEST_TICKET_SAVE
-    });
-
     return axiosWrapper({
-              url: '/Ticket',
-              method: 'post',
-              data: payload
-            })
-            .then(response => {
-              toastInfo('Saved');
+      url: '/Ticket',
+      method: 'post',
+      data: payload
+    })
+      .then(() => {
+        toastInfo('Saved');
+      })
+      .catch(e => {
+        toastError(e);
+      })
+      .finally(() => {
+        dispatch({
+          type: SAVE_TICKET,
+          payload
+        });
+      })
+  }
+}
 
-              dispatch(getTickets());
-            })
-            .catch(e => {
-              dispatch({
-                type: RECEIVE_TICKETS_ERROR,
-                payload: e
-              });
+export const saveTicketAndCloseModal = payload => {
+  return (dispatch) => {
+    return axiosWrapper({
+      url: '/Ticket',
+      method: 'post',
+      data: payload
+    })
+      .then(() => {
+        toastInfo('Saved');
 
-              toastError(e);
-            });
+        dispatch({
+          type: CLOSE_TICKET_MODAL
+        });
+
+        getTickets()(dispatch);
+      })
+      .catch(e => {
+        toastError(e.message);
+
+        dispatch({
+          type: SAVE_TICKET,
+          payload
+        });
+      });
   }
 }
 
@@ -69,7 +91,7 @@ export const moveTicket = (payload) => {
   }
 }
 
-export const setTickets = (payload) => {
+export const saveTickets = (payload) => {
   return (dispatch) => {
     dispatch({
       type: REQUEST_TICKETS
@@ -80,11 +102,8 @@ export const setTickets = (payload) => {
               method: 'post',
               data: payload
             })
-            .then(response => {
-              dispatch({
-                type: SAVE_TICKETS,
-                payload: +(new Date())
-              })
+            .then(() => {
+              toastInfo('Saved');
             })
             .catch(e => {
               dispatch({
@@ -128,13 +147,11 @@ export const getTickets = (projectId = 1) => {
 }
 
 export const resetTickets = () => {
-  console.log('resetTickets');
   return (dispatch) => {
     dispatch(requestTickets);
 
     return axiosWrapper({ url: '/DefaultTickets' })
             .then(response => {
-              console.log(response);
               dispatch({
                 type: RESET_TICKETS,
                 payload: response

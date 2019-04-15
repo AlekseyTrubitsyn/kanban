@@ -16,7 +16,7 @@ const SideMenu = (props) => {
     testing,
     done,
     archive,
-    setTickets,
+    saveTickets,
     show,
     hideSideMenu
   } = props;
@@ -24,7 +24,7 @@ const SideMenu = (props) => {
   const onSaveClick = () => {
     if (isFetching) return;
 
-    setTickets({
+    saveTickets({
       discuss: discuss.values,
       toDo: toDo.values,
       inProgress: inProgress.values,
@@ -93,7 +93,7 @@ function mapDispatchToProps(dispatch) {
   return {
     hideSideMenu: bindActionCreators(SideMenuActions, dispatch).hideSideMenu,
     getTickets: bindActionCreators(TicketsActions, dispatch).getTickets,
-    setTickets: bindActionCreators(TicketsActions, dispatch).setTickets,
+    saveTickets: bindActionCreators(TicketsActions, dispatch).saveTickets,
     resetTickets: bindActionCreators(TicketsActions, dispatch).resetTickets,
   }
 }
@@ -126,7 +126,7 @@ SideMenu.propTypes = {
   }).isRequired,
   hideSideMenu: PropTypes.func.isRequired,
   getTickets: PropTypes.func.isRequired,
-  setTickets: PropTypes.func.isRequired,
+  saveTickets: PropTypes.func.isRequired,
   resetTickets: PropTypes.func.isRequired
 }
 

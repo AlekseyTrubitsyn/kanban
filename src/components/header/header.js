@@ -9,18 +9,18 @@ const propTypes = {
   filterId: PropTypes.number.isRequired,
   user: PropTypes.string.isRequired,
   onShowSideMenu: PropTypes.func.isRequired,
-  onCreateNewItem: PropTypes.func.isRequired,
+  onCreateNewTicket: PropTypes.func.isRequired,
   onLogout: PropTypes.func.isRequired,
   onSelectFilter: PropTypes.func.isRequired
 };
 
-const Header = (props) => {  
+const Header = (props) => {
   const {
     user,
     filters,
     filterId,
     onShowSideMenu,
-    onCreateNewItem,
+    onCreateNewTicket,
     onLogout,
     onSelectFilter
   } = props;
@@ -38,7 +38,7 @@ const Header = (props) => {
         <button
           className="header__create-ticket-button btn btn-primary"
           title="Create a new task"
-          onClick={onCreateNewItem}
+          onClick={onCreateNewTicket}
         >
           <FontAwesomeIcon icon="plus" />
         </button>
@@ -56,12 +56,12 @@ const Header = (props) => {
         <span className="header__user-name">
           {user}
         </span>
-        <button 
+        <button
           className="header__logout-button btn btn-primary"
           title="Logout"
           onClick={onLogout}
         >
-          <FontAwesomeIcon icon="sign-out-alt" />          
+          <FontAwesomeIcon icon="sign-out-alt" />
         </button>
       </div>
     </div>

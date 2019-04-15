@@ -50,7 +50,7 @@ class KanbanBoardContainer extends Component {
   }
 
   onOpenCardClick(columnName, itemId) {
-    this.props.openItemCard({
+    this.props.openTicketModal({
       itemId,
       columnName
     })
@@ -193,7 +193,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     moveTicket: bindActionCreators(TicketsActions, dispatch).moveTicket,
-    openItemCard: bindActionCreators(TicketsActions, dispatch).openItemCard,
+    openTicketModal: bindActionCreators(TicketsActions, dispatch).openTicketModal,
   }
 }
 
@@ -226,7 +226,7 @@ KanbanBoardContainer.propTypes = {
   filter: PropTypes.string.isRequired,
   userId: PropTypes.number.isRequired,
   moveTicket: PropTypes.func.isRequired,
-  openItemCard: PropTypes.func.isRequired
+  openTicketModal: PropTypes.func.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(KanbanBoardContainer);
