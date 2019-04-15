@@ -1,0 +1,25 @@
+@import '../../assets/styles/colors.scss';
+
+.editable-text {
+  display: block;
+  cursor: text;
+  padding: 1px;
+}
+
+.editable-text__text--strikeout {
+  text-decoration: line-through;
+}
+
+.editable-text__input {
+  display: block;
+  resize: vertical;
+  border-radius: 5px;
+  border: none;
+  background: $i-white;
+  padding: 10px;
+
+  &:focus {
+    background: $i-white;
+    box-shadow: 0 0 0 1px darken($i-white, 15%);
+  }
+}
