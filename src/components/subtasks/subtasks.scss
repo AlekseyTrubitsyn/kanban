@@ -1,0 +1,21 @@
+.subtasks__list {
+  margin: 0 0 10px;
+}
+
+.subtasks-list__item {
+  border-bottom: 1px dotted #eee;
+
+  &:last-of-type {
+    border: none;
+  }
+}
+
+.subtasks-list-item {
+  display: flex;
+  align-items: center;
+  padding: 4px;
+}
+
+.subtasks-list-item__subtask {
+  flex-grow: 1;
+}
