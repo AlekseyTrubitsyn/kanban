@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import KanbanBoardContainer from './KanbanBoardContainer';
 import HeaderContainer from './header-container';
-import SideMenu from './SideMenu';
+import SideMenuContainer from './side-menu-container';
 import TicketContainer from './ticket-container';
 
 import * as TicketsActions from '../actions/TicketsActions';
@@ -27,7 +27,7 @@ class KanbanBoard extends Component {
     return (
       <Fragment>
         {showTicketModal && <TicketContainer/>}
-        <SideMenu />
+        <SideMenuContainer />
         <HeaderContainer />
         <KanbanBoardContainer />
       </Fragment>
