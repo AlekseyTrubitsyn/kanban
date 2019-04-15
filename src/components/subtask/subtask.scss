@@ -1,0 +1,28 @@
+.subtask {
+  display: flex;
+  align-items: center;
+
+  .subtask__checkbox {
+    width: 14px;
+    margin-right: 10px;
+  }
+
+  .subtask__text {
+    flex-grow: 1;
+    word-break: break-all;
+  }
+}
+
+.subtask__checkbox {
+  cursor: pointer;
+}
+
+.subtask__text {
+  padding: 5px 0;
+}
+
+.subtask--done {
+  .subtask__text {
+    opacity: 0.4;
+  }
+}
