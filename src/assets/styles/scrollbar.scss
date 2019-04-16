@@ -1,0 +1,22 @@
+.ps__thumb-y {
+  right: 3px !important;
+  background-color: $i-grey !important;
+}
+
+.ps__rail-y:hover > .ps__thumb-y,
+.ps__rail-y:focus > .ps__thumb-y,
+.ps__rail-y.ps--clicking .ps__thumb-y {
+  width: 6px !important;
+  background: $b-white !important;
+}
+
+.oc-scrollbar-container .ps__rail-y {
+  opacity: 1 !important;
+}
+
+.ps__rail-y:hover,
+.ps__rail-x:focus,
+.ps__rail-y:focus,
+.ps .ps__rail-y.ps--clicking {
+  background-color: transparent !important;
+}
