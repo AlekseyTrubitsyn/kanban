@@ -11,6 +11,9 @@ import { toastError, toastInfo } from '../utilities/toastify';
 import { axiosWrapper } from '../utilities/axiosWrapper';
 import { setCookie } from '../utilities/cookies';
 
+import { getProjects } from './ProjectsActions';
+import { getTickets } from './TicketsActions';
+
 let sessionKey;
 
 export const register = (login, password) => {
@@ -104,6 +107,9 @@ export const login = (login, password) => {
               setCookie('login_session', sessionKey, {
                 expires: sessionTimeout - new Date()
               });
+
+              getProjects()(dispatch);
+              getTickets()(dispatch);
 
               dispatch({
                 type: RECEIVE_USER_DATA,
