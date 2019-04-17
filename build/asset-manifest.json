@@ -1,7 +1,16 @@
 {
-  "main.css": "static/css/main.6f537572.css",
-  "main.css.map": "static/css/main.6f537572.css.map",
-  "main.js": "static/js/main.1c4de670.js",
-  "main.js.map": "static/js/main.1c4de670.js.map",
-  "static\\media\\bg-calm.jpg": "static/media/bg-calm.c9da2eb3.jpg"
+  "main.css": "./static/css/main.b508c7a6.chunk.css",
+  "main.js": "./static/js/main.d5b656fa.chunk.js",
+  "main.js.map": "./static/js/main.d5b656fa.chunk.js.map",
+  "runtime~main.js": "./static/js/runtime~main.d653cc00.js",
+  "runtime~main.js.map": "./static/js/runtime~main.d653cc00.js.map",
+  "static/css/2.1e08ae58.chunk.css": "./static/css/2.1e08ae58.chunk.css",
+  "static/js/2.44c1d5da.chunk.js": "./static/js/2.44c1d5da.chunk.js",
+  "static/js/2.44c1d5da.chunk.js.map": "./static/js/2.44c1d5da.chunk.js.map",
+  "index.html": "./index.html",
+  "precache-manifest.1a25b165ec1a82f15c325f73e1ca4d34.js": "./precache-manifest.1a25b165ec1a82f15c325f73e1ca4d34.js",
+  "service-worker.js": "./service-worker.js",
+  "static/css/2.1e08ae58.chunk.css.map": "./static/css/2.1e08ae58.chunk.css.map",
+  "static/css/main.b508c7a6.chunk.css.map": "./static/css/main.b508c7a6.chunk.css.map",
+  "static/media/App.scss": "./static/media/bg-calm.c9da2eb3.jpg"
 }
