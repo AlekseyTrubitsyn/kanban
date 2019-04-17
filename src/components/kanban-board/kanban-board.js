@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { DragDropContext } from 'react-beautiful-dnd';
 
-import KanbanColumn from '../KanbanColumn';
+import KanbanBoardColumn from '../kanban-board-column';
 
 const propTypes = {
   isFetching: PropTypes.bool.isRequired,
@@ -79,41 +79,37 @@ class KanbanBoard extends Component {
     const { selectedAssigneeId } = this.state;
 
     if (isFetching) return (
-      <div className="kanban-board__container kanban-board__container--loading">
-        <div className="kanban-board">
-          {Array.from(new Array(5)).map((item, index) => (
-            <div
-              className="kanban-board__column kanban-board__column--loading"
-              key={index}
-            >
-              {Array.from(new Array(3)).map((subitem, subindex) => (
-                <div
-                  className="kanban-board__dummy-item kanban-board-item"
-                  key={subindex}
-                />
-              ))}
-            </div>
-          ))}
-        </div>
+      <div className="kanban-board kanban-board--loading">
+        {Array.from(new Array(5)).map((item, index) => (
+          <div
+            className="kanban-board__column"
+            key={index}
+          >
+            {Array.from(new Array(4)).map((subitem, index) => (
+              <div
+                className="kanban-board__column-item"
+                key={index}
+              />
+            ))}
+          </div>
+        ))}
       </div>
     );
 
     return (
-      <div className="kanban-board__container">
-        <div className={"kanban-board" + (selectedAssigneeId !== -1 ? " highlight" : "")}>
-          <DragDropContext onDragEnd={this.onDragEnd}>
-            {columns.map(column => (
-              <KanbanColumn
-                droppableId={column.droppableId}
-                key={column.droppableId}
-                data={column.data}
-                selectedAssigneeId={selectedAssigneeId}
-                onAssigneeSelect={(id) => this.onAssigneeSelect(id)}
-                onItemClick={(id) => this.onOpenCardClick(column.droppableId, id)}
-              />
-            ))}
-          </DragDropContext>
-        </div>
+      <div className={"kanban-board" + (selectedAssigneeId !== -1 ? " highlight" : "")}>
+        <DragDropContext onDragEnd={this.onDragEnd}>
+          {columns.map(column => (
+            <KanbanBoardColumn
+              droppableId={column.droppableId}
+              key={column.droppableId}
+              data={column.data}
+              selectedAssigneeId={selectedAssigneeId}
+              onAssigneeSelect={(id) => this.onAssigneeSelect(id)}
+              onItemClick={(id) => this.onOpenCardClick(column.droppableId, id)}
+            />
+          ))}
+        </DragDropContext>
       </div>
     );
   }
