@@ -12,7 +12,7 @@ import { faSignOutAlt, faStar, faTimes, faTimesCircle, faInfoCircle, faChevronCi
 import { faSquare } from  '@fortawesome/free-regular-svg-icons';
 
 import LoginRegisterPage from './views/login-register-page';
-import KanbanBoard from './containers/KanbanBoard';
+import KanbanPage from './views/kanban-page';
 import Tooltips from './containers/tooltips';
 
 library.add(fab, faSignOutAlt, faStar, faTimes, faTimesCircle, faInfoCircle, faChevronCircleLeft, faChevronRight, faChevronLeft, faBars, faPlus, faCheck, faSquare, faPen, faExpand, faExclamationCircle);
@@ -38,8 +38,8 @@ const App = (props) => {
       <Tooltips />
       {showLoginForm
         ? <LoginRegisterPage />
-        : <KanbanBoard />
-      }      
+        : <KanbanPage />
+      }
     </div>
   );
 }
