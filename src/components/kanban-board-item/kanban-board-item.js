@@ -48,8 +48,8 @@ const KanbanBoardItem = (props) => {
     onClick,
     onAvatarOver
   } = props;
-  
-  const { 
+
+  const {
     id,
     title,
     description,
@@ -60,35 +60,37 @@ const KanbanBoardItem = (props) => {
     priority
   } = item;
 
-  // const assigneeAvatar = assignee ? `${process.env.PUBLIC_URL}/${assignee.avatar}` : '';
-  const assigneeAvatar = assignee ? assignee.avatar : '';
-
-  const deadlineDate = new Date(deadline);
-  const deadlineWarningTime = moment().add(12, 'hours').toDate();
   const done = item.statusName === 'done';
+  const deadlineMoment = deadline ? moment(deadline) : null;
 
   const getModifier = () => {
     switch (true) {
       case done:
         return '--done';
-      case (deadline && deadlineDate < new Date()):
+
+      case (deadline && deadlineMoment && deadlineMoment.isBefore(moment())):
         return '--expired';
-      case (deadline && deadlineDate <= deadlineWarningTime):
+
+      case (deadline && deadlineMoment && deadlineMoment.isSameOrBefore(moment().add(24, 'hours'))):
         return '--warning';
+
       default:
         return '';
     }
   }
 
   const modifier = getModifier();
+  const deadlineString = deadlineMoment
+    ? `${deadlineMoment.format('LL')} ${deadlineMoment.fromNow().split(' ').join('\u00A0')}`
+    : '';
 
   return (
     <div
       className={
         `
-          kanban-board-item 
-          ${parentClassName} 
-          ${highlighted ? 'highlighted' : ''} 
+          kanban-board-item
+          ${parentClassName}
+          ${highlighted ? 'highlighted' : ''}
           ${modifier ? 'kanban-board-item' + modifier : ''}
         `.trim()
       }
@@ -96,48 +98,39 @@ const KanbanBoardItem = (props) => {
       {...draggableData}
       onClick={onClick}
     >
-      <div className="kanban-board-item__header">
-        <span>
+      <div className="kanban-board-item__header kanban-board-item-header">
+        <span className="kanban-board-item-header__span kanban-board-item-header__ticket-id">
           {'#' + id}
         </span>
         {!_isEmpty(assignee) && (
-          <div
-            className="kanban-board-item__assignee"
-            onMouseOver={() => onAvatarOver((assignee && assignee.id) || -1)}
-            onMouseLeave={() => onAvatarOver(-1)}
-          >
-            <span className="kanban-board-item__assignee-username">
-              {assignee && assignee.username}
-            </span>
-            <div
-              className="kanban-board-item__assignee-avatar"
+          <Fragment>
+            <span
+              className="kanban-board-item-header__span kanban-board-item-header__assignee-username"
+              onMouseOver={() => onAvatarOver(assignee.id)}
+              onMouseLeave={() => onAvatarOver(-1)}
+              title={`All tickets for ${assignee.username}`}
             >
-              <img
-                src={assigneeAvatar}
-                alt={assignee && assignee.username}
-                width="30"
-                height="auto"
-              />
-            </div>
-          </div>
+              {assignee.username}
+            </span>
+            <img
+              className="kanban-board-item-header__span kanban-board-item-header__assignee-avatar"
+              src={assignee.avatar}
+              alt={assignee.username}
+              width="30"
+              height="auto"
+              onMouseOver={() => onAvatarOver(assignee.id)}
+              onMouseLeave={() => onAvatarOver(-1)}
+              title={`All tickets for ${assignee.username}`}
+            />
+          </Fragment>
         )}
-      </div>
-      <div className="kanban-board-item__deadline">
-        { done 
-          ? (
-            <span>Done!</span>
-          ) : deadline ? (
-            <Fragment>
-              <span>deadline: </span>
-              <span>{moment(deadline).format('LL')} </span>
-              <span>({moment(deadline).fromNow().split(' ').join('\u00A0')})</span>
-            </Fragment>
-          ) : (
-            <Fragment>
-              <span>No deadline!</span>
-            </Fragment>
-          )
-        }
+        </div>
+      <div className="kanban-board-item__deadline kanban-board-item-deadline">
+        <span className="kanban-board-item-deadline__text">
+          {done && 'Done!'}
+          {!done && deadline && `deadline: ${deadlineString}`}
+          {!done && !deadline && 'No deadline!'}
+        </span>
       </div>
       <p className="kanban-board-item__title">
         {title.length > 35 ? title.slice(0, 32) + '...' : title}
@@ -145,18 +138,21 @@ const KanbanBoardItem = (props) => {
       <p className="kanban-board-item__description">
         {description.length > 35 ? description.slice(0, 32) + '...' : description}
       </p>
-      <div className="kanban-board-item__footer">
-        <div className="kanban-board-item__priority-stars">
+      <div className="kanban-board-item__footer kanban-board-item-footer">
+        <div className="kanban-board-item-footer__priority-stars">
           {priority && Array.from(new Array(priority)).map((item, index) =>
-            <FontAwesomeIcon icon="star" key={index}/>
+            <FontAwesomeIcon icon="star" key={index} />
           )}
         </div>
-        <span>Created </span>
-        <span> {moment(creationDate).fromNow()}</span>
-        <span> by {reporter.username}</span>
+        <p className="kanban-board-item-footer__created">
+          {`Created ${moment(creationDate).fromNow()} by ${reporter.username}`}
+        </p>
       </div>
-      <button className="kanban-board-item__edit-button">
-        <FontAwesomeIcon icon="info-circle"/>
+      <button
+        className="kanban-board-item__info-button"
+        title={`Show details`}
+      >
+        <FontAwesomeIcon icon="info-circle" />
       </button>
     </div>
   )

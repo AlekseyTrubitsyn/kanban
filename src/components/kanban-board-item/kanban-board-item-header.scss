@@ -1,0 +1,45 @@
+@import '../../assets/styles/colors.scss';
+
+.kanban-board-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid $mid-yellow;
+  background: $yellow;
+  color: $mid-grey;
+  padding: 5px 15px;
+
+  &:hover {
+    .kanban-board-item-header__assignee-username {
+      border-bottom-color: $cerulean;
+    }
+  }
+
+  .kanban-board-item-header__ticket-id {
+    margin-right: 10px;
+  }
+
+  .kanban-board-item-header__span {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .kanban-board-item-header__assignee-username {
+    border: 1px dashed transparent;
+    margin-left: auto;
+    padding: 5px;
+  }
+
+  .kanban-board-item-header__assignee-avatar {
+    width: 30px;
+    height: 30px;
+    background: white;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    right: -1px;
+  }
+}

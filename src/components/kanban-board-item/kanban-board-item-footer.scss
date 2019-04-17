@@ -1,0 +1,33 @@
+@import '../../assets/styles/colors.scss';
+
+.kanban-board-item-footer {
+  padding: 15px 25px 5px;
+  color: rgba($i-grey, .6);
+  font-size: 10px;
+  text-align: center;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 1px;
+    width: 30%;
+    background-color: rgba($i-grey, .1);
+  }
+}
+
+.kanban-board-item-footer__created {
+  color: $i-grey;
+}
+
+.kanban-board-item-footer__priority-stars {
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  color: $i-grey;
+  transform: translateX(-50%);
+  font-size: 8px;
+}
