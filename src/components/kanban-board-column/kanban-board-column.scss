@@ -1,0 +1,70 @@
+@import '../../assets/styles/colors.scss';
+
+$column-bg: #dedede;
+$column-bg--hover: $i-grey;
+
+$column-title-bg: $celestial-blue;
+$column-title-color: $i-grey;
+$column-title-color--hover: $i-white;
+
+.kanban-board-column {
+  height: 100%;
+  background: rgba($column-bg, 0.5);
+  border-radius: 5px;
+  transition: .3s all;
+  overflow: hidden;
+  grid-row: 1 / span 2;
+
+  &:nth-of-type(5) {
+    grid-row: 1;
+  }
+
+  &:nth-of-type(6) {
+    grid-row: 2;
+  }
+
+  &:hover {
+    background: rgba($column-bg--hover, 0.5);
+    box-shadow: 2px 2px 7px rgba($gun-grey, 0.7);
+
+    .kanban-board-column__title {
+      color: $column-title-color--hover
+    }
+  }
+
+  .kanban-board-column__item {
+    margin: 15px;
+  }
+}
+
+.kanban-board-column--loading {
+  background: rgba($column-bg, 0.8);
+
+  &:hover {
+    background: rgba($column-bg, 0.8);
+  }
+}
+
+.kanban-board-column__title {
+  transition: all 0.2s;
+  padding: 10px 20px;
+  color: $column-title-color;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 40px;
+  white-space: nowrap;
+}
+
+.kanban-board-column__droppable {
+  padding: 5px 0 20px;
+  height: 100%;
+  overflow: hidden;
+
+  .oc-scrollbar-container {
+    height: calc(100% - 40px);
+  }
+}
+
+.kanban-board-column__droppable--over {
+  background-color: rgba(lighten($column-title-bg, 10%), .9);
+}
