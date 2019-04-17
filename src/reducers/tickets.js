@@ -1,3 +1,5 @@
+import _clone from 'lodash/clone';
+
 import {
   MOVE_TICKET,
   CREATE_TICKET,
@@ -88,7 +90,10 @@ export default function tickets(state = initialState, action) {
     }
 
     const destinationValues = state[destination.name].values.slice();
-    destinationValues.splice(destination.position, 0, ticket);
+    const clonedTicket = _clone(ticket);
+
+    clonedTicket.statusName = destination.name;
+    destinationValues.splice(destination.position, 0, clonedTicket);
 
     return {
       ...state,
