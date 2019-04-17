@@ -7,7 +7,7 @@
     "assigneeId": 1,
     "projectId": 1,
     "deadline": null,
-    "creationDate": "2018-07-27T12:00:00.555Z",
+    "creationDate": "2019-04-10T12:00:00.555Z",
     "statusName": "discuss",
     "priority": 2,
     "subtasks": [
@@ -39,9 +39,9 @@
       {
         "id": 1,
         "author": "admin",
-        "created": "2019-04-11T19:44:36.918Z",
+        "created": "2019-04-12T19:44:36.918Z",
         "editor": "admin",
-        "edited": "2019-04-11T19:44:51.215Z",
+        "edited": "2019-04-12T19:44:51.215Z",
         "text": "...terrific..."
       }
     ]
@@ -53,7 +53,7 @@
     "assigneeId": 1,
     "projectId": 1,
     "deadline": null,
-    "creationDate": "2018-07-27T12:00:00.555Z",
+    "creationDate": "2019-04-11T12:00:00.555Z",
     "statusName": "discuss",
     "priority": 2,
     "subtasks": [
@@ -85,21 +85,21 @@
       {
         "id": 1,
         "author": "admin",
-        "created": "2019-04-11T19:44:36.918Z",
+        "created": "2019-04-12T19:44:36.918Z",
         "editor": "admin",
-        "edited": "2019-04-11T19:44:51.215Z",
+        "edited": "2019-04-12T19:44:51.215Z",
         "text": "...red flare..."
       }
     ]
   }, {
     "id": 3,
-    "title": "Example 3",
+    "title": "Example 3 (deadline)",
     "description": "Almost before we knew it, we had left the ground.",
     "reporterId": 4,
     "assigneeId": 1,
     "projectId": 1,
-    "deadline": "2018-08-28T12:00:00.555Z",
-    "creationDate": "2018-07-26T12:00:00.555Z",
+    "deadline": "2019-04-15T12:00:00.555Z",
+    "creationDate": "2019-04-11T12:00:00.555Z",
     "statusName": "toDo",
     "priority": 1,
     "subtasks": [
@@ -131,21 +131,21 @@
       {
         "id": 1,
         "author": "admin",
-        "created": "2019-04-11T19:44:36.918Z",
+        "created": "2019-04-12T19:44:36.918Z",
         "editor": "admin",
-        "edited": "2019-04-11T19:44:51.215Z",
+        "edited": "2019-04-12T19:44:51.215Z",
         "text": "Almost before we..."
       }
     ]
   }, {
     "id": 4,
-    "title": "Example 4",
+    "title": "Example 4 (warning)",
     "description": "A shining crescent far beneath the flying vessel.",
     "reporterId": 3,
     "assigneeId": 2,
     "projectId": 1,
-    "deadline": "2018-09-02T09:00:00.555Z",
-    "creationDate": "2018-07-25T12:00:00.555Z",
+    "deadline": "2019-04-18T09:00:00.555Z",
+    "creationDate": "2019-04-11T12:00:00.555Z",
     "statusName": "inProgress",
     "priority": 2,
     "subtasks": [],
@@ -161,9 +161,9 @@
       {
         "id": 1,
         "author": "admin",
-        "created": "2019-04-11T19:44:36.918Z",
+        "created": "2019-04-12T19:44:36.918Z",
         "editor": "admin",
-        "edited": "2019-04-11T19:44:51.215Z",
+        "edited": "2019-04-12T19:44:51.215Z",
         "text": "A shining crescent..."
       }
     ]
@@ -174,17 +174,17 @@
     "reporterId": 2,
     "assigneeId": 1,
     "projectId": 1,
-    "deadline": "2018-09-01T12:00:00.555Z",
-    "creationDate": "2018-07-25T12:00:00.555Z",
+    "deadline": "2019-05-01T12:00:00.555Z",
+    "creationDate": "2019-04-15T12:00:00.555Z",
     "statusName": "inProgress",
     "priority": 1,
     "subtasks": [],
     "comments": [
       {
         "author": "anon",
-        "created": "2018-08-12T19:44:36.918Z",
+        "created": "2019-04-15T19:44:36.918Z",
         "editor": "admin",
-        "edited": "2018-08-12T19:44:51.215Z",
+        "edited": "2019-04-15T19:44:51.215Z",
         "text": "\"Mist enveloped the ship three hours out from port.\" - whaat?"
       }
     ]
@@ -195,8 +195,8 @@
     "reporterId": 2,
     "assigneeId": 4,
     "projectId": 1,
-    "deadline": "2018-09-05T12:00:00.555Z",
-    "creationDate": "2018-07-24T12:00:00.555Z",
+    "deadline": "2019-05-05T12:00:00.555Z",
+    "creationDate": "2019-04-15T12:00:00.555Z",
     "statusName": "testing",
     "priority": 1,
     "subtasks": [],
@@ -204,17 +204,17 @@
       {
         "id": 0,
         "author": "anon",
-        "created": "2019-04-11T19:44:36.918Z",
+        "created": "2019-04-15T19:44:36.918Z",
         "editor": "admin",
-        "edited": "2019-04-11T19:44:51.215Z",
+        "edited": "2019-04-15T19:44:51.215Z",
         "text": "She stared through..."
       },
       {
         "id": 1,
         "author": "admin",
-        "created": "2019-04-11T19:44:36.918Z",
+        "created": "2019-04-16T19:44:36.918Z",
         "editor": "admin",
-        "edited": "2019-04-11T19:44:51.215Z",
+        "edited": "2019-04-16T19:44:51.215Z",
         "text": "She stared through..."
       }
     ]
@@ -225,8 +225,8 @@
     "reporterId": 2,
     "assigneeId": 3,
     "projectId": 1,
-    "deadline": "2018-09-03T12:00:00.555Z",
-    "creationDate": "2018-07-24T12:00:00.555Z",
+    "deadline": "2019-05-10T12:00:00.555Z",
+    "creationDate": "2019-04-15T12:00:00.555Z",
     "statusName": "done",
     "priority": 1,
     "subtasks": [],
@@ -234,17 +234,17 @@
       {
         "id": 0,
         "author": "anon",
-        "created": "2019-04-11T19:44:36.918Z",
+        "created": "2019-04-15T19:44:36.918Z",
         "editor": "admin",
-        "edited": "2019-04-11T19:44:51.215Z",
+        "edited": "2019-04-15T19:44:51.215Z",
         "text": "I repeat. She stared through..."
       },
       {
         "id": 1,
         "author": "admin",
-        "created": "2019-04-11T19:44:36.918Z",
+        "created": "2019-04-16T19:44:36.918Z",
         "editor": "admin",
-        "edited": "2019-04-11T19:44:51.215Z",
+        "edited": "2019-04-16T19:44:51.215Z",
         "text": "I repeat. She stared through..."
       }
     ]
@@ -253,9 +253,10 @@
     "title": "Example 8",
     "description": "Some ticket without assignee.",
     "reporterId": 2,
+    "assigneeId": 0,
     "projectId": 1,
     "deadline": null,
-    "creationDate": "2018-07-24T12:00:00.555Z",
+    "creationDate": "2019-04-15T12:00:00.555Z",
     "statusName": "discuss",
     "priority": 1,
     "subtasks": [],
@@ -263,17 +264,17 @@
       {
         "id": 0,
         "author": "anon",
-        "created": "2019-04-11T19:44:36.918Z",
+        "created": "2019-04-15T19:44:36.918Z",
         "editor": "admin",
-        "edited": "2019-04-11T19:44:51.215Z",
+        "edited": "2019-04-15T19:44:51.215Z",
         "text": "Some ticket..."
       },
       {
         "id": 1,
         "author": "admin",
-        "created": "2019-04-11T19:44:36.918Z",
+        "created": "2019-04-16T19:44:36.918Z",
         "editor": "admin",
-        "edited": "2019-04-11T19:44:51.215Z",
+        "edited": "2019-04-16T19:44:51.215Z",
         "text": "Some ticket..."
       }
     ]

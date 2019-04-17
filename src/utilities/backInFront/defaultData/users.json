@@ -5,19 +5,19 @@
     "password": "1234"
   }, {
     "id": 1,
-    "username": "Lorem",
+    "username": "Max",
     "password": "******"
   }, {
     "id": 2,
-    "username": "blaster",
+    "username": "Kimberly",
     "password": "qwerty"
   }, {
     "id": 3,
-    "username": "Supertester",
+    "username": "Austin",
     "password": "QWERTY"
   }, {
     "id": 4,
-    "username": "smokey_ln",
+    "username": "Sebastian",
     "password": "a1"
   }
 ]
