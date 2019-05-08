@@ -5,4 +5,4 @@ CSS: Grids, Flexboxes, loaders, animations, transitions, etc.
 
 IE is not supported!
 
-Demo: https://alekseytrubitsyn.github.io/agile-kanban/build/
+Demo: https://alekseytrubitsyn.github.io/kanban/build/
